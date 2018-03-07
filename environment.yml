@@ -1,0 +1,15 @@
+name: ual-model
+
+channels:
+  - udst  # for orca and pandana
+  - conda-forge  # for some of the pandana dependencies
+
+dependencies:
+  - python=3.6
+  - jupyter=1.0
+  - numpy=1.14
+  - orca=1.4
+  - pandana=0.3
+  - pandas=0.22
+
+# Orca 1.5 and Pandana 0.4 are not on Conda! We need to fix this.
