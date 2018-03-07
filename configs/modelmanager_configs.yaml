@@ -1,0 +1,35 @@
+test_automated_registration:
+    model:
+        fit_filters: null
+        fit_parameters:
+            Coefficient:
+                Intercept: 111178.37319581283
+                hadkids: -6694.812182769866
+                persons: 7707.931085521214
+                tenure: -24871.928105633822
+            Std. Error:
+                Intercept: 146.03200937195766
+                hadkids: 113.53254691346872
+                persons: 32.78766429321142
+                tenure: 50.855130840315745
+            T-Score:
+                Intercept: 761.3287913653969
+                hadkids: -58.96821981693462
+                persons: 235.08631223594406
+                tenure: -489.0741149350546
+        fit_rsquared: 0.11343386015932877
+        fit_rsquared_adj: 0.11343283861520126
+        fitted: true
+        model_expression: income ~ tenure + persons + hadkids
+        model_type: regression
+        name: test_automated_registration
+        predict_filters: null
+        ytransform: null
+    model_expression: income ~ tenure + persons + hadkids
+    name: test_automated_registration
+    out_fname: null
+    tables:
+    - households
+    - buildings
+    tags: []
+    type: RegressionStep
