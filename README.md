@@ -1,6 +1,13 @@
-# ual_land_use_model
+# urbansim_parcel_bayarea
 
 This is a repository for us to build a clean UrbanSim model for the Bay Area.
+
+- `scripts` is for manual definitions of Orca tables, steps, etc. using Python functions
+- `configs` is for definitions generated automatically using the modelmanager/template interface
+- `data` is for data
+- `notebooks` is for Jupyter notebooks
+
+With just a few lines of code in the manual definitions, we can already load data, estimate and register models, and run steps, all from a notebook: [notebooks-sam/Data-loading.ipynb](https://github.com/ual/urbansim_parcel_bayarea/blob/master/Data-loading.ipynb)
 
 
 ## Setup
@@ -18,9 +25,11 @@ My approach for this has been to use Conda `environment.yml` files. Not sure if 
 `source activate ual-model` (Mac or Linux)  
 or, `activate ual-model` (Windows)
 
-3. Add ModelManager to the environment (it doesn't have a release yet, sorry):
+3. Add ModelManager to the environment (it doesn't have a release yet, sorry) - only need to do this once:
 
-`cd path-to-modelmanager`
+`cd path-to-modelmanager`  
 `python setup.py develop`
 
-4. Launch Jupyer or run scripts
+4. Launch Jupyter or run scripts
+
+You'll also need to download the data file. Instructions are in the folder.
