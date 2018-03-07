@@ -14,9 +14,9 @@ With just a few lines of code in the manual definitions, we can already load dat
 
 I think it will save headaches later on if we use an explicitly-defined Python environment for working on this.
 
-My approach for this has been to use Conda `environment.yml` files. Not sure if this is the best way, so feel free to suggest alternatives.
+My approach in the past has been to use Conda `environment.yml` files. Not sure if this is the best way, so feel free to suggest alternatives.
 
-1. Install the environment specified in the repository (this is slow):
+1. Install the environment specified in the repository - this part is slow:
 
 `conda env create -f environment.yml`
 
@@ -25,7 +25,7 @@ My approach for this has been to use Conda `environment.yml` files. Not sure if 
 `source activate ual-model` (Mac or Linux)  
 or, `activate ual-model` (Windows)
 
-3. Add ModelManager to the environment (it doesn't have a release yet, sorry) - only need to do this once:
+3. Add ModelManager to the environment (it doesn't have a release yet, sorry) - only needs to be done once:
 
 `cd path-to-modelmanager`  
 `python setup.py develop`
