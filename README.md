@@ -7,7 +7,7 @@ This is a repository for us to build a clean UrbanSim model for the Bay Area.
 - `data` is for data
 - `notebooks` is for Jupyter notebooks
 
-With just a few lines of code in the manual definitions, we can already load data, estimate and register models, and run steps, all from a notebook: [notebooks-sam/Data-loading.ipynb](https://github.com/ual/urbansim_parcel_bayarea/blob/master/Data-loading.ipynb)
+With just a few lines of code in the manual definitions, we can already load data, estimate and register models, and run steps, all from a notebook: [notebooks-sam/Data-loading.ipynb](https://github.com/ual/urbansim_parcel_bayarea/blob/master/notebooks-sam/Data-loading.ipynb)
 
 
 ## Setup
