@@ -11,5 +11,7 @@ dependencies:
   - orca=1.4
   - pandana=0.3
   - pandas=0.22
+  - scipy=1.0
+  - statsmodels=0.8
 
 # Orca 1.5 and Pandana 0.4 are not on Conda! We need to fix this.
