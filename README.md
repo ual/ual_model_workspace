@@ -25,9 +25,9 @@ My approach in the past has been to use Conda `environment.yml` files. Not sure 
 `source activate ual-model` (Mac or Linux)  
 or, `activate ual-model` (Windows)
 
-3. Add ModelManager to the environment (it doesn't have a release yet, sorry) - only needs to be done once:
+3. Add UrbanSim_Templates to the environment (it doesn't have a release yet, sorry) - only needs to be done once:
 
-`cd path-to-modelmanager`  
+`cd path-to-urbansim_templates`  
 `python setup.py develop`
 
 4. Launch Jupyter or run scripts
