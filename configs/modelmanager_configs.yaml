@@ -33,3 +33,41 @@ test_automated_registration:
     - buildings
     tags: []
     type: RegressionStep
+
+BinaryLogitStep-20180315-103903:
+    filters:
+    - income < 500000
+    fitted_parameters:
+    - 0.07926611363797435
+    - 1.1328955252890226e-05
+    - 0.009637182292449944
+    - -0.41269801095215736
+    model_expression: hownrent ~ income + persons + stories
+    name: BinaryLogitStep-20180315-103903
+    out_column: taz
+    out_tables: null
+    out_transform: null
+    out_value_false: 0
+    out_value_true: 1
+    summary_table: "                           Logit Regression Results          \
+        \                 \n==============================================================================\n\
+        Dep. Variable:               hownrent   No. Observations:              2594607\n\
+        Model:                          Logit   Df Residuals:                  2594603\n\
+        Method:                           MLE   Df Model:                        \
+        \    3\nDate:                Thu, 15 Mar 2018   Pseudo R-squ.:           \
+        \      0.08808\nTime:                        10:39:04   Log-Likelihood:  \
+        \          -1.6047e+06\nconverged:                       True   LL-Null: \
+        \                  -1.7597e+06\n                                        LLR\
+        \ p-value:                     0.000\n==============================================================================\n\
+        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
+        ------------------------------------------------------------------------------\n\
+        Intercept      0.0793      0.004     19.676      0.000       0.071       0.087\n\
+        income      1.133e-05    2.8e-08    405.251      0.000    1.13e-05    1.14e-05\n\
+        persons        0.0096      0.001     11.272      0.000       0.008       0.011\n\
+        stories       -0.4127      0.002   -200.892      0.000      -0.417      -0.409\n\
+        =============================================================================="
+    tables:
+    - households
+    - buildings
+    tags: null
+    type: BinaryLogitStep
