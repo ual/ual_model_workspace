@@ -1,3 +1,80 @@
+BinaryLogitStep-20180316-145603:
+    filters:
+    - income < 500000
+    fitted_parameters:
+    - 0.07926611363794958
+    - 1.1328955252890297e-05
+    - 0.00963718229244911
+    - -0.4126980109521422
+    model_expression: hownrent ~ income + persons + stories
+    name: BinaryLogitStep-20180316-145603
+    out_column: taz
+    out_filters: null
+    out_tables: null
+    out_transform: null
+    out_value_false: 0
+    out_value_true: 1
+    summary_table: "                           Logit Regression Results          \
+        \                 \n==============================================================================\n\
+        Dep. Variable:               hownrent   No. Observations:              2594607\n\
+        Model:                          Logit   Df Residuals:                  2594603\n\
+        Method:                           MLE   Df Model:                        \
+        \    3\nDate:                Fri, 16 Mar 2018   Pseudo R-squ.:           \
+        \      0.08808\nTime:                        14:56:04   Log-Likelihood:  \
+        \          -1.6047e+06\nconverged:                       True   LL-Null: \
+        \                  -1.7597e+06\n                                        LLR\
+        \ p-value:                     0.000\n==============================================================================\n\
+        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
+        ------------------------------------------------------------------------------\n\
+        Intercept      0.0793      0.004     19.676      0.000       0.071       0.087\n\
+        income      1.133e-05    2.8e-08    405.251      0.000    1.13e-05    1.14e-05\n\
+        persons        0.0096      0.001     11.272      0.000       0.008       0.011\n\
+        stories       -0.4127      0.002   -200.892      0.000      -0.417      -0.409\n\
+        =============================================================================="
+    tables:
+    - households
+    - buildings
+    tags: null
+    type: BinaryLogitStep
+
+BinaryLogitStep-20180316-144717:
+    filters:
+    - income < 500000
+    fitted_parameters:
+    - 0.07926611363794958
+    - 1.1328955252890297e-05
+    - 0.00963718229244911
+    - -0.4126980109521422
+    model_expression: hownrent ~ income + persons + stories
+    name: BinaryLogitStep-20180316-144717
+    out_column: taz
+    out_tables: null
+    out_transform: null
+    out_value_false: 0
+    out_value_true: 1
+    summary_table: "                           Logit Regression Results          \
+        \                 \n==============================================================================\n\
+        Dep. Variable:               hownrent   No. Observations:              2594607\n\
+        Model:                          Logit   Df Residuals:                  2594603\n\
+        Method:                           MLE   Df Model:                        \
+        \    3\nDate:                Fri, 16 Mar 2018   Pseudo R-squ.:           \
+        \      0.08808\nTime:                        14:47:18   Log-Likelihood:  \
+        \          -1.6047e+06\nconverged:                       True   LL-Null: \
+        \                  -1.7597e+06\n                                        LLR\
+        \ p-value:                     0.000\n==============================================================================\n\
+        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
+        ------------------------------------------------------------------------------\n\
+        Intercept      0.0793      0.004     19.676      0.000       0.071       0.087\n\
+        income      1.133e-05    2.8e-08    405.251      0.000    1.13e-05    1.14e-05\n\
+        persons        0.0096      0.001     11.272      0.000       0.008       0.011\n\
+        stories       -0.4127      0.002   -200.892      0.000      -0.417      -0.409\n\
+        =============================================================================="
+    tables:
+    - households
+    - buildings
+    tags: null
+    type: BinaryLogitStep
+
 test_automated_registration:
     model:
         fit_filters: null
@@ -65,6 +142,159 @@ BinaryLogitStep-20180315-103903:
         income      1.133e-05    2.8e-08    405.251      0.000    1.13e-05    1.14e-05\n\
         persons        0.0096      0.001     11.272      0.000       0.008       0.011\n\
         stories       -0.4127      0.002   -200.892      0.000      -0.417      -0.409\n\
+        =============================================================================="
+    tables:
+    - households
+    - buildings
+    tags: null
+    type: BinaryLogitStep
+
+BinaryLogitStep-20180316-145008:
+    filters:
+    - income < 500000
+    fitted_parameters:
+    - 0.07926611363794958
+    - 1.1328955252890297e-05
+    - 0.00963718229244911
+    - -0.4126980109521422
+    model_expression: hownrent ~ income + persons + stories
+    name: BinaryLogitStep-20180316-145008
+    out_column: taz
+    out_tables: null
+    out_transform: null
+    out_value_false: 0
+    out_value_true: 1
+    summary_table: "                           Logit Regression Results          \
+        \                 \n==============================================================================\n\
+        Dep. Variable:               hownrent   No. Observations:              2594607\n\
+        Model:                          Logit   Df Residuals:                  2594603\n\
+        Method:                           MLE   Df Model:                        \
+        \    3\nDate:                Fri, 16 Mar 2018   Pseudo R-squ.:           \
+        \      0.08808\nTime:                        14:50:10   Log-Likelihood:  \
+        \          -1.6047e+06\nconverged:                       True   LL-Null: \
+        \                  -1.7597e+06\n                                        LLR\
+        \ p-value:                     0.000\n==============================================================================\n\
+        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
+        ------------------------------------------------------------------------------\n\
+        Intercept      0.0793      0.004     19.676      0.000       0.071       0.087\n\
+        income      1.133e-05    2.8e-08    405.251      0.000    1.13e-05    1.14e-05\n\
+        persons        0.0096      0.001     11.272      0.000       0.008       0.011\n\
+        stories       -0.4127      0.002   -200.892      0.000      -0.417      -0.409\n\
+        =============================================================================="
+    tables:
+    - households
+    - buildings
+    tags: null
+    type: BinaryLogitStep
+
+BinaryLogitStep-20180316-151129:
+    filters:
+    - income < 500000
+    fitted_parameters:
+    - 0.07926611363794958
+    - 1.1328955252890297e-05
+    - 0.00963718229244911
+    - -0.4126980109521422
+    model_expression: hownrent ~ income + persons + stories
+    name: BinaryLogitStep-20180316-151129
+    out_column: taz
+    out_filters: null
+    out_tables: null
+    out_transform: null
+    out_value_false: 0
+    out_value_true: 1
+    summary_table: "                           Logit Regression Results          \
+        \                 \n==============================================================================\n\
+        Dep. Variable:               hownrent   No. Observations:              2594607\n\
+        Model:                          Logit   Df Residuals:                  2594603\n\
+        Method:                           MLE   Df Model:                        \
+        \    3\nDate:                Fri, 16 Mar 2018   Pseudo R-squ.:           \
+        \      0.08808\nTime:                        15:11:31   Log-Likelihood:  \
+        \          -1.6047e+06\nconverged:                       True   LL-Null: \
+        \                  -1.7597e+06\n                                        LLR\
+        \ p-value:                     0.000\n==============================================================================\n\
+        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
+        ------------------------------------------------------------------------------\n\
+        Intercept      0.0793      0.004     19.676      0.000       0.071       0.087\n\
+        income      1.133e-05    2.8e-08    405.251      0.000    1.13e-05    1.14e-05\n\
+        persons        0.0096      0.001     11.272      0.000       0.008       0.011\n\
+        stories       -0.4127      0.002   -200.892      0.000      -0.417      -0.409\n\
+        =============================================================================="
+    tables:
+    - households
+    - buildings
+    tags: null
+    type: BinaryLogitStep
+
+model_one:
+    filters: null
+    fitted_parameters:
+    - 0.09686869696923237
+    - 1.090087186229519e-05
+    - 0.012178554390128682
+    - -0.41168334895602865
+    model_expression: hownrent ~ income + persons + stories
+    name: model_one
+    out_column: taz
+    out_filters: null
+    out_tables: null
+    out_transform: null
+    out_value_false: 0
+    out_value_true: 1000000
+    summary_table: "                           Logit Regression Results          \
+        \                 \n==============================================================================\n\
+        Dep. Variable:               hownrent   No. Observations:              2603610\n\
+        Model:                          Logit   Df Residuals:                  2603606\n\
+        Method:                           MLE   Df Model:                        \
+        \    3\nDate:                Fri, 16 Mar 2018   Pseudo R-squ.:           \
+        \      0.08698\nTime:                        15:13:34   Log-Likelihood:  \
+        \          -1.6113e+06\nconverged:                       True   LL-Null: \
+        \                  -1.7649e+06\n                                        LLR\
+        \ p-value:                     0.000\n==============================================================================\n\
+        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
+        ------------------------------------------------------------------------------\n\
+        Intercept      0.0969      0.004     24.134      0.000       0.089       0.105\n\
+        income       1.09e-05   2.74e-08    397.741      0.000    1.08e-05     1.1e-05\n\
+        persons        0.0122      0.001     14.276      0.000       0.011       0.014\n\
+        stories       -0.4117      0.002   -201.179      0.000      -0.416      -0.408\n\
+        =============================================================================="
+    tables:
+    - households
+    - buildings
+    tags: null
+    type: BinaryLogitStep
+
+model_two:
+    filters: null
+    fitted_parameters:
+    - 0.09686869696923237
+    - 1.090087186229519e-05
+    - 0.012178554390128682
+    - -0.41168334895602865
+    model_expression: hownrent ~ income + persons + stories
+    name: model_two
+    out_column: taz
+    out_filters: null
+    out_tables: null
+    out_transform: null
+    out_value_false: 0
+    out_value_true: 1000000000
+    summary_table: "                           Logit Regression Results          \
+        \                 \n==============================================================================\n\
+        Dep. Variable:               hownrent   No. Observations:              2603610\n\
+        Model:                          Logit   Df Residuals:                  2603606\n\
+        Method:                           MLE   Df Model:                        \
+        \    3\nDate:                Fri, 16 Mar 2018   Pseudo R-squ.:           \
+        \      0.08698\nTime:                        15:13:34   Log-Likelihood:  \
+        \          -1.6113e+06\nconverged:                       True   LL-Null: \
+        \                  -1.7649e+06\n                                        LLR\
+        \ p-value:                     0.000\n==============================================================================\n\
+        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
+        ------------------------------------------------------------------------------\n\
+        Intercept      0.0969      0.004     24.134      0.000       0.089       0.105\n\
+        income       1.09e-05   2.74e-08    397.741      0.000    1.08e-05     1.1e-05\n\
+        persons        0.0122      0.001     14.276      0.000       0.011       0.014\n\
+        stories       -0.4117      0.002   -201.179      0.000      -0.416      -0.408\n\
         =============================================================================="
     tables:
     - households
