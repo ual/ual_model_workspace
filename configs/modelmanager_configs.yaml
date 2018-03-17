@@ -1,73 +1,157 @@
-test_automated_registration:
-    model:
-        fit_filters: null
-        fit_parameters:
-            Coefficient:
-                Intercept: 111178.37319581283
-                hadkids: -6694.812182769866
-                persons: 7707.931085521214
-                tenure: -24871.928105633822
-            Std. Error:
-                Intercept: 146.03200937195766
-                hadkids: 113.53254691346872
-                persons: 32.78766429321142
-                tenure: 50.855130840315745
-            T-Score:
-                Intercept: 761.3287913653969
-                hadkids: -58.96821981693462
-                persons: 235.08631223594406
-                tenure: -489.0741149350546
-        fit_rsquared: 0.11343386015932877
-        fit_rsquared_adj: 0.11343283861520126
-        fitted: true
-        model_expression: income ~ tenure + persons + hadkids
-        model_type: regression
-        name: test_automated_registration
-        predict_filters: null
-        ytransform: null
-    model_expression: income ~ tenure + persons + hadkids
-    name: test_automated_registration
-    out_fname: null
-    tables:
-    - households
-    - buildings
-    tags: []
-    type: RegressionStep
-
-BinaryLogitStep-20180315-103903:
-    filters:
-    - income < 500000
+model_one:
+    filters: null
     fitted_parameters:
-    - 0.07926611363797435
-    - 1.1328955252890226e-05
-    - 0.009637182292449944
-    - -0.41269801095215736
+    - 0.09686869696923237
+    - 1.090087186229519e-05
+    - 0.012178554390128682
+    - -0.41168334895602865
     model_expression: hownrent ~ income + persons + stories
-    name: BinaryLogitStep-20180315-103903
+    name: model_one
     out_column: taz
+    out_filters: null
     out_tables: null
     out_transform: null
     out_value_false: 0
-    out_value_true: 1
+    out_value_true: 1000000
     summary_table: "                           Logit Regression Results          \
         \                 \n==============================================================================\n\
-        Dep. Variable:               hownrent   No. Observations:              2594607\n\
-        Model:                          Logit   Df Residuals:                  2594603\n\
+        Dep. Variable:               hownrent   No. Observations:              2603610\n\
+        Model:                          Logit   Df Residuals:                  2603606\n\
         Method:                           MLE   Df Model:                        \
-        \    3\nDate:                Thu, 15 Mar 2018   Pseudo R-squ.:           \
-        \      0.08808\nTime:                        10:39:04   Log-Likelihood:  \
-        \          -1.6047e+06\nconverged:                       True   LL-Null: \
-        \                  -1.7597e+06\n                                        LLR\
+        \    3\nDate:                Sat, 17 Mar 2018   Pseudo R-squ.:           \
+        \      0.08698\nTime:                        11:15:05   Log-Likelihood:  \
+        \          -1.6113e+06\nconverged:                       True   LL-Null: \
+        \                  -1.7649e+06\n                                        LLR\
         \ p-value:                     0.000\n==============================================================================\n\
         \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
         ------------------------------------------------------------------------------\n\
-        Intercept      0.0793      0.004     19.676      0.000       0.071       0.087\n\
-        income      1.133e-05    2.8e-08    405.251      0.000    1.13e-05    1.14e-05\n\
-        persons        0.0096      0.001     11.272      0.000       0.008       0.011\n\
-        stories       -0.4127      0.002   -200.892      0.000      -0.417      -0.409\n\
+        Intercept      0.0969      0.004     24.134      0.000       0.089       0.105\n\
+        income       1.09e-05   2.74e-08    397.741      0.000    1.08e-05     1.1e-05\n\
+        persons        0.0122      0.001     14.276      0.000       0.011       0.014\n\
+        stories       -0.4117      0.002   -201.179      0.000      -0.416      -0.408\n\
         =============================================================================="
     tables:
     - households
     - buildings
-    tags: null
+    tags:
+    - sam
+    - testing
     type: BinaryLogitStep
+
+model_two:
+    filters: null
+    fitted_parameters:
+    - 0.09686869696923237
+    - 1.090087186229519e-05
+    - 0.012178554390128682
+    - -0.41168334895602865
+    model_expression: hownrent ~ income + persons + stories
+    name: model_two
+    out_column: taz
+    out_filters: null
+    out_tables: null
+    out_transform: null
+    out_value_false: 0
+    out_value_true: 1000000000
+    summary_table: "                           Logit Regression Results          \
+        \                 \n==============================================================================\n\
+        Dep. Variable:               hownrent   No. Observations:              2603610\n\
+        Model:                          Logit   Df Residuals:                  2603606\n\
+        Method:                           MLE   Df Model:                        \
+        \    3\nDate:                Sat, 17 Mar 2018   Pseudo R-squ.:           \
+        \      0.08698\nTime:                        11:15:05   Log-Likelihood:  \
+        \          -1.6113e+06\nconverged:                       True   LL-Null: \
+        \                  -1.7649e+06\n                                        LLR\
+        \ p-value:                     0.000\n==============================================================================\n\
+        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
+        ------------------------------------------------------------------------------\n\
+        Intercept      0.0969      0.004     24.134      0.000       0.089       0.105\n\
+        income       1.09e-05   2.74e-08    397.741      0.000    1.08e-05     1.1e-05\n\
+        persons        0.0122      0.001     14.276      0.000       0.011       0.014\n\
+        stories       -0.4117      0.002   -201.179      0.000      -0.416      -0.408\n\
+        =============================================================================="
+    tables:
+    - households
+    - buildings
+    tags:
+    - sam
+    - testing
+    type: BinaryLogitStep
+
+ols_test:
+    filters: null
+    fitted_parameters:
+    - 89090.02995275857
+    - -31145.485872578407
+    - -50691.99723979375
+    - -60396.33536413638
+    - 6724.434484264912
+    model:
+        fit_filters: null
+        fit_parameters:
+            Coefficient:
+                C(tenure)[T.2]: -31145.485872578407
+                C(tenure)[T.3]: -50691.99723979375
+                C(tenure)[T.4]: -60396.33536413638
+                Intercept: 89090.02995275857
+                persons: 6724.434484264912
+            Std. Error:
+                C(tenure)[T.2]: 145.7336964978689
+                C(tenure)[T.3]: 104.76058665340923
+                C(tenure)[T.4]: 434.8327517937999
+                Intercept: 114.66724527097803
+                persons: 30.156780765484754
+            T-Score:
+                C(tenure)[T.2]: -213.7150612455223
+                C(tenure)[T.3]: -483.8842436755682
+                C(tenure)[T.4]: -138.89555263485914
+                Intercept: 776.9440152000147
+                persons: 222.98250388719234
+        fit_rsquared: 0.11333982911502705
+        fit_rsquared_adj: 0.11333846691120453
+        fitted: true
+        model_expression: income ~ C(tenure) + persons
+        model_type: regression
+        name: ols_test
+        predict_filters: null
+        ytransform: null
+    model_expression: income ~ C(tenure) + persons
+    name: ols_test
+    out_column: taz
+    out_filters: null
+    out_tables: null
+    out_transform: null
+    summary_table: "                            OLS Regression Results           \
+        \                 \n==============================================================================\n\
+        Dep. Variable:                 income   R-squared:                       0.113\n\
+        Model:                            OLS   Adj. R-squared:                  0.113\n\
+        Method:                 Least Squares   F-statistic:                 8.320e+04\n\
+        Date:                Sat, 17 Mar 2018   Prob (F-statistic):              \
+        \ 0.00\nTime:                        11:15:19   Log-Likelihood:          \
+        \  -3.2980e+07\nNo. Observations:             2603610   AIC:             \
+        \            6.596e+07\nDf Residuals:                 2603605   BIC:     \
+        \                    6.596e+07\nDf Model:                           4    \
+        \                                     \nCovariance Type:            nonrobust\
+        \                                         \n==================================================================================\n\
+        \                     coef    std err          t      P>|t|      [0.025  \
+        \    0.975]\n----------------------------------------------------------------------------------\n\
+        Intercept       8.909e+04    114.667    776.944      0.000    8.89e+04   \
+        \ 8.93e+04\nC(tenure)[T.2] -3.115e+04    145.734   -213.715      0.000   -3.14e+04\
+        \   -3.09e+04\nC(tenure)[T.3] -5.069e+04    104.761   -483.884      0.000\
+        \   -5.09e+04   -5.05e+04\nC(tenure)[T.4]  -6.04e+04    434.833   -138.896\
+        \      0.000   -6.12e+04   -5.95e+04\npersons         6724.4345     30.157\
+        \    222.983      0.000    6665.328    6783.541\n==============================================================================\n\
+        Omnibus:                  1680526.920   Durbin-Watson:                   1.136\n\
+        Prob(Omnibus):                  0.000   Jarque-Bera (JB):         25127048.692\n\
+        Skew:                           2.919   Prob(JB):                        \
+        \ 0.00\nKurtosis:                      17.055   Cond. No.                \
+        \         29.7\n==============================================================================\n\
+        \nWarnings:\n[1] Standard Errors assume that the covariance matrix of the\
+        \ errors is correctly specified."
+    tables:
+    - households
+    - buildings
+    tags:
+    - sam
+    - testing
+    type: OLSRegressionStep
