@@ -1,83 +1,3 @@
-model_one:
-    filters: null
-    fitted_parameters:
-    - 0.09686869696923237
-    - 1.090087186229519e-05
-    - 0.012178554390128682
-    - -0.41168334895602865
-    model_expression: hownrent ~ income + persons + stories
-    name: model_one
-    out_column: taz
-    out_filters: null
-    out_tables: null
-    out_transform: null
-    out_value_false: 0
-    out_value_true: 1000000
-    summary_table: "                           Logit Regression Results          \
-        \                 \n==============================================================================\n\
-        Dep. Variable:               hownrent   No. Observations:              2603610\n\
-        Model:                          Logit   Df Residuals:                  2603606\n\
-        Method:                           MLE   Df Model:                        \
-        \    3\nDate:                Sat, 17 Mar 2018   Pseudo R-squ.:           \
-        \      0.08698\nTime:                        11:15:05   Log-Likelihood:  \
-        \          -1.6113e+06\nconverged:                       True   LL-Null: \
-        \                  -1.7649e+06\n                                        LLR\
-        \ p-value:                     0.000\n==============================================================================\n\
-        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
-        ------------------------------------------------------------------------------\n\
-        Intercept      0.0969      0.004     24.134      0.000       0.089       0.105\n\
-        income       1.09e-05   2.74e-08    397.741      0.000    1.08e-05     1.1e-05\n\
-        persons        0.0122      0.001     14.276      0.000       0.011       0.014\n\
-        stories       -0.4117      0.002   -201.179      0.000      -0.416      -0.408\n\
-        =============================================================================="
-    tables:
-    - households
-    - buildings
-    tags:
-    - sam
-    - testing
-    type: BinaryLogitStep
-
-model_two:
-    filters: null
-    fitted_parameters:
-    - 0.09686869696923237
-    - 1.090087186229519e-05
-    - 0.012178554390128682
-    - -0.41168334895602865
-    model_expression: hownrent ~ income + persons + stories
-    name: model_two
-    out_column: taz
-    out_filters: null
-    out_tables: null
-    out_transform: null
-    out_value_false: 0
-    out_value_true: 1000000000
-    summary_table: "                           Logit Regression Results          \
-        \                 \n==============================================================================\n\
-        Dep. Variable:               hownrent   No. Observations:              2603610\n\
-        Model:                          Logit   Df Residuals:                  2603606\n\
-        Method:                           MLE   Df Model:                        \
-        \    3\nDate:                Sat, 17 Mar 2018   Pseudo R-squ.:           \
-        \      0.08698\nTime:                        11:15:05   Log-Likelihood:  \
-        \          -1.6113e+06\nconverged:                       True   LL-Null: \
-        \                  -1.7649e+06\n                                        LLR\
-        \ p-value:                     0.000\n==============================================================================\n\
-        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
-        ------------------------------------------------------------------------------\n\
-        Intercept      0.0969      0.004     24.134      0.000       0.089       0.105\n\
-        income       1.09e-05   2.74e-08    397.741      0.000    1.08e-05     1.1e-05\n\
-        persons        0.0122      0.001     14.276      0.000       0.011       0.014\n\
-        stories       -0.4117      0.002   -201.179      0.000      -0.416      -0.408\n\
-        =============================================================================="
-    tables:
-    - households
-    - buildings
-    tags:
-    - sam
-    - testing
-    type: BinaryLogitStep
-
 ols_test:
     filters: null
     fitted_parameters:
@@ -155,3 +75,83 @@ ols_test:
     - sam
     - testing
     type: OLSRegressionStep
+
+model_two:
+    filters: null
+    fitted_parameters:
+    - 0.09686869696923237
+    - 1.090087186229519e-05
+    - 0.012178554390128682
+    - -0.41168334895602865
+    model_expression: hownrent ~ income + persons + stories
+    name: model_two
+    out_column: taz
+    out_filters: null
+    out_tables: null
+    out_transform: null
+    out_value_false: 0
+    out_value_true: 1000000000
+    summary_table: "                           Logit Regression Results          \
+        \                 \n==============================================================================\n\
+        Dep. Variable:               hownrent   No. Observations:              2603610\n\
+        Model:                          Logit   Df Residuals:                  2603606\n\
+        Method:                           MLE   Df Model:                        \
+        \    3\nDate:                Sat, 17 Mar 2018   Pseudo R-squ.:           \
+        \      0.08698\nTime:                        11:15:05   Log-Likelihood:  \
+        \          -1.6113e+06\nconverged:                       True   LL-Null: \
+        \                  -1.7649e+06\n                                        LLR\
+        \ p-value:                     0.000\n==============================================================================\n\
+        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
+        ------------------------------------------------------------------------------\n\
+        Intercept      0.0969      0.004     24.134      0.000       0.089       0.105\n\
+        income       1.09e-05   2.74e-08    397.741      0.000    1.08e-05     1.1e-05\n\
+        persons        0.0122      0.001     14.276      0.000       0.011       0.014\n\
+        stories       -0.4117      0.002   -201.179      0.000      -0.416      -0.408\n\
+        =============================================================================="
+    tables:
+    - households
+    - buildings
+    tags:
+    - sam
+    - testing
+    type: BinaryLogitStep
+
+model_one:
+    filters: null
+    fitted_parameters:
+    - 0.09686869696923237
+    - 1.090087186229519e-05
+    - 0.012178554390128682
+    - -0.41168334895602865
+    model_expression: hownrent ~ income + persons + stories
+    name: model_one
+    out_column: taz
+    out_filters: null
+    out_tables: null
+    out_transform: null
+    out_value_false: 0
+    out_value_true: 1000000
+    summary_table: "                           Logit Regression Results          \
+        \                 \n==============================================================================\n\
+        Dep. Variable:               hownrent   No. Observations:              2603610\n\
+        Model:                          Logit   Df Residuals:                  2603606\n\
+        Method:                           MLE   Df Model:                        \
+        \    3\nDate:                Sat, 17 Mar 2018   Pseudo R-squ.:           \
+        \      0.08698\nTime:                        11:15:05   Log-Likelihood:  \
+        \          -1.6113e+06\nconverged:                       True   LL-Null: \
+        \                  -1.7649e+06\n                                        LLR\
+        \ p-value:                     0.000\n==============================================================================\n\
+        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
+        ------------------------------------------------------------------------------\n\
+        Intercept      0.0969      0.004     24.134      0.000       0.089       0.105\n\
+        income       1.09e-05   2.74e-08    397.741      0.000    1.08e-05     1.1e-05\n\
+        persons        0.0122      0.001     14.276      0.000       0.011       0.014\n\
+        stories       -0.4117      0.002   -201.179      0.000      -0.416      -0.408\n\
+        =============================================================================="
+    tables:
+    - households
+    - buildings
+    tags:
+    - sam
+    - testing
+    type: BinaryLogitStep
