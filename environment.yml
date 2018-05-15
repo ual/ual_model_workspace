@@ -2,15 +2,18 @@ name: ual-model
 
 channels:
   - udst  # for orca and pandana
-  - conda-forge  # for some of the pandana dependencies
+  - conda-forge  # for choicemodels, statsmodels, and many dependencies
+  - timothyb0912  # for pylogit
 
 dependencies:
   - python=3.6
+  - choicemodels=0.1
   - jupyter=1.0
   - numpy=1.14
   - orca=1.4
   - pandana=0.3
   - pandas=0.22
+  - pylogit=0.2
   - scipy=1.0
   - statsmodels=0.8
 
