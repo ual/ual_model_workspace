@@ -221,7 +221,7 @@ large-mnl-test:
     - household_id % 1000 < 1
     choosers: households
     fitted_parameters:
-    - 0.0003452767802864991
+    - 0.00045990926356891706
     model_expression: res_price_per_sqft - 1
     name: large-mnl-test
     out_alt_filters: null
@@ -236,11 +236,11 @@ large-mnl-test:
         \     Maximum Likelihood   Df Model:                       \nDate:       \
         \                       Pseudo R-squ.:                  \nTime:          \
         \                    Pseudo R-bar-squ.:              \nAIC:              \
-        \                 Log-Likelihood:       -5,980.289\nBIC:                 \
+        \                 Log-Likelihood:       -5,973.144\nBIC:                 \
         \              LL-Null:              -5,995.932\n=======================================================================\n\
         \                        coef   std err         z     P>|z|   Conf. Int.\n\
         -----------------------------------------------------------------------\n\
-        res_price_per_sqft    0.0003     0.000     8.474                       \n\
+        res_price_per_sqft    0.0005     0.000     9.968                       \n\
         ======================================================================="
     tags:
     - sam
