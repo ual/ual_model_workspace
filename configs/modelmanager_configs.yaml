@@ -1,3 +1,120 @@
+modelmanager_version: 0.1dev5
+
+large-mnl-test:
+    alt_filters: null
+    alt_sample_size: 10
+    alternatives: buildings
+    choice_column: building_id
+    chooser_filters:
+    - household_id % 1000 < 1
+    choosers: households
+    fitted_parameters:
+    - 0.00045990926356891706
+    model_expression: res_price_per_sqft - 1
+    name: large-mnl-test
+    out_alt_filters: null
+    out_alternatives: null
+    out_chooser_filters: null
+    out_choosers: null
+    out_column: null
+    summary_table: "                  CHOICEMODELS ESTIMATION RESULTS            \
+        \      \n===================================================================\n\
+        Dep. Var.:                chosen   No. Observations:               \nModel:\
+        \         Multinomial Logit   Df Residuals:                   \nMethod:  \
+        \     Maximum Likelihood   Df Model:                       \nDate:       \
+        \                       Pseudo R-squ.:                  \nTime:          \
+        \                    Pseudo R-bar-squ.:              \nAIC:              \
+        \                 Log-Likelihood:       -5,973.144\nBIC:                 \
+        \              LL-Null:              -5,995.932\n=======================================================================\n\
+        \                        coef   std err         z     P>|z|   Conf. Int.\n\
+        -----------------------------------------------------------------------\n\
+        res_price_per_sqft    0.0005     0.000     9.968                       \n\
+        ======================================================================="
+    tags:
+    - sam
+    - testing
+    type: LargeMultinomialLogitStep
+
+model_one:
+    filters: null
+    fitted_parameters:
+    - 0.09686869696923237
+    - 1.090087186229519e-05
+    - 0.012178554390128682
+    - -0.41168334895602865
+    model_expression: hownrent ~ income + persons + stories
+    name: model_one
+    out_column: taz
+    out_filters: null
+    out_tables: null
+    out_transform: null
+    out_value_false: 0
+    out_value_true: 1000000
+    summary_table: "                           Logit Regression Results          \
+        \                 \n==============================================================================\n\
+        Dep. Variable:               hownrent   No. Observations:              2603610\n\
+        Model:                          Logit   Df Residuals:                  2603606\n\
+        Method:                           MLE   Df Model:                        \
+        \    3\nDate:                Sat, 17 Mar 2018   Pseudo R-squ.:           \
+        \      0.08698\nTime:                        11:15:05   Log-Likelihood:  \
+        \          -1.6113e+06\nconverged:                       True   LL-Null: \
+        \                  -1.7649e+06\n                                        LLR\
+        \ p-value:                     0.000\n==============================================================================\n\
+        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
+        ------------------------------------------------------------------------------\n\
+        Intercept      0.0969      0.004     24.134      0.000       0.089       0.105\n\
+        income       1.09e-05   2.74e-08    397.741      0.000    1.08e-05     1.1e-05\n\
+        persons        0.0122      0.001     14.276      0.000       0.011       0.014\n\
+        stories       -0.4117      0.002   -201.179      0.000      -0.416      -0.408\n\
+        =============================================================================="
+    tables:
+    - households
+    - buildings
+    tags:
+    - sam
+    - testing
+    type: BinaryLogitStep
+
+model_two:
+    filters: null
+    fitted_parameters:
+    - 0.09686869696923237
+    - 1.090087186229519e-05
+    - 0.012178554390128682
+    - -0.41168334895602865
+    model_expression: hownrent ~ income + persons + stories
+    name: model_two
+    out_column: taz
+    out_filters: null
+    out_tables: null
+    out_transform: null
+    out_value_false: 0
+    out_value_true: 1000000000
+    summary_table: "                           Logit Regression Results          \
+        \                 \n==============================================================================\n\
+        Dep. Variable:               hownrent   No. Observations:              2603610\n\
+        Model:                          Logit   Df Residuals:                  2603606\n\
+        Method:                           MLE   Df Model:                        \
+        \    3\nDate:                Sat, 17 Mar 2018   Pseudo R-squ.:           \
+        \      0.08698\nTime:                        11:15:05   Log-Likelihood:  \
+        \          -1.6113e+06\nconverged:                       True   LL-Null: \
+        \                  -1.7649e+06\n                                        LLR\
+        \ p-value:                     0.000\n==============================================================================\n\
+        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
+        ------------------------------------------------------------------------------\n\
+        Intercept      0.0969      0.004     24.134      0.000       0.089       0.105\n\
+        income       1.09e-05   2.74e-08    397.741      0.000    1.08e-05     1.1e-05\n\
+        persons        0.0122      0.001     14.276      0.000       0.011       0.014\n\
+        stories       -0.4117      0.002   -201.179      0.000      -0.416      -0.408\n\
+        =============================================================================="
+    tables:
+    - households
+    - buildings
+    tags:
+    - sam
+    - testing
+    type: BinaryLogitStep
+
 small-mnl-test:
     choice_column: tenure
     filters:
@@ -54,7 +171,7 @@ small-mnl-test:
     - testing
     type: SmallMultinomialLogitStep
 
-ols_test:
+ols-test:
     filters: null
     fitted_parameters:
     - 89090.02995275857
@@ -92,7 +209,7 @@ ols_test:
         predict_filters: null
         ytransform: null
     model_expression: income ~ C(tenure) + persons
-    name: ols_test
+    name: ols-test
     out_column: taz
     out_filters: null
     out_tables: null
@@ -131,118 +248,4 @@ ols_test:
     - sam
     - testing
     type: OLSRegressionStep
-
-model_two:
-    filters: null
-    fitted_parameters:
-    - 0.09686869696923237
-    - 1.090087186229519e-05
-    - 0.012178554390128682
-    - -0.41168334895602865
-    model_expression: hownrent ~ income + persons + stories
-    name: model_two
-    out_column: taz
-    out_filters: null
-    out_tables: null
-    out_transform: null
-    out_value_false: 0
-    out_value_true: 1000000000
-    summary_table: "                           Logit Regression Results          \
-        \                 \n==============================================================================\n\
-        Dep. Variable:               hownrent   No. Observations:              2603610\n\
-        Model:                          Logit   Df Residuals:                  2603606\n\
-        Method:                           MLE   Df Model:                        \
-        \    3\nDate:                Sat, 17 Mar 2018   Pseudo R-squ.:           \
-        \      0.08698\nTime:                        11:15:05   Log-Likelihood:  \
-        \          -1.6113e+06\nconverged:                       True   LL-Null: \
-        \                  -1.7649e+06\n                                        LLR\
-        \ p-value:                     0.000\n==============================================================================\n\
-        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
-        ------------------------------------------------------------------------------\n\
-        Intercept      0.0969      0.004     24.134      0.000       0.089       0.105\n\
-        income       1.09e-05   2.74e-08    397.741      0.000    1.08e-05     1.1e-05\n\
-        persons        0.0122      0.001     14.276      0.000       0.011       0.014\n\
-        stories       -0.4117      0.002   -201.179      0.000      -0.416      -0.408\n\
-        =============================================================================="
-    tables:
-    - households
-    - buildings
-    tags:
-    - sam
-    - testing
-    type: BinaryLogitStep
-
-model_one:
-    filters: null
-    fitted_parameters:
-    - 0.09686869696923237
-    - 1.090087186229519e-05
-    - 0.012178554390128682
-    - -0.41168334895602865
-    model_expression: hownrent ~ income + persons + stories
-    name: model_one
-    out_column: taz
-    out_filters: null
-    out_tables: null
-    out_transform: null
-    out_value_false: 0
-    out_value_true: 1000000
-    summary_table: "                           Logit Regression Results          \
-        \                 \n==============================================================================\n\
-        Dep. Variable:               hownrent   No. Observations:              2603610\n\
-        Model:                          Logit   Df Residuals:                  2603606\n\
-        Method:                           MLE   Df Model:                        \
-        \    3\nDate:                Sat, 17 Mar 2018   Pseudo R-squ.:           \
-        \      0.08698\nTime:                        11:15:05   Log-Likelihood:  \
-        \          -1.6113e+06\nconverged:                       True   LL-Null: \
-        \                  -1.7649e+06\n                                        LLR\
-        \ p-value:                     0.000\n==============================================================================\n\
-        \                 coef    std err          z      P>|z|      [0.025      0.975]\n\
-        ------------------------------------------------------------------------------\n\
-        Intercept      0.0969      0.004     24.134      0.000       0.089       0.105\n\
-        income       1.09e-05   2.74e-08    397.741      0.000    1.08e-05     1.1e-05\n\
-        persons        0.0122      0.001     14.276      0.000       0.011       0.014\n\
-        stories       -0.4117      0.002   -201.179      0.000      -0.416      -0.408\n\
-        =============================================================================="
-    tables:
-    - households
-    - buildings
-    tags:
-    - sam
-    - testing
-    type: BinaryLogitStep
-
-large-mnl-test:
-    alt_filters: null
-    alt_sample_size: 10
-    alternatives: buildings
-    choice_column: building_id
-    chooser_filters:
-    - household_id % 1000 < 1
-    choosers: households
-    fitted_parameters:
-    - 0.00045990926356891706
-    model_expression: res_price_per_sqft - 1
-    name: large-mnl-test
-    out_alt_filters: null
-    out_alternatives: null
-    out_chooser_filters: null
-    out_choosers: null
-    out_column: null
-    summary_table: "                  CHOICEMODELS ESTIMATION RESULTS            \
-        \      \n===================================================================\n\
-        Dep. Var.:                chosen   No. Observations:               \nModel:\
-        \         Multinomial Logit   Df Residuals:                   \nMethod:  \
-        \     Maximum Likelihood   Df Model:                       \nDate:       \
-        \                       Pseudo R-squ.:                  \nTime:          \
-        \                    Pseudo R-bar-squ.:              \nAIC:              \
-        \                 Log-Likelihood:       -5,973.144\nBIC:                 \
-        \              LL-Null:              -5,995.932\n=======================================================================\n\
-        \                        coef   std err         z     P>|z|   Conf. Int.\n\
-        -----------------------------------------------------------------------\n\
-        res_price_per_sqft    0.0005     0.000     9.968                       \n\
-        ======================================================================="
-    tags:
-    - sam
-    - testing
-    type: LargeMultinomialLogitStep
+    version: 0.1dev1
