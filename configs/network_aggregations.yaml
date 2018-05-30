@@ -8,10 +8,10 @@ node_col: node_id
 
 variable_definitions:
 
-  - aggregation: sum
+  - name: sum_income_3000
     dataframe: households
+    aggregation: sum
     decay: flat
-    name: sum_income_3000
     radius: 3000
     varname: income
 

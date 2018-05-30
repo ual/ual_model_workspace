@@ -3,10 +3,10 @@ import pandana as pdna
 import pandas as pd
 from urbansim.utils import networks
 
+
 @orca.step()
 def test_manual_registration():
     print("Model step is running")
-    return
 
 
 @orca.injectable('net', cache=True)
