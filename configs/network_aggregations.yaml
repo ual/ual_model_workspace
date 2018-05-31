@@ -49,15 +49,6 @@ variable_definitions:
     radius: 1500
     apply: np.log1p
 
-  - name: ave_income_1500
-    aggregation: 75pct
-    filters:
-    dataframe: households
-    varname: income
-    radius: 1500
-    decay: flat
-    apply: np.log1p
-  
   - name: ave_income_500
     aggregation: median
     filters:
