@@ -1,0 +1,59 @@
+name: network_aggregations
+
+desc: Network aggregations
+
+model_type: networks
+
+node_col: node_id
+
+variable_definitions:
+
+  - name: sum_income_3000
+    dataframe: households
+    aggregation: sum
+    decay: flat
+    radius: 3000
+    varname: income
+
+  - name: residential_units_500
+    dataframe: buildings
+    varname: residential_units
+    radius: 500
+    apply: np.log1p
+
+  - name: residential_units_1500
+    dataframe: buildings
+    varname: residential_units
+    radius: 1500
+    apply: np.log1p
+
+  - name: population
+    filters:
+    dataframe: households
+    varname: persons
+    radius: 1500
+    apply: np.log1p
+
+  - name: poor
+    dataframe: households
+    filters:
+    - income < 40000
+    varname: persons
+    radius: 1500
+    apply: np.log1p
+
+  - name: renters
+    dataframe: households
+    filters:
+    - tenure == 2
+    radius: 1500
+    apply: np.log1p
+
+  - name: ave_income_500
+    aggregation: median
+    filters:
+    dataframe: households
+    varname: income
+    radius: 500
+    decay: flat
+    apply: np.log1p
