@@ -3,6 +3,10 @@ Download the following data files from UAL Box and place them in this folder loc
 - `bayarea_ual.h5` (1.94 GB): parcels and buildings
 - `units_w_tenure.zip` (15 MB): units
 - `synthpop_w_units.zip` (105 MB): households and persons
+- `bay_area_tertiary_strongly_nodes.csv` (1 MB): network nodes
+- `bay_area_tertiary_strongly_edges.csv` (7 MB): network edges
 
-Downloads: https://berkeley.app.box.com/folder/47811370974  
+Main downloads: https://berkeley.app.box.com/folder/47811370974  
 Data ledger: https://berkeley.app.box.com/notes/282712547032
+
+Network downloads: https://berkeley.app.box.com/folder/47842591037
