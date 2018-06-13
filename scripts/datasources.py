@@ -8,18 +8,26 @@ import zipfile
 # data documentation: https://berkeley.app.box.com/notes/282712547032
 
 
+# Set data directory
+
+d = 'data/'
+
+if 'data_directory' in orca.list_injectables():
+    d = orca.get_injectable('data_directory')
+
+
 ############################################################
 
 # Tables from MTC Bay Area UrbanSim
 
 @orca.table(cache=True)
 def parcels():
-    df = pd.read_hdf('data/bayarea_ual.h5', 'parcels')
+    df = pd.read_hdf(d + 'bayarea_ual.h5', 'parcels')
     return df
 
 @orca.table(cache=True)
 def buildings():
-    df = pd.read_hdf('data/bayarea_ual.h5', 'buildings')
+    df = pd.read_hdf(d + 'bayarea_ual.h5', 'buildings')
     return df
 
 
@@ -29,19 +37,19 @@ def buildings():
 
 @orca.table(cache=True)
 def units():
-    z = zipfile.ZipFile('data/units_w_tenure.zip')
+    z = zipfile.ZipFile(d + 'units_w_tenure.zip')
     df = pd.read_csv(z.open('units_w_tenure.csv'))
     return df
 
 @orca.table(cache=True)
 def households():
-    z = zipfile.ZipFile('data/synthpop_w_units.zip')
+    z = zipfile.ZipFile(d + 'synthpop_w_units.zip')
     df = pd.read_csv(z.open('households_w_units.csv'))
     return df
 
 @orca.table(cache=True)
 def persons():
-    z = zipfile.ZipFile('data/synthpop_w_units.zip')
+    z = zipfile.ZipFile(d + 'synthpop_w_units.zip')
     df = pd.read_csv(z.open('sfbay_persons_2018_04_16.csv'))
     return df
 
