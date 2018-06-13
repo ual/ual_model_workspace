@@ -218,13 +218,15 @@ model_one:
 large-mnl-test:
     alt_filters: null
     alt_sample_size: 10
-    alternatives: buildings
-    choice_column: building_id
+    alternatives:
+    - units
+    - buildings
+    choice_column: unit_id
     chooser_filters:
     - household_id % 1000 < 1
     choosers: households
     fitted_parameters:
-    - 0.00045990926356891706
+    - 1.805049467592521e-05
     model_expression: res_price_per_sqft - 1
     name: large-mnl-test
     out_alt_filters: null
@@ -239,11 +241,11 @@ large-mnl-test:
         \     Maximum Likelihood   Df Model:                       \nDate:       \
         \                       Pseudo R-squ.:                  \nTime:          \
         \                    Pseudo R-bar-squ.:              \nAIC:              \
-        \                 Log-Likelihood:       -5,973.144\nBIC:                 \
-        \              LL-Null:              -5,995.932\n=======================================================================\n\
+        \                 Log-Likelihood:       -5,717.211\nBIC:                 \
+        \              LL-Null:              -5,717.319\n=======================================================================\n\
         \                        coef   std err         z     P>|z|   Conf. Int.\n\
         -----------------------------------------------------------------------\n\
-        res_price_per_sqft    0.0005     0.000     9.968                       \n\
+        res_price_per_sqft    0.0000     0.000     0.547                       \n\
         ======================================================================="
     tags:
     - sam
