@@ -39,6 +39,7 @@ def buildings():
 def units():
     z = zipfile.ZipFile(d + 'units_w_tenure.zip')
     df = pd.read_csv(z.open('units_w_tenure.csv'))
+    df.index.name = 'unit_id'  # first column in CSV is unnamed
     return df
 
 @orca.table(cache=True)
@@ -51,6 +52,7 @@ def households():
 def persons():
     z = zipfile.ZipFile(d + 'synthpop_w_units.zip')
     df = pd.read_csv(z.open('sfbay_persons_2018_04_16.csv'))
+    df.index.name = 'person_id'  # first column in CSV is unnamed
     return df
 
 
