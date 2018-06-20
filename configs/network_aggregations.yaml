@@ -57,3 +57,15 @@ variable_definitions:
     radius: 500
     decay: flat
     apply: np.log1p
+
+  - name: job_500
+    dataframe: jobs
+    varname: job_id
+    radius: 500
+    apply: np.log1p
+
+  - name: job_1500
+    dataframe: jobs
+    varname: job_id
+    radius: 1500
+    apply: np.log1p
