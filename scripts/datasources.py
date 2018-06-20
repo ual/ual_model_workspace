@@ -55,6 +55,12 @@ def persons():
     df.index.name = 'person_id'  # first column in CSV is unnamed
     return df
 
+@orca.table(cache=True)
+def jobs():
+    z = zipfile.ZipFile(d + 'jobs_w_occup.zip')
+    df = pd.read_csv(z.open('jobs_w_occup.csv'))
+    return df
+
 
 ############################################################
 

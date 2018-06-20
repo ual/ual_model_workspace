@@ -53,6 +53,11 @@ def initialize_network():
     @orca.column('persons', 'node_id')
     def node_id(households, persons):
         return misc.reindex(households.node_id, persons.household_id)
+
+    @orca.column('jobs', 'node_id')
+    def node_id(units, jobs):
+        return misc.reindex(units.node_id, jobs.building_id)
+    
     
     # While we're at it, we can use these node_id columns to define direct broadcasts
     # between the nodes table and lower-level ones, which speeds up merging
