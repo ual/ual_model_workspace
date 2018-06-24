@@ -30,6 +30,16 @@ def buildings():
     df = pd.read_hdf(d + 'bayarea_ual.h5', 'buildings')
     return df
 
+############################################################
+
+# Tables of Residential Sales from Dataquick added by Paul Waddell
+
+@orca.table(cache=True)
+def sales():
+    z = zipfile.ZipFile(d + 'sales.zip')
+    df = pd.read_csv(z.open('sales.csv'))
+    df.index.name = 'sales_id'  # first column in CSV is unnamed
+    return df
 
 ############################################################
 

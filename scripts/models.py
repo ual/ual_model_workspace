@@ -30,10 +30,17 @@ def initialize_network():
     ids = orca.get_injectable('net').get_node_ids(parcels.x, parcels.y)
     orca.get_table('parcels').update_col_from_series('node_id', ids, cast=True)
     
+     # Assign 'node_id' to the sales
+    
+    sales = orca.get_table('sales').to_frame(columns=['sa_x_coord','sa_y_coord'])
+    ids = orca.get_injectable('net').get_node_ids(sales.sa_x_coord, sales.sa_y_coord)
+    orca.get_table('sales').update_col_from_series('node_id', ids, cast=True)
+    
     # Anticipating that a 'nodes' table will be built, specify a broadcast relationship
     # (how to handle this best in a template?)
     
     orca.broadcast('nodes', 'parcels', cast_index=True, onto_on='node_id')
+    orca.broadcast('nodes', 'sales', cast_index=True, onto_on='node_id')
     
     # Also assign 'node_id' down to the other tables - this is required for calculating 
     # node-level aggregations of variables from a table
