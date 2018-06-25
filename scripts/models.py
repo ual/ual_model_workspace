@@ -3,6 +3,12 @@ import pandana as pdna
 import pandas as pd
 from urbansim.utils import misc, networks
 
+# Set data directory
+
+d = 'data/'
+
+if 'data_directory' in orca.list_injectables():
+    d = orca.get_injectable('data_directory')
 
 @orca.step()
 def test_manual_registration():
@@ -17,9 +23,9 @@ def initialize_network():
     """
     @orca.injectable('net', cache=True)
     def build_network():
-        nodes = pd.read_csv('data/bay_area_tertiary_strongly_nodes.csv')\
+        nodes = pd.read_csv(d + 'bay_area_tertiary_strongly_nodes.csv')\
                 .set_index('osmid')
-        edges = pd.read_csv('data/bay_area_tertiary_strongly_edges.csv')
+        edges = pd.read_csv(d + 'bay_area_tertiary_strongly_edges.csv')
         net = pdna.Network(nodes.x, nodes.y, edges.u, edges.v, edges[['length']])
         net.precompute(5000)
         return net
