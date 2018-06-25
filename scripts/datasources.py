@@ -36,8 +36,8 @@ def buildings():
 
 @orca.table(cache=True)
 def sales():
-    z = zipfile.ZipFile(d + 'sales.zip')
-    df = pd.read_csv(z.open('sales.csv'))
+    z = zipfile.ZipFile(d + 'salemrg.csv.zip')
+    df = pd.read_csv(z.open('salemrg.csv'))
     df.index.name = 'sales_id'  # first column in CSV is unnamed
     return df
 
