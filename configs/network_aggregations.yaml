@@ -8,12 +8,6 @@ node_col: node_id
 
 variable_definitions:
 
-  - name: sum_income_3000
-    dataframe: households
-    aggregation: sum
-    decay: flat
-    radius: 3000
-    varname: income
 
   - name: residential_units_500
     dataframe: buildings
@@ -27,14 +21,13 @@ variable_definitions:
     radius: 1500
     apply: np.log1p
 
-  - name: population
+  - name: population_1500
     filters:
     dataframe: households
     varname: persons
     radius: 1500
-    apply: np.log1p
 
-  - name: poor
+  - name: poor_1500
     dataframe: households
     filters:
     - income < 40000
@@ -42,30 +35,55 @@ variable_definitions:
     radius: 1500
     apply: np.log1p
 
-  - name: renters
+  - name: renters_1500
     dataframe: households
     filters:
     - tenure == 2
     radius: 1500
     apply: np.log1p
 
-  - name: ave_income_500
+  - name: med_income_500
     aggregation: median
-    filters:
     dataframe: households
     varname: income
     radius: 500
-    decay: flat
-    apply: np.log1p
 
-  - name: job_500
-    dataframe: jobs
-    varname: job_id
+
+  - name: med_income_500_log
+    aggregation: median
+    dataframe: households
+    varname: income
     radius: 500
-    apply: np.log1p
+    apply: np.log
+
 
   - name: job_1500
     dataframe: jobs
     varname: job_id
     radius: 1500
     apply: np.log1p
+
+  - name: job_25km
+    dataframe: jobs
+    varname: job_id
+    radius: 25000
+    apply: np.log1p
+
+  - name: ave_hhsize
+    dataframe: households
+    varname: persons
+    radius: 1500
+    aggregation: average
+    decay: flat
+    apply: np.log1p
+
+
+  - name: med_rent_sqft_1500
+    dataframe: rentals
+    varname: price_per_sqft
+    radius: 1500
+    aggregation: median
+    decay: flat
+
+
+
