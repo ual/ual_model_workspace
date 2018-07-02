@@ -34,11 +34,21 @@ def buildings():
 
 # Tables of Residential Sales from Dataquick added by Paul Waddell
 
+#@orca.table(cache=True)
+#def sales():
+#    z = zipfile.ZipFile(d + 'salemrg.csv.zip')
+#    df = pd.read_csv(z.open('salemrg.csv'))
+#    df.index.name = 'sales_id'  # first column in CSV is unnamed
+#    return df
+
+############################################################
+
+# Table of Rental Data from  Craigslist, bayarea_urbansim added by Arezoo
+
 @orca.table(cache=True)
-def sales():
-    z = zipfile.ZipFile(d + 'salemrg.csv.zip')
-    df = pd.read_csv(z.open('salemrg.csv'))
-    df.index.name = 'sales_id'  # first column in CSV is unnamed
+def rentals():
+    z = zipfile.ZipFile(d + 'sfbay_craigslist.zip')
+    df = pd.read_csv(z.open('sfbay_craigslist.csv'))
     return df
 
 ############################################################
