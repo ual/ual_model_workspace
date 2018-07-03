@@ -42,20 +42,12 @@ variable_definitions:
     radius: 1500
     apply: np.log1p
 
-  - name: med_income_500
+
+  - name: med_income_1500
     aggregation: median
     dataframe: households
     varname: income
-    radius: 500
-
-
-  - name: med_income_500_log
-    aggregation: median
-    dataframe: households
-    varname: income
-    radius: 500
-    apply: np.log
-
+    radius: 1500
 
   - name: job_1500
     dataframe: jobs
@@ -85,5 +77,11 @@ variable_definitions:
     aggregation: median
     decay: flat
 
+  - name: med_rent_sqft_7000
+    dataframe: rentals
+    varname: price_per_sqft
+    radius: 7000
+    aggregation: median
+    decay: flat
 
 
