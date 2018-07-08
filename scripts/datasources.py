@@ -22,12 +22,14 @@ if 'data_directory' in orca.list_injectables():
 
 @orca.table(cache=True)
 def parcels():
-    df = pd.read_hdf(d + 'bayarea_ual.h5', 'parcels')
+#    df = pd.read_hdf(d + 'bayarea_ual.h5', 'parcels')
+    df = pd.read_csv(d + 'mtc_data_platform_format_7-6-18/' + 'parcel_attr.csv')
     return df
 
 @orca.table(cache=True)
 def buildings():
-    df = pd.read_hdf(d + 'bayarea_ual.h5', 'buildings')
+#    df = pd.read_hdf(d + 'bayarea_ual.h5', 'buildings')
+    df = pd.read_csv(d + 'mtc_data_platform_format_7-6-18/' + 'buildings_v2.csv')
     return df
 
 ############################################################
@@ -64,21 +66,24 @@ def units():
 
 @orca.table(cache=True)
 def households():
-    z = zipfile.ZipFile(d + 'synthpop_w_units.zip')
-    df = pd.read_csv(z.open('households_w_units.csv'))
+#    z = zipfile.ZipFile(d + 'synthpop_w_units.zip')
+#    df = pd.read_csv(z.open('households_w_units.csv'))
+    df = pd.read_csv(d + 'mtc_data_platform_format_7-6-18/' + 'households_v2.csv')
     return df
 
 @orca.table(cache=True)
 def persons():
-    z = zipfile.ZipFile(d + 'synthpop_w_units.zip')
-    df = pd.read_csv(z.open('sfbay_persons_2018_04_16.csv'))
-    df.index.name = 'person_id'  # first column in CSV is unnamed
+#    z = zipfile.ZipFile(d + 'synthpop_w_units.zip')
+#    df = pd.read_csv(z.open('sfbay_persons_2018_04_16.csv'))
+#    df.index.name = 'person_id'  # first column in CSV is unnamed
+    df = pd.read_csv(d + 'mtc_data_platform_format_7-6-18/' + 'persons_v2.csv')
     return df
 
 @orca.table(cache=True)
 def jobs():
-    z = zipfile.ZipFile(d + 'jobs_w_occup.zip')
-    df = pd.read_csv(z.open('jobs_w_occup.csv'))
+#    z = zipfile.ZipFile(d + 'jobs_w_occup.zip')
+#    df = pd.read_csv(z.open('jobs_w_occup.csv'))
+    df = pd.read_csv(d + 'mtc_data_platform_format_7-6-18/' + 'jobs_v2.csv')
     return df
 
 
