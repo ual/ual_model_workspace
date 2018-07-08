@@ -23,9 +23,11 @@ def initialize_network():
     """
     @orca.injectable('net', cache=True)
     def build_network():
-        nodes = pd.read_csv(d + 'bay_area_tertiary_strongly_nodes.csv')\
-                .set_index('osmid')
-        edges = pd.read_csv(d + 'bay_area_tertiary_strongly_edges.csv')
+#        nodes = pd.read_csv(d + 'bay_area_tertiary_strongly_nodes.csv')\
+#                .set_index('osmid')
+#        edges = pd.read_csv(d + 'bay_area_tertiary_strongly_edges.csv')
+        nodes = pd.read_csv(d + 'bay_area_walk_nodes.csv')
+        edges = pd.read_csv(d + 'bay_area_walk_edges.csv')
         net = pdna.Network(nodes.x, nodes.y, edges.u, edges.v, edges[['length']])
         net.precompute(5000)
         return net
