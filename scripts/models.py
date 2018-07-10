@@ -35,13 +35,14 @@ def initialize_network_small():
         return netsmall
 
     parcels = orca.get_table('parcels').to_frame(columns=['x','y'])
-    idssmall = orca.get_injectable('netsmall').get_node_ids(parcels.x, parcels.y)
-    orca.add_column('parcels', 'node_id_small', idssmall, cache=False)
+    idssmall_parcel = orca.get_injectable('netsmall').get_node_ids(parcels.x, parcels.y)
+    orca.add_column('parcels', 'node_id_small', idssmall_parcel, cache=False)
     orca.broadcast('nodessmall', 'parcels', cast_index=True,onto_on='node_id_small')
 
-    rentals = orca.get_table('rentals').to_frame(columns=['lon','lat'])
-    ids = orca.get_injectable('netsmall').get_node_ids(rentals.lon, rentals.lat)
-    orca.add_column('rentals', 'node_id_small', ids, cache=False)
+    rentals = orca.get_table('rentals').to_frame(columns=['longitude','latitude'])
+    idssmall_rentals = orca.get_injectable('netsmall').get_node_ids(rentals.longitude,rentals.latitude)
+    orca.add_column('rentals', 'node_id_small', idssmall_rentals, cache=False)
+    orca.broadcast('nodessmall', 'rentals', cast_index=True, onto_on='node_id_small')
 
     @orca.column('buildings', 'node_id_small')
     def node_id(parcels, buildings):
@@ -88,33 +89,20 @@ def initialize_network_drive():
     # Assign 'node_id' to the parcels
     
     parcels = orca.get_table('parcels').to_frame(columns=['x','y'])
-    #orca.get_table('parcels').update_col_from_series('node_id_small', idssmall, \
-    #cast=True)
-    idsdrive = orca.get_injectable('netdrive').get_node_ids(parcels.x, parcels.y)
-    orca.add_column('parcels', 'node_id_drive', idsdrive, cache=False)
+    idsdrive_parcel = orca.get_injectable('netdrive').get_node_ids(parcels.x, parcels.y)
+    orca.add_column('parcels', 'node_id_drive', idsdrive_parcel, cache=False)
     orca.broadcast('nodesdrive', 'parcels', cast_index=True, onto_on='node_id_drive')
-
-    #orca.get_table('parcels').update_col_from_series('node_id_drive', idsdrive, \
-    #cast=True)
-    
-    # Assign 'node_id' to the sales
-
-    # sales = orca.get_table('sales').to_frame(columns=['sa_x_coord','sa_y_coord'])
-    # ids = orca.get_injectable('net').get_node_ids(sales.sa_x_coord, sales.sa_y_coord)
-    # orca.get_table('sales').update_col_from_series('node_id', ids, cast=True )
     
     # Assign 'node_id' to the rentals
 
-    rentals = orca.get_table('rentals').to_frame(columns=['lon','lat'])
-    ids = orca.get_injectable('netdrive').get_node_ids(rentals.lon, rentals.lat)
-    orca.add_column('rentals', 'node_id_drive', ids, cache=False)
+    rentals = orca.get_table('rentals').to_frame(columns=['longitude','latitude'])
+    idsdrive_rentals = orca.get_injectable('netdrive').get_node_ids(rentals.longitude,rentals.latitude)
+    orca.add_column('rentals', 'node_id_drive', idsdrive_rentals, cache=False)
+    orca.broadcast('nodesdrive', 'rentals', cast_index=True, onto_on='node_id_drive')
     
     # Anticipating that a 'nodes' table will be built, specify a broadcast relationship
     # (how to handle this best in a template?)
     
-
-    #orca.broadcast('nodes', 'rentals', cast_index=True, onto_on='node_id')
-    # orca.broadcast('nodes', 'sales', cast_index=True, onto_on='node_id')
     
     # Also assign 'node_id' down to the other tables - this is required for calculating 
     # node-level aggregations of variables from a table
