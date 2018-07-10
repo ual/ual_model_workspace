@@ -13,7 +13,6 @@ variable_definitions:
     dataframe: buildings
     varname: residential_units
     radius: 10000
-    apply: np.log1p
 
   - name: population_10000
     filters:
@@ -31,7 +30,11 @@ variable_definitions:
     dataframe: jobs
     varname: job_id
     radius: 25000
-    apply: np.log1p
 
+  - name: med_income_10000
+    aggregation: median
+    dataframe: households
+    varname: income
+    radius: 10000
 
 

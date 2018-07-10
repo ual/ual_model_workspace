@@ -13,19 +13,16 @@ variable_definitions:
     dataframe: buildings
     varname: residential_units
     radius: 500
-    apply: np.log1p
 
   - name: residential_units_1500
     dataframe: buildings
     varname: residential_units
     radius: 1500
-    apply: np.log1p
 
   - name: population_1500
     filters:
     dataframe: households
     varname: persons
-    radius: 1500
 
   - name: poor_1500
     dataframe: households
@@ -33,27 +30,23 @@ variable_definitions:
     - income < 40000
     varname: persons
     radius: 1500
-    apply: np.log1p
 
   - name: renters_1500
     dataframe: households
     filters:
     - tenure == 2
     radius: 1500
-    apply: np.log1p
 
 
   - name: med_income_1500
     aggregation: median
     dataframe: households
     varname: income
-    radius: 1500
 
   - name: job_1500
     dataframe: jobs
     varname: job_id
     radius: 1500
-    apply: np.log1p
 
   - name: ave_hhsize
     dataframe: households
@@ -61,7 +54,6 @@ variable_definitions:
     radius: 1500
     aggregation: average
     decay: flat
-    apply: np.log1p
 
 
   - name: med_rent_sqft_1500
