@@ -55,12 +55,6 @@ variable_definitions:
     radius: 1500
     apply: np.log1p
 
-  - name: job_25km
-    dataframe: jobs
-    varname: job_id
-    radius: 25000
-    apply: np.log1p
-
   - name: ave_hhsize
     dataframe: households
     varname: persons
@@ -74,13 +68,6 @@ variable_definitions:
     dataframe: rentals
     varname: price_per_sqft
     radius: 1500
-    aggregation: median
-    decay: flat
-
-  - name: med_rent_sqft_7000
-    dataframe: rentals
-    varname: price_per_sqft
-    radius: 7000
     aggregation: median
     decay: flat
 
