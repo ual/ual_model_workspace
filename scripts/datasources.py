@@ -59,8 +59,9 @@ def rentals():
 
 @orca.table(cache=True)
 def units():
-    z = zipfile.ZipFile(d + 'units_w_tenure.zip')
-    df = pd.read_csv(z.open('units_w_tenure.csv'))
+    #z = zipfile.ZipFile(d + 'units_w_tenure.zip')
+    #df = pd.read_csv(z.open('units_w_tenure.csv'))
+    df = pd.read_csv(d + 'mtc_data_platform_format_7-6-18/' + 'units_v2.csv')
     df.index.name = 'unit_id'  # first column in CSV is unnamed
     return df
 
