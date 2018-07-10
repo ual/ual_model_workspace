@@ -23,6 +23,7 @@ variable_definitions:
     filters:
     dataframe: households
     varname: persons
+    radius: 1500
 
   - name: poor_1500
     dataframe: households
@@ -42,6 +43,7 @@ variable_definitions:
     aggregation: median
     dataframe: households
     varname: income
+    radius: 1500
 
   - name: job_1500
     dataframe: jobs

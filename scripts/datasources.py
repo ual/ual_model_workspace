@@ -49,8 +49,8 @@ def buildings():
 
 @orca.table(cache=True)
 def rentals():
-    z = zipfile.ZipFile(d + 'sfbay_craigslist.zip')
-    df = pd.read_csv(z.open('sfbay_craigslist.csv'))
+    z = zipfile.ZipFile(d + 'MTC_craigslist_listings_7-10-18.zip')
+    df = pd.read_csv(z.open('MTC_craigslist_listings_7-10-18.csv'))
     return df
 
 ############################################################
