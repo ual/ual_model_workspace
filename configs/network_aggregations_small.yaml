@@ -1,0 +1,37 @@
+name: network_aggregations
+
+desc: Network aggregations
+
+model_type: networks
+
+node_col: node_id_small
+
+variable_definitions:
+
+
+  - name: residential_units_10000
+    dataframe: buildings
+    varname: residential_units
+    radius: 10000
+    apply: np.log1p
+
+  - name: population_10000
+    filters:
+    dataframe: households
+    varname: persons
+    radius: 10000
+
+  - name: jobs_10000
+    dataframe: jobs
+    varname: job_id
+    radius: 10000
+    apply: np.log1p
+
+  - name: jobs_25000
+    dataframe: jobs
+    varname: job_id
+    radius: 25000
+    apply: np.log1p
+
+
+
