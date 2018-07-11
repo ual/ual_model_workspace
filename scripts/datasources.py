@@ -48,11 +48,16 @@ def buildings():
 # Table of Rental Data from  Craigslist, bayarea_urbansim added by Arezoo
 
 @orca.table(cache=True)
-def rentals():
+def craigslist():
     z = zipfile.ZipFile(d + 'MTC_craigslist_listings_7-10-18.zip')
     df = pd.read_csv(z.open('MTC_craigslist_listings_7-10-18.csv'))
     return df
 
+@orca.table(cache=True)
+def rentals():
+    df = pd.read_csv(d + 'rental_listings_cleaned.csv')
+    return df
+    
 ############################################################
 
 # Tables synthesized by Max Gardner
