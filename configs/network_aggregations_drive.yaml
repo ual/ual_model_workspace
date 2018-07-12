@@ -58,9 +58,9 @@ variable_definitions:
     decay: flat
 
 
-  - name: med_rent_sqft_1500
+  - name: med_rent_1500
     dataframe: rentals
-    varname: price_per_sqft
+    varname: rent
     radius: 1500
     aggregation: median
     decay: flat
