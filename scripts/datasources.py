@@ -53,6 +53,7 @@ def buildings():
 def craigslist():
     z = zipfile.ZipFile(d + 'MTC_craigslist_listings_7-10-18.zip')
     df = pd.read_csv(z.open('MTC_craigslist_listings_7-10-18.csv'))
+    df = df.set_index('pid')
     return df
 
 @orca.table(cache=True)
