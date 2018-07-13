@@ -16,7 +16,6 @@ def test_manual_registration():
     print("Model step is running")
 
 
-reserve_num_graphs(40)
 
 @orca.step()
 def initialize_network_small():
@@ -24,11 +23,13 @@ def initialize_network_small():
     This will be turned into a data loading template.
     
     """
+    reserve_num_graphs(40)
     @orca.injectable('netsmall', cache=True)
     def build_networksmall():
         nodessmall = pd.read_csv(d + 'bay_area_tertiary_strongly_nodes.csv')\
-                .set_index('osmid')
-        edgessmall = pd.read_csv(d + 'bay_area_tertiary_strongly_edges.csv')
+            .set_index('osmid')
+        edgessmall = pd.read_csv(d + 'bay_area_tertiary_strongly_edges.csv')\
+            .set_index('uniqueid')
         netsmall = pdna.Network(nodessmall.x, nodessmall.y, edgessmall.u, \
         edgessmall.v, edgessmall[['length']], twoway=False)
         netsmall.precompute(25000)
@@ -76,11 +77,13 @@ def initialize_network_drive():
     This will be turned into a data loading template.
     
     """
+    reserve_num_graphs(40)
     @orca.injectable('netdrive', cache=True)
     def build_networkdrive():
         nodesdrive = pd.read_csv(d + 'bay_area_drive_full_nodes.csv')\
-                .set_index('osmid')
-        edgesdrive = pd.read_csv(d + 'bay_area_drive_full_edges.csv')
+            .set_index('osmid')
+        edgesdrive = pd.read_csv(d + 'bay_area_drive_full_edges.csv') \
+            .set_index('uniqueid')
         netdrive = pdna.Network(nodesdrive.x, nodesdrive.y, edgesdrive.u, edgesdrive.v, \
         edgesdrive[['length']], twoway=False)
         netdrive.precompute(2500)
@@ -131,6 +134,60 @@ def initialize_network_drive():
 
 
 @orca.step()
+def initialize_network_walk():
+    """
+    This will be turned into a data loading template.
+
+    """
+
+    reserve_num_graphs(40)
+    @orca.injectable('netwalk', cache=True)
+    def build_networkwalk():
+        nodeswalk = pd.read_csv(d + 'bay_area_walk_nodes.csv') \
+            .set_index('osmid')
+        edgeswalk = pd.read_csv(d + 'bay_area_walk_edges.csv') \
+            .set_index('uniqueid')
+        netwalk = pdna.Network(nodeswalk.x, nodeswalk.y, edgeswalk.u, \
+                                edgeswalk.v, edgeswalk[['length']], twoway=True)
+        netwalk.precompute(1000)
+        return netwalk
+
+    parcels = orca.get_table('parcels').to_frame(columns=['x', 'y'])
+    idswalk_parcel = orca.get_injectable('netwalk').get_node_ids(parcels.x, parcels.y)
+    orca.add_column('parcels', 'node_id_walk', idswalk_parcel, cache=False)
+    orca.broadcast('nodeswalk', 'parcels', cast_index=True, onto_on='node_id_walk')
+
+    rentals = orca.get_table('rentals').to_frame(columns=['longitude', 'latitude'])
+    idswalk_rentals = orca.get_injectable('netwalk').get_node_ids(rentals.longitude, rentals.latitude)
+    orca.add_column('rentals', 'node_id_walk', idswalk_rentals, cache=False)
+    orca.broadcast('nodeswalk', 'rentals', cast_index=True, onto_on='node_id_walk')
+
+    @orca.column('buildings', 'node_id_walk')
+    def node_id(parcels, buildings):
+        return misc.reindex(parcels.node_id_walk, buildings.parcel_id)
+
+    @orca.column('units', 'node_id_walk')
+    def node_id(buildings, units):
+        return misc.reindex(buildings.node_id_walk, units.building_id)
+
+    @orca.column('households', 'node_id_walk')
+    def node_id(units, households):
+        return misc.reindex(units.node_id_walk, households.unit_id)
+
+    @orca.column('persons', 'node_id_walk')
+    def node_id(households, persons):
+        return misc.reindex(households.node_id_walk, persons.household_id)
+
+    @orca.column('jobs', 'node_id_walk')
+    def node_id(buildings, jobs):
+        return misc.reindex(buildings.node_id_walk, jobs.building_id)
+
+    # While we're at it, we can use these node_id columns to define direct broadcasts
+    # between the nodes table and lower-level ones, which speeds up merging
+
+    orca.broadcast('nodeswalk', 'units', cast_index=True, onto_on='node_id_walk')
+
+@orca.step()
 def network_aggregations_drive(netdrive):
     """
     This will be turned into a network aggregation template.
@@ -152,3 +209,16 @@ def network_aggregations_small(netsmall):
     nodessmall = nodessmall.fillna(0)
     print(nodessmall.describe())
     orca.add_table('nodessmall', nodessmall)
+
+
+@orca.step()
+def network_aggregations_walk(netwalk):
+    """
+    This will be turned into a network aggregation template.
+
+    """
+
+    nodeswalk = networks.from_yaml(netwalk, 'network_aggregations_walk.yaml')
+    nodeswalk = nodeswalk.fillna(0)
+    print(nodeswalk.describe())
+    orca.add_table('nodeswalk', nodeswalk)

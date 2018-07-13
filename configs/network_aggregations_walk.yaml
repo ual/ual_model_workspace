@@ -4,58 +4,44 @@ desc: Network aggregations
 
 model_type: networks
 
-node_col: node_id_drive
+node_col: node_id_walk
 
 variable_definitions:
 
 
-  - name: residential_units_500
+  - name: units_500_walk
     dataframe: buildings
     varname: residential_units
     radius: 500
 
-  - name: residential_units_1500
-    dataframe: buildings
-    varname: residential_units
-    radius: 1500
-
-  - name: population_1500
+  - name: pop_500_walk
     dataframe: households
     varname: persons
-    radius: 1500
+    radius: 500
 
-  - name: poor_1500
+  - name: poor_500_walk
     dataframe: households
     filters:
     - income < 40000
-    radius: 1500
+    radius: 500
 
-  - name: renters_1500
+  - name: renters_500_walk
     dataframe: households
     filters:
     - tenure == 2
-    radius: 1500
+    radius: 500
 
-
-  - name: med_income_1500
+  - name: med_income_500_walk
     aggregation: median
     dataframe: households
     varname: income
-    radius: 1500
+    radius: 500
 
-  - name: job_1500
+  - name: jobs_500_walk
     dataframe: jobs
-    radius: 1500
+    radius: 500
 
-  - name: ave_hhsize
-    dataframe: households
-    varname: persons
-    radius: 1500
-    aggregation: average
-    decay: flat
-
-
-  - name: med_rent_1500
+  - name: med_rent_500_walk
     dataframe: rentals
     varname: rent
     radius: 1500

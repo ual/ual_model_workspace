@@ -15,20 +15,16 @@ variable_definitions:
     radius: 10000
 
   - name: population_10000
-    filters:
     dataframe: households
     varname: persons
     radius: 10000
 
   - name: jobs_10000
     dataframe: jobs
-    varname: job_id
     radius: 10000
-    apply: np.log1p
 
   - name: jobs_25000
     dataframe: jobs
-    varname: job_id
     radius: 25000
 
   - name: med_income_10000
