@@ -3,6 +3,7 @@ import pandana as pdna
 import pandas as pd
 from urbansim.utils import misc, networks
 from pandana.network import reserve_num_graphs
+reserve_num_graphs(40)
 
 # Set data directory
 
@@ -23,7 +24,6 @@ def initialize_network_small():
     This will be turned into a data loading template.
     
     """
-    reserve_num_graphs(40)
     @orca.injectable('netsmall', cache=True)
     def build_networksmall():
         nodessmall = pd.read_csv(d + 'bay_area_tertiary_strongly_nodes.csv')\
@@ -77,7 +77,6 @@ def initialize_network_drive():
     This will be turned into a data loading template.
     
     """
-    reserve_num_graphs(40)
     @orca.injectable('netdrive', cache=True)
     def build_networkdrive():
         nodesdrive = pd.read_csv(d + 'bay_area_drive_full_nodes.csv')\
@@ -139,8 +138,6 @@ def initialize_network_walk():
     This will be turned into a data loading template.
 
     """
-
-    reserve_num_graphs(40)
     @orca.injectable('netwalk', cache=True)
     def build_networkwalk():
         nodeswalk = pd.read_csv(d + 'bay_area_walk_nodes.csv') \
