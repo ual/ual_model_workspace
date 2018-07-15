@@ -8,29 +8,199 @@ node_col: node_id_small
 
 variable_definitions:
 
-
-  - name: residential_units_10000
+  - name: units_10000
     dataframe: buildings
     varname: residential_units
     radius: 10000
+    decay: flat
 
-  - name: population_10000
+  - name: units_sf_10000
+    dataframe: buildings
+    varname: residential_units
+    filters:
+    - building_type_id == 1
+    radius: 10000
+    decay: flat
+
+  - name: units_mf_10000
+    dataframe: buildings
+    varname: residential_units
+    filters:
+    - building_type_id == 3
+    radius: 10000
+    decay: flat
+
+  - name: pop_10000
     dataframe: households
     varname: persons
     radius: 10000
+    decay: flat
 
-  - name: jobs_10000
-    dataframe: jobs
+  - name: hh_10000
+    dataframe: households
     radius: 10000
+    decay: flat
 
-  - name: jobs_25000
-    dataframe: jobs
-    radius: 25000
+  - name: poor_10000
+    dataframe: households
+    filters:
+    - income < 40000
+    radius: 10000
+    decay: flat
+
+  - name: renters_10000
+    dataframe: households
+    filters:
+    - tenure == 2
+    radius: 10000
+    decay: flat
 
   - name: med_income_10000
     aggregation: median
     dataframe: households
     varname: income
     radius: 10000
+    decay: flat
+
+  - name: jobs_10000
+    dataframe: jobs
+    radius: 10000
+    decay: flat
+
+  - name: med_rent_10000
+    dataframe: rentals
+    varname: rent
+    radius: 10000
+    aggregation: median
+    decay: flat
+
+  - name: pop_white_10000
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 1
+    radius: 10000
+    decay: flat
+
+  - name: pop_black_10000
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 2
+    radius: 10000
+    decay: flat
+
+  - name: pop_asian_10000
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 6
+    radius: 10000
+    decay: flat
+
+  - name: pop_hisp_10000
+    dataframe: households
+    varname: persons
+    filters:
+    - hispanic_head == 'yes'
+    radius: 10000
+    decay: flat
 
 
+  - name: units_25000
+    dataframe: buildings
+    varname: residential_units
+    radius: 25000
+    decay: flat
+
+  - name: units_sf_25000
+    dataframe: buildings
+    varname: residential_units
+    filters:
+    - building_type_id == 1
+    radius: 25000
+    decay: flat
+
+  - name: units_mf_25000
+    dataframe: buildings
+    varname: residential_units
+    filters:
+    - building_type_id == 3
+    radius: 25000
+    decay: flat
+
+  - name: pop_25000
+    dataframe: households
+    varname: persons
+    radius: 25000
+    decay: flat
+
+  - name: hh_25000
+    dataframe: households
+    radius: 25000
+    decay: flat
+
+  - name: poor_25000
+    dataframe: households
+    filters:
+    - income < 40000
+    radius: 25000
+    decay: flat
+
+  - name: renters_25000
+    dataframe: households
+    filters:
+    - tenure == 2
+    radius: 25000
+    decay: flat
+
+  - name: med_income_25000
+    aggregation: median
+    dataframe: households
+    varname: income
+    radius: 25000
+    decay: flat
+
+  - name: jobs_25000
+    dataframe: jobs
+    radius: 25000
+    decay: flat
+
+  - name: med_rent_25000
+    dataframe: rentals
+    varname: rent
+    radius: 25000
+    aggregation: median
+    decay: flat
+
+  - name: pop_white_25000
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 1
+    radius: 25000
+    decay: flat
+
+  - name: pop_black_25000
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 2
+    radius: 25000
+    decay: flat
+
+  - name: pop_asian_25000
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 6
+    radius: 25000
+    decay: flat
+
+  - name: pop_hisp_25000
+    dataframe: households
+    varname: persons
+    filters:
+    - hispanic_head == 'yes'
+    radius: 25000
+    decay: flat

@@ -3,6 +3,7 @@ import pandana as pdna
 import pandas as pd
 from urbansim.utils import misc, networks
 from pandana.network import reserve_num_graphs
+
 reserve_num_graphs(40)
 
 # Set data directory
@@ -12,10 +13,10 @@ d = 'data/'
 if 'data_directory' in orca.list_injectables():
     d = orca.get_injectable('data_directory')
 
+
 @orca.step()
 def test_manual_registration():
     print("Model step is running")
-
 
 
 @orca.step()
@@ -24,24 +25,24 @@ def initialize_network_small():
     This will be turned into a data loading template.
     
     """
+
     @orca.injectable('netsmall', cache=True)
     def build_networksmall():
-        nodessmall = pd.read_csv(d + 'bay_area_tertiary_strongly_nodes.csv')\
+        nodessmall = pd.read_csv(d + 'bay_area_tertiary_strongly_nodes.csv') \
             .set_index('osmid')
-        edgessmall = pd.read_csv(d + 'bay_area_tertiary_strongly_edges.csv')\
-            .set_index('uniqueid')
+        edgessmall = pd.read_csv(d + 'bay_area_tertiary_strongly_edges.csv')
         netsmall = pdna.Network(nodessmall.x, nodessmall.y, edgessmall.u, \
-        edgessmall.v, edgessmall[['length']], twoway=False)
+                                edgessmall.v, edgessmall[['length']], twoway=False)
         netsmall.precompute(25000)
         return netsmall
 
-    parcels = orca.get_table('parcels').to_frame(columns=['x','y'])
+    parcels = orca.get_table('parcels').to_frame(columns=['x', 'y'])
     idssmall_parcel = orca.get_injectable('netsmall').get_node_ids(parcels.x, parcels.y)
     orca.add_column('parcels', 'node_id_small', idssmall_parcel, cache=False)
-    orca.broadcast('nodessmall', 'parcels', cast_index=True,onto_on='node_id_small')
+    orca.broadcast('nodessmall', 'parcels', cast_index=True, onto_on='node_id_small')
 
-    rentals = orca.get_table('rentals').to_frame(columns=['longitude','latitude'])
-    idssmall_rentals = orca.get_injectable('netsmall').get_node_ids(rentals.longitude,rentals.latitude)
+    rentals = orca.get_table('rentals').to_frame(columns=['longitude', 'latitude'])
+    idssmall_rentals = orca.get_injectable('netsmall').get_node_ids(rentals.longitude, rentals.latitude)
     orca.add_column('rentals', 'node_id_small', idssmall_rentals, cache=False)
     orca.broadcast('nodessmall', 'rentals', cast_index=True, onto_on='node_id_small')
 
@@ -64,10 +65,10 @@ def initialize_network_small():
     @orca.column('jobs', 'node_id_small')
     def node_id(buildings, jobs):
         return misc.reindex(buildings.node_id_small, jobs.building_id)
-    
+
     # While we're at it, we can use these node_id columns to define direct broadcasts
     # between the nodes table and lower-level ones, which speeds up merging
-    
+
     orca.broadcast('nodessmall', 'units', cast_index=True, onto_on='node_id_small')
 
 
@@ -77,35 +78,34 @@ def initialize_network_drive():
     This will be turned into a data loading template.
     
     """
+
     @orca.injectable('netdrive', cache=True)
     def build_networkdrive():
-        nodesdrive = pd.read_csv(d + 'bay_area_drive_full_nodes.csv')\
+        nodesdrive = pd.read_csv(d + 'bay_area_drive_full_nodes.csv') \
             .set_index('osmid')
-        edgesdrive = pd.read_csv(d + 'bay_area_drive_full_edges.csv') \
-            .set_index('uniqueid')
+        edgesdrive = pd.read_csv(d + 'bay_area_drive_full_edges.csv')
         netdrive = pdna.Network(nodesdrive.x, nodesdrive.y, edgesdrive.u, edgesdrive.v, \
-        edgesdrive[['length']], twoway=False)
+                                edgesdrive[['length']], twoway=False)
         netdrive.precompute(2500)
         return netdrive
-    
+
     # Assign 'node_id' to the parcels
-    
-    parcels = orca.get_table('parcels').to_frame(columns=['x','y'])
+
+    parcels = orca.get_table('parcels').to_frame(columns=['x', 'y'])
     idsdrive_parcel = orca.get_injectable('netdrive').get_node_ids(parcels.x, parcels.y)
     orca.add_column('parcels', 'node_id_drive', idsdrive_parcel, cache=False)
     orca.broadcast('nodesdrive', 'parcels', cast_index=True, onto_on='node_id_drive')
-    
+
     # Assign 'node_id' to the rentals
 
-    rentals = orca.get_table('rentals').to_frame(columns=['longitude','latitude'])
-    idsdrive_rentals = orca.get_injectable('netdrive').get_node_ids(rentals.longitude,rentals.latitude)
+    rentals = orca.get_table('rentals').to_frame(columns=['longitude', 'latitude'])
+    idsdrive_rentals = orca.get_injectable('netdrive').get_node_ids(rentals.longitude, rentals.latitude)
     orca.add_column('rentals', 'node_id_drive', idsdrive_rentals, cache=False)
     orca.broadcast('nodesdrive', 'rentals', cast_index=True, onto_on='node_id_drive')
-    
+
     # Anticipating that a 'nodes' table will be built, specify a broadcast relationship
     # (how to handle this best in a template?)
-    
-    
+
     # Also assign 'node_id' down to the other tables - this is required for calculating 
     # node-level aggregations of variables from a table
 
@@ -128,7 +128,7 @@ def initialize_network_drive():
     @orca.column('jobs', 'node_id_drive')
     def node_id(buildings, jobs):
         return misc.reindex(buildings.node_id_drive, jobs.building_id)
-    
+
     orca.broadcast('nodesdrive', 'units', cast_index=True, onto_on='node_id_drive')
 
 
@@ -138,14 +138,14 @@ def initialize_network_walk():
     This will be turned into a data loading template.
 
     """
+
     @orca.injectable('netwalk', cache=True)
     def build_networkwalk():
         nodeswalk = pd.read_csv(d + 'bay_area_walk_nodes.csv') \
             .set_index('osmid')
-        edgeswalk = pd.read_csv(d + 'bay_area_walk_edges.csv') \
-            .set_index('uniqueid')
+        edgeswalk = pd.read_csv(d + 'bay_area_walk_edges.csv') 
         netwalk = pdna.Network(nodeswalk.x, nodeswalk.y, edgeswalk.u, \
-                                edgeswalk.v, edgeswalk[['length']], twoway=True)
+                               edgeswalk.v, edgeswalk[['length']], twoway=True)
         netwalk.precompute(1000)
         return netwalk
 
@@ -184,6 +184,7 @@ def initialize_network_walk():
 
     orca.broadcast('nodeswalk', 'units', cast_index=True, onto_on='node_id_walk')
 
+
 @orca.step()
 def network_aggregations_drive(netdrive):
     """
@@ -196,12 +197,13 @@ def network_aggregations_drive(netdrive):
     print(nodesdrive.describe())
     orca.add_table('nodesdrive', nodesdrive)
 
+
 @orca.step()
 def network_aggregations_small(netsmall):
     """
     This will be turned into a network aggregation template.
     
-    """    
+    """
     nodessmall = networks.from_yaml(netsmall, 'network_aggregations_small.yaml')
     nodessmall = nodessmall.fillna(0)
     print(nodessmall.describe())
