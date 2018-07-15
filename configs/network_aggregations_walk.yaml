@@ -13,39 +13,222 @@ variable_definitions:
     dataframe: buildings
     varname: residential_units
     radius: 500
+    decay: flat
+
+  - name: sqft_unit_500_walk
+    dataframe: buildings
+    varname: sqft_per_unit
+    aggregation: median
+    radius: 500
+    decay: flat
+
+  - name: units_sf_500_walk
+    dataframe: buildings
+    varname: residential_units
+    filters:
+    - building_type_id == 1
+    radius: 500
+    decay: flat
+
+  - name: units_mf_500_walk
+    dataframe: buildings
+    varname: residential_units
+    filters:
+    - building_type_id == 3
+    radius: 500
+    decay: flat
 
   - name: pop_500_walk
     dataframe: households
     varname: persons
     radius: 500
+    decay: flat
+
+  - name: hh_500_walk
+    dataframe: households
+    radius: 500
+    decay: flat
 
   - name: poor_500_walk
     dataframe: households
     filters:
     - income < 40000
     radius: 500
+    decay: flat
+
+  - name: rich_500_walk
+    dataframe: households
+    filters:
+    - income > 150000
+    radius: 500
+    decay: flat
 
   - name: renters_500_walk
     dataframe: households
     filters:
     - tenure == 2
     radius: 500
+    decay: flat
 
   - name: med_income_500_walk
     aggregation: median
     dataframe: households
     varname: income
     radius: 500
+    decay: flat
 
   - name: jobs_500_walk
     dataframe: jobs
     radius: 500
+    decay: flat
 
   - name: med_rent_500_walk
+    dataframe: rentals
+    varname: rent
+    radius: 500
+    aggregation: median
+    decay: flat
+
+  - name: pop_white_500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 1
+    radius: 500
+    decay: flat
+
+  - name: pop_black_500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 2
+    radius: 500
+    decay: flat
+
+  - name: pop_asian_500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 6
+    radius: 500
+    decay: flat
+
+  - name: pop_hisp_500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - hispanic_head == 'yes'
+    radius: 500
+    decay: flat
+
+  - name: units_1500_walk
+    dataframe: buildings
+    varname: residential_units
+    radius: 1500
+    decay: flat
+
+  - name: sqft_unit_1500_walk
+    dataframe: buildings
+    varname: sqft_per_unit
+    aggregation: median
+    radius: 1500
+    decay: flat
+
+  - name: units_sf_1500_walk
+    dataframe: buildings
+    varname: residential_units
+    filters:
+    - building_type_id == 1
+    radius: 1500
+    decay: flat
+
+  - name: units_mf_1500_walk
+    dataframe: buildings
+    varname: residential_units
+    filters:
+    - building_type_id == 3
+    radius: 1500
+    decay: flat
+
+  - name: pop_1500_walk
+    dataframe: households
+    varname: persons
+    radius: 1500
+    decay: flat
+
+  - name: hh_1500_walk
+    dataframe: households
+    radius: 1500
+    decay: flat
+
+  - name: poor_1500_walk
+    dataframe: households
+    filters:
+    - income < 40000
+    radius: 1500
+    decay: flat
+
+  - name: rich_1500_walk
+    dataframe: households
+    filters:
+    - income > 150000
+    radius: 1500
+    decay: flat
+
+  - name: renters_1500_walk
+    dataframe: households
+    filters:
+    - tenure == 2
+    radius: 1500
+    decay: flat
+
+  - name: med_income_1500_walk
+    aggregation: median
+    dataframe: households
+    varname: income
+    radius: 1500
+    decay: flat
+
+  - name: jobs_1500_walk
+    dataframe: jobs
+    radius: 1500
+    decay: flat
+
+  - name: med_rent_1500_walk
     dataframe: rentals
     varname: rent
     radius: 1500
     aggregation: median
     decay: flat
 
+  - name: pop_white_1500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 1
+    radius: 1500
+    decay: flat
 
+  - name: pop_black_1500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 2
+    radius: 1500
+    decay: flat
+
+  - name: pop_asian_1500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 6
+    radius: 1500
+    decay: flat
+
+  - name: pop_hisp_1500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - hispanic_head == 'yes'
+    radius: 1500
+    decay: flat

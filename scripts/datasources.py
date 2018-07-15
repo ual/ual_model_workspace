@@ -1,4 +1,5 @@
 import orca
+import numpy as np
 import pandas as pd
 import zipfile
 
@@ -32,6 +33,8 @@ def buildings():
 #    df = pd.read_hdf(d + 'bayarea_ual.h5', 'buildings')
     df = pd.read_csv(d + 'mtc_data_platform_format_7-6-18/' + 'buildings_v2.csv')
     df = df.set_index('building_id')
+    df['res_sqft_per_unit'] = df['residential_sqft'] / df['residential_units']
+    df['res_sqft_per_unit'][df['res_sqft_per_unit'] == np.inf] = 0
     return df
 
 ############################################################
@@ -62,6 +65,29 @@ def rentals():
     df = df.set_index('pid')
     return df
     
+############################################################
+# @orca.table(cache=True)
+# def nodesdrive_vars():
+#     df = pd.read_csv(d + 'nodesdrive_vars.csv')
+#     df = df.set_index('osmid')
+#     df.index_name = 'node_id_drive'
+#     return df
+#
+# @orca.table(cache=True)
+# def nodessmall_vars():
+#     df = pd.read_csv(d + 'nodessmall_vars.csv')
+#     df = df.set_index('osmid')
+#     df.index_name = 'node_id_small'
+#     return df
+#
+# @orca.table(cache=True)
+# def nodeswalk_vars():
+#     df = pd.read_csv(d + 'nodeswalk_vars.csv')
+#     df = df.set_index('osmid')
+#     df.index_name = 'node_id_walk'
+#     return df
+#
+
 ############################################################
 
 # Tables synthesized by Max Gardner
@@ -108,4 +134,9 @@ orca.broadcast('parcels', 'buildings', cast_index=True, onto_on='parcel_id')
 orca.broadcast('buildings', 'units', cast_index=True, onto_on='building_id')
 orca.broadcast('units', 'households', cast_index=True, onto_on='unit_id')
 orca.broadcast('households', 'persons', cast_index=True, onto_on='household_id')
+
+
+#orca.broadcast('nodesdrive_vars', 'rentals', cast_on='nodesdrive_id', onto_on='nodesdrive_id')
+#orca.broadcast('nodessmall_vars', 'rentals', cast_on='nodessmall_id', onto_on='nodessmall_id')
+#orca.broadcast('nodeswalk_vars', 'rentals', cast_on='nodeswalk_id', onto_on='nodeswalk_id')
 
