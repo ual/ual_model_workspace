@@ -141,9 +141,9 @@ def initialize_network_walk():
 
     @orca.injectable('netwalk', cache=True)
     def build_networkwalk():
-        nodeswalk = pd.read_csv(d + 'bay_area_walk_nodes.csv') \
+        nodeswalk = pd.read_csv(d + 'bayarea_walk_nodes.csv') \
             .set_index('osmid')
-        edgeswalk = pd.read_csv(d + 'bay_area_walk_edges.csv') 
+        edgeswalk = pd.read_csv(d + 'bayarea_walk_edges.csv')
         netwalk = pdna.Network(nodeswalk.x, nodeswalk.y, edgeswalk.u, \
                                edgeswalk.v, edgeswalk[['length']], twoway=True)
         netwalk.precompute(1000)
