@@ -55,8 +55,8 @@ variable_definitions:
     radius: 10000
     decay: flat
 
-  - name: med_income_10000
-    aggregation: median
+  - name: avg_income_10000
+    aggregation: mean
     dataframe: households
     varname: income
     radius: 10000
@@ -67,11 +67,11 @@ variable_definitions:
     radius: 10000
     decay: flat
 
-  - name: med_rent_10000
+  - name: avg_rent_10000
     dataframe: rentals
     varname: rent
     radius: 10000
-    aggregation: median
+    aggregation: mean
     decay: flat
 
   - name: pop_white_10000
@@ -154,8 +154,8 @@ variable_definitions:
     radius: 25000
     decay: flat
 
-  - name: med_income_25000
-    aggregation: median
+  - name: avg_income_25000
+    aggregation: mean
     dataframe: households
     varname: income
     radius: 25000
@@ -166,11 +166,11 @@ variable_definitions:
     radius: 25000
     decay: flat
 
-  - name: med_rent_25000
+  - name: avg_rent_25000
     dataframe: rentals
     varname: rent
     radius: 25000
-    aggregation: median
+    aggregation: mean
     decay: flat
 
   - name: pop_white_25000
