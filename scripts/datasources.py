@@ -74,14 +74,14 @@ def rentals():
 #     return df
 
 @orca.table(cache=True)
-def nodessmall_vars():
+def nodessmall():
     df = pd.read_csv(d + 'nodessmall_vars.csv')
     df = df.set_index('osmid')
     df.index_name = 'node_id_small'
     return df
 
 @orca.table(cache=True)
-def nodeswalk_vars():
+def nodeswalk():
     df = pd.read_csv(d + 'nodeswalk_vars.csv')
     df = df.set_index('osmid')
     df.index_name = 'node_id_walk'
@@ -136,7 +136,6 @@ orca.broadcast('units', 'households', cast_index=True, onto_on='unit_id')
 orca.broadcast('households', 'persons', cast_index=True, onto_on='household_id')
 
 
-#orca.broadcast('nodesdrive_vars', 'rentals', cast_on='nodesdrive_id', onto_on='nodesdrive_id')
 #orca.broadcast('nodessmall_vars', 'rentals', cast_on='nodessmall_id', onto_on='nodessmall_id')
 #orca.broadcast('nodeswalk_vars', 'rentals', cast_on='nodeswalk_id', onto_on='nodeswalk_id')
 
