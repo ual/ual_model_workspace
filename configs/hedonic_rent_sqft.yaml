@@ -89,7 +89,7 @@ saved_object:
         + np.log(jobs_25000 + 1) +     np.log(pop_10000+1) + np.log(pop_black_10000+1)
         + np.log(pop_hisp_10000+1) +     np.log(pop_asian_10000+1)  '
     name: hedonic_rent_sqft
-    out_column: predicted_ln_rent_sqft
+    out_column: null
     out_filters: null
     out_tables: null
     out_transform: null
@@ -99,7 +99,7 @@ saved_object:
         \ 0.368\nModel:                             OLS   Adj. R-squared:        \
         \          0.368\nMethod:                  Least Squares   F-statistic:  \
         \               1.507e+04\nDate:                 Tue, 17 Jul 2018   Prob (F-statistic):\
-        \               0.00\nTime:                         14:38:26   Log-Likelihood:\
+        \               0.00\nTime:                         15:01:31   Log-Likelihood:\
         \                 72328.\nNo. Observations:               362901   AIC:  \
         \                      -1.446e+05\nDf Residuals:                   362886\
         \   BIC:                        -1.445e+05\nDf Model:                    \
