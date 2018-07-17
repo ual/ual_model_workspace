@@ -75,7 +75,7 @@ def rentals():
 #     return df
 
 @orca.table(cache=True)
-def nodessmall_vars():
+def nodessmall():
     df = pd.read_csv(
         d + 'nodessmall_vars.csv',
         index_col='osmid', dtype={'osmid': int})
@@ -83,7 +83,7 @@ def nodessmall_vars():
     return df
 
 @orca.table(cache=True)
-def nodeswalk_vars():
+def nodeswalk():
     df = pd.read_csv(
         d + 'nodeswalk_vars.csv',
         index_col='osmid', dtype={'osmid': int})
