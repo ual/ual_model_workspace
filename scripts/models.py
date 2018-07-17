@@ -146,7 +146,7 @@ def initialize_network_walk():
         edgeswalk = pd.read_csv(d + 'bayarea_walk_edges.csv')
         netwalk = pdna.Network(nodeswalk.x, nodeswalk.y, edgeswalk.u, \
                                edgeswalk.v, edgeswalk[['length']], twoway=True)
-        netwalk.precompute(1000)
+        netwalk.precompute(2500)
         return netwalk
 
     parcels = orca.get_table('parcels').to_frame(columns=['x', 'y'])

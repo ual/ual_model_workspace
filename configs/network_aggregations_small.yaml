@@ -56,7 +56,7 @@ variable_definitions:
     decay: flat
 
   - name: avg_income_10000
-    aggregation: mean
+    aggregation: ave
     dataframe: households
     varname: income
     radius: 10000
@@ -71,7 +71,7 @@ variable_definitions:
     dataframe: rentals
     varname: rent
     radius: 10000
-    aggregation: mean
+    aggregation: ave
     decay: flat
 
   - name: pop_white_10000
@@ -155,7 +155,7 @@ variable_definitions:
     decay: flat
 
   - name: avg_income_25000
-    aggregation: mean
+    aggregation: ave
     dataframe: households
     varname: income
     radius: 25000
@@ -170,7 +170,7 @@ variable_definitions:
     dataframe: rentals
     varname: rent
     radius: 25000
-    aggregation: mean
+    aggregation: ave
     decay: flat
 
   - name: pop_white_25000
