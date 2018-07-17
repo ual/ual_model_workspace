@@ -72,64 +72,64 @@ def initialize_network_small():
     orca.broadcast('nodessmall', 'units', cast_index=True, onto_on='node_id_small')
 
 
-@orca.step()
-def initialize_network_drive():
-    """
-    This will be turned into a data loading template.
-    
-    """
-
-    @orca.injectable('netdrive', cache=True)
-    def build_networkdrive():
-        nodesdrive = pd.read_csv(d + 'bay_area_drive_full_nodes.csv') \
-            .set_index('osmid')
-        edgesdrive = pd.read_csv(d + 'bay_area_drive_full_edges.csv')
-        netdrive = pdna.Network(nodesdrive.x, nodesdrive.y, edgesdrive.u, edgesdrive.v, \
-                                edgesdrive[['length']], twoway=False)
-        netdrive.precompute(2500)
-        return netdrive
-
-    # Assign 'node_id' to the parcels
-
-    parcels = orca.get_table('parcels').to_frame(columns=['x', 'y'])
-    idsdrive_parcel = orca.get_injectable('netdrive').get_node_ids(parcels.x, parcels.y)
-    orca.add_column('parcels', 'node_id_drive', idsdrive_parcel, cache=False)
-    orca.broadcast('nodesdrive', 'parcels', cast_index=True, onto_on='node_id_drive')
-
-    # Assign 'node_id' to the rentals
-
-    rentals = orca.get_table('rentals').to_frame(columns=['longitude', 'latitude'])
-    idsdrive_rentals = orca.get_injectable('netdrive').get_node_ids(rentals.longitude, rentals.latitude)
-    orca.add_column('rentals', 'node_id_drive', idsdrive_rentals, cache=False)
-    orca.broadcast('nodesdrive', 'rentals', cast_index=True, onto_on='node_id_drive')
-
-    # Anticipating that a 'nodes' table will be built, specify a broadcast relationship
-    # (how to handle this best in a template?)
-
-    # Also assign 'node_id' down to the other tables - this is required for calculating 
-    # node-level aggregations of variables from a table
-
-    @orca.column('buildings', 'node_id_drive')
-    def node_id(parcels, buildings):
-        return misc.reindex(parcels.node_id_drive, buildings.parcel_id)
-
-    @orca.column('units', 'node_id_drive')
-    def node_id(buildings, units):
-        return misc.reindex(buildings.node_id_drive, units.building_id)
-
-    @orca.column('households', 'node_id_drive')
-    def node_id(units, households):
-        return misc.reindex(units.node_id_drive, households.unit_id)
-
-    @orca.column('persons', 'node_id_drive')
-    def node_id(households, persons):
-        return misc.reindex(households.node_id_drive, persons.household_id)
-
-    @orca.column('jobs', 'node_id_drive')
-    def node_id(buildings, jobs):
-        return misc.reindex(buildings.node_id_drive, jobs.building_id)
-
-    orca.broadcast('nodesdrive', 'units', cast_index=True, onto_on='node_id_drive')
+# @orca.step()
+# def initialize_network_drive():
+#     """
+#     This will be turned into a data loading template.
+#
+#     """
+#
+#     @orca.injectable('netdrive', cache=True)
+#     def build_networkdrive():
+#         nodesdrive = pd.read_csv(d + 'bay_area_drive_full_nodes.csv') \
+#             .set_index('osmid')
+#         edgesdrive = pd.read_csv(d + 'bay_area_drive_full_edges.csv')
+#         netdrive = pdna.Network(nodesdrive.x, nodesdrive.y, edgesdrive.u, edgesdrive.v, \
+#                                 edgesdrive[['length']], twoway=False)
+#         netdrive.precompute(2500)
+#         return netdrive
+#
+#     # Assign 'node_id' to the parcels
+#
+#     parcels = orca.get_table('parcels').to_frame(columns=['x', 'y'])
+#     idsdrive_parcel = orca.get_injectable('netdrive').get_node_ids(parcels.x, parcels.y)
+#     orca.add_column('parcels', 'node_id_drive', idsdrive_parcel, cache=False)
+#     orca.broadcast('nodesdrive', 'parcels', cast_index=True, onto_on='node_id_drive')
+#
+#     # Assign 'node_id' to the rentals
+#
+#     rentals = orca.get_table('rentals').to_frame(columns=['longitude', 'latitude'])
+#     idsdrive_rentals = orca.get_injectable('netdrive').get_node_ids(rentals.longitude, rentals.latitude)
+#     orca.add_column('rentals', 'node_id_drive', idsdrive_rentals, cache=False)
+#     orca.broadcast('nodesdrive', 'rentals', cast_index=True, onto_on='node_id_drive')
+#
+#     # Anticipating that a 'nodes' table will be built, specify a broadcast relationship
+#     # (how to handle this best in a template?)
+#
+#     # Also assign 'node_id' down to the other tables - this is required for calculating
+#     # node-level aggregations of variables from a table
+#
+#     @orca.column('buildings', 'node_id_drive')
+#     def node_id(parcels, buildings):
+#         return misc.reindex(parcels.node_id_drive, buildings.parcel_id)
+#
+#     @orca.column('units', 'node_id_drive')
+#     def node_id(buildings, units):
+#         return misc.reindex(buildings.node_id_drive, units.building_id)
+#
+#     @orca.column('households', 'node_id_drive')
+#     def node_id(units, households):
+#         return misc.reindex(units.node_id_drive, households.unit_id)
+#
+#     @orca.column('persons', 'node_id_drive')
+#     def node_id(households, persons):
+#         return misc.reindex(households.node_id_drive, persons.household_id)
+#
+#     @orca.column('jobs', 'node_id_drive')
+#     def node_id(buildings, jobs):
+#         return misc.reindex(buildings.node_id_drive, jobs.building_id)
+#
+#     orca.broadcast('nodesdrive', 'units', cast_index=True, onto_on='node_id_drive')
 
 
 @orca.step()
