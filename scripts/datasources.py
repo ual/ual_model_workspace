@@ -24,7 +24,8 @@ if 'data_directory' in orca.list_injectables():
 @orca.table(cache=True)
 def parcels():
     df = pd.read_csv(
-        d + 'mtc_data_platform_format_7-6-18/' + 'parcel_attr.csv',
+#        d + 'mtc_data_platform_format_7-6-18/' + 'parcel_attr.csv',
+        d + 'parcels_with_nodes.csv',
         index_col='primary_id', dtype={'primary_id': int, 'block_id':str})
     return df
 
@@ -62,10 +63,12 @@ def craigslist():
 @orca.table(cache=True)
 def rentals():
     df = pd.read_csv(
-        d + 'rental_listings_cleaned.csv',
+#        d + 'rental_listings_cleaned.csv',
+        d + 'rentals_with_nodes.csv',
         index_col='pid', dtype={'pid': int})
     return df
-    
+
+
 ############################################################
 # @orca.table(cache=True)
 # def nodesdrive_vars():
