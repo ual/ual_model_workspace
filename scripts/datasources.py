@@ -89,7 +89,7 @@ def nodessmall():
 def nodeswalk():
     df = pd.read_csv(
         d + 'nodeswalk_vars.csv',
-        index_col='osmid', dtype={'osmid': int})
+        index_col='osmid',  dtype={'osmid': int})
     df.index_name = 'node_id_walk'
     return df
 
