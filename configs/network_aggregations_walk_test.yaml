@@ -1,0 +1,15 @@
+name: network_aggregations
+
+desc: Network aggregations
+
+model_type: networks
+
+node_col: node_id_walk
+
+variable_definitions:
+
+  - name: pop_500_walk
+    dataframe: households
+    varname: persons
+    radius: 500
+    decay: flat
