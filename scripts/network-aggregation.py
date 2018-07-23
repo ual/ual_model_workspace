@@ -51,6 +51,13 @@ nodeswalk_c['prop_hisp_1500_walk'] = nodeswalk_c['pop_hisp_1500_walk'] / nodeswa
 nodeswalk_c['prop_rich_1500_walk'] = nodeswalk_c['rich_1500_walk'] / nodeswalk_c['pop_1500_walk']
 nodeswalk_c['prop_poor_1500_walk'] = nodeswalk_c['poor_1500_walk'] / nodeswalk_c['pop_1500_walk']
 
+nodeswalk_c['pop_jobs_ratio_1500_walk'] = nodeswalk_c['pop_1500_walk'] / (nodeswalk_c['jobs_500_walk']+1)
+nodessmall['pop_jobs_ratio_10000'] = nodessmall['pop_10000'] / (nodessmall['jobs_10000'] + 1)
+nodessmall['pop_jobs_ratio_25000'] = nodessmall['pop_25000'] / (nodessmall['jobs_25000'] + 1)
+nodeswalk_c['avg_hhs_500_walk'] = nodeswalk_c['pop_500_walk'] / (nodeswalk_c['hh_500_walk']+1)
+nodeswalk_c['avg_hhs_1500_walk'] = nodeswalk_c['pop_1500_walk'] / (nodeswalk_c['hh_1500_walk']+1)
+
+
 #nodesdrive.to_csv('data/nodesdrive_vars.csv')
 parcel = orca.get_table('parcels').to_frame()
 rentals = orca.get_table('rentals').to_frame()
