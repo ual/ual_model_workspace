@@ -11,4 +11,4 @@ from scripts import datasources
 from scripts import models
 
 orca.run(["initialize_network_walk"])
-orca.run(["network_aggregations_walk_test"])
+networks.from_yaml(netwalk, 'network_aggregations_walk_test.yaml')

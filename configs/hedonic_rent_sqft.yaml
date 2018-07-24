@@ -4,88 +4,93 @@ saved_object:
     filters: &id001
     - rent_sqft < 10
     fitted_parameters:
-    - -0.8150537223540977
-    - 0.03378152308090131
-    - -0.004002690243259874
-    - 0.015974071669489356
-    - 0.016114470869820353
-    - -0.0010799393398741152
-    - -0.0697558594377569
-    - 0.006499468049931189
-    - 0.017072320798394863
-    - 0.045413681423086036
-    - 0.11047172890592649
-    - 0.15572901435914313
-    - -0.019298603512390045
-    - -0.12733376703576868
-    - -0.026078216936083587
+    - 2.0187150366597164
+    - -0.3266502772746589
+    - -0.015393124442476633
+    - -0.005167871423073981
+    - 0.0596851418391831
+    - 0.014175203702538067
+    - 0.010137751073877915
+    - -0.05103992756506668
+    - 0.010591537935661066
+    - 0.0013771530775709955
+    - 0.033647807409379796
+    - 0.09227380417755034
+    - 0.06746502326625733
+    - -0.016290136775727864
+    - -0.03889403917149842
+    - -0.027659806316410337
     model:
         fit_filters: *id001
         fit_parameters:
             Coefficient:
-                Intercept: -0.8150537223540977
-                np.log(children_500_walk + 1): -0.0697558594377569
-                np.log(elderly_hh_500_walk + 1): -0.0010799393398741152
-                np.log(jobs_10000 + 1): 0.045413681423086036
-                np.log(jobs_1500_walk + 1): 0.017072320798394863
-                np.log(jobs_25000 + 1): 0.11047172890592649
-                np.log(jobs_500_walk + 1): 0.006499468049931189
-                np.log(pop_10000 + 1): 0.15572901435914313
-                np.log(pop_asian_10000 + 1): -0.026078216936083587
-                np.log(pop_black_10000 + 1): -0.019298603512390045
-                np.log(pop_hisp_10000 + 1): -0.12733376703576868
-                np.log(rich_500_walk + 1): 0.015974071669489356
-                np.log(singles_500_walk + 1): 0.016114470869820353
-                np.log(sqft_unit_500_walk + 2): -0.004002690243259874
-                np.log(units_500_walk + 1): 0.03378152308090131
+                Intercept: 2.0187150366597164
+                np.log(children_500_walk + 1): -0.05103992756506668
+                np.log(elderly_hh_500_walk + 1): 0.010137751073877915
+                np.log(jobs_10000 + 1): 0.033647807409379796
+                np.log(jobs_1500_walk + 1): 0.0013771530775709955
+                np.log(jobs_25000 + 1): 0.09227380417755034
+                np.log(jobs_500_walk + 1): 0.010591537935661066
+                np.log(pop_10000 + 1): 0.06746502326625733
+                np.log(pop_asian_10000 + 1): -0.027659806316410337
+                np.log(pop_black_10000 + 1): -0.016290136775727864
+                np.log(pop_hisp_10000 + 1): -0.03889403917149842
+                np.log(res_sqft_per_unit): -0.3266502772746589
+                np.log(rich_500_walk + 1): 0.0596851418391831
+                np.log(singles_500_walk + 1): 0.014175203702538067
+                np.log(sqft_unit_500_walk + 2): -0.005167871423073981
+                np.log(units_500_walk + 1): -0.015393124442476633
             Std. Error:
-                Intercept: 0.011686540992531089
-                np.log(children_500_walk + 1): 0.0008651109758225166
-                np.log(elderly_hh_500_walk + 1): 0.0007158072005881445
-                np.log(jobs_10000 + 1): 0.0010524328732285186
-                np.log(jobs_1500_walk + 1): 0.00040354772996304913
-                np.log(jobs_25000 + 1): 0.0009402561807194729
-                np.log(jobs_500_walk + 1): 0.00028049105384787755
-                np.log(pop_10000 + 1): 0.002601414166620107
-                np.log(pop_asian_10000 + 1): 0.0010099250182007869
-                np.log(pop_black_10000 + 1): 0.00048287446703963597
-                np.log(pop_hisp_10000 + 1): 0.0012218989788174888
-                np.log(rich_500_walk + 1): 0.0006260452612650085
-                np.log(singles_500_walk + 1): 0.0009740294142764619
-                np.log(sqft_unit_500_walk + 2): 0.00046028537756581206
-                np.log(units_500_walk + 1): 0.00161713245219064
+                Intercept: 0.010615804418101994
+                np.log(children_500_walk + 1): 0.0004974250276583009
+                np.log(elderly_hh_500_walk + 1): 0.0004397269794773508
+                np.log(jobs_10000 + 1): 0.0007897626895854414
+                np.log(jobs_1500_walk + 1): 0.00022620876011698106
+                np.log(jobs_25000 + 1): 0.0007257404364192475
+                np.log(jobs_500_walk + 1): 0.0002023359644748009
+                np.log(pop_10000 + 1): 0.001604351841548906
+                np.log(pop_asian_10000 + 1): 0.0005648503385038121
+                np.log(pop_black_10000 + 1): 0.0003013721828690562
+                np.log(pop_hisp_10000 + 1): 0.0006266875810633643
+                np.log(res_sqft_per_unit): 0.0006673326692429439
+                np.log(rich_500_walk + 1): 0.0004031323943623493
+                np.log(singles_500_walk + 1): 0.0005969660809113527
+                np.log(sqft_unit_500_walk + 2): 0.0002962759320791871
+                np.log(units_500_walk + 1): 0.0009153559814234822
             T-Score:
-                Intercept: -69.74293958109602
-                np.log(children_500_walk + 1): -80.63226728967983
-                np.log(elderly_hh_500_walk + 1): -1.5087014198610755
-                np.log(jobs_10000 + 1): 43.15114301187853
-                np.log(jobs_1500_walk + 1): 42.305580061020514
-                np.log(jobs_25000 + 1): 117.49109569414884
-                np.log(jobs_500_walk + 1): 23.171748120908454
-                np.log(pop_10000 + 1): 59.86321453821957
-                np.log(pop_asian_10000 + 1): -25.82193377340305
-                np.log(pop_black_10000 + 1): -39.96608814440783
-                np.log(pop_hisp_10000 + 1): -104.20973357306335
-                np.log(rich_500_walk + 1): 25.515841517930507
-                np.log(singles_500_walk + 1): 16.544131659299698
-                np.log(sqft_unit_500_walk + 2): -8.696105586555516
-                np.log(units_500_walk + 1): 20.88976882205248
-        fit_rsquared: 0.3676793735166569
-        fit_rsquared_adj: 0.3676549788341099
+                Intercept: 190.16128756266627
+                np.log(children_500_walk + 1): -102.60828210704315
+                np.log(elderly_hh_500_walk + 1): 23.054648786679884
+                np.log(jobs_10000 + 1): 42.60495950630695
+                np.log(jobs_1500_walk + 1): 6.08797412115613
+                np.log(jobs_25000 + 1): 127.14436118899867
+                np.log(jobs_500_walk + 1): 52.34629425941795
+                np.log(pop_10000 + 1): 42.051264267022546
+                np.log(pop_asian_10000 + 1): -48.96838052655901
+                np.log(pop_black_10000 + 1): -54.053219579345836
+                np.log(pop_hisp_10000 + 1): -62.06288483569909
+                np.log(res_sqft_per_unit): -489.4864170897366
+                np.log(rich_500_walk + 1): 148.05345011677736
+                np.log(singles_500_walk + 1): 23.74540891987971
+                np.log(sqft_unit_500_walk + 2): -17.442764880721867
+                np.log(units_500_walk + 1): -16.816544333428162
+        fit_rsquared: 0.6303903129249493
+        fit_rsquared_adj: 0.6303750349572568
         fitted: true
-        model_expression: 'np.log1p(rent_sqft) ~ +  np.log(units_500_walk+1) + np.log(sqft_unit_500_walk+2)  +     np.log(rich_500_walk
-            + 1) + np.log(singles_500_walk + 1) + np.log(elderly_hh_500_walk + 1)
-            +     np.log(children_500_walk + 1) +     np.log(jobs_500_walk + 1) +
-            np.log(jobs_1500_walk+1) + np.log(jobs_10000+1) + np.log(jobs_25000 +
-            1) +     np.log(pop_10000+1) + np.log(pop_black_10000+1) + np.log(pop_hisp_10000+1)
-            +     np.log(pop_asian_10000+1)  '
+        model_expression: 'np.log1p(rent_sqft) ~ +  np.log(res_sqft_per_unit) +     np.log(units_500_walk+1)
+            + np.log(sqft_unit_500_walk+2)  +     np.log(rich_500_walk + 1) + np.log(singles_500_walk
+            + 1) + np.log(elderly_hh_500_walk + 1) +     np.log(children_500_walk
+            + 1) +     np.log(jobs_500_walk + 1) + np.log(jobs_1500_walk+1) + np.log(jobs_10000+1)
+            + np.log(jobs_25000 + 1) +     np.log(pop_10000+1) + np.log(pop_black_10000+1)
+            + np.log(pop_hisp_10000+1) +     np.log(pop_asian_10000+1)  '
         model_type: regression
         name: hedonic_rent_sqft
         predict_filters: null
         ytransform: np.expm1
-    model_expression: 'np.log1p(rent_sqft) ~ +  np.log(units_500_walk+1) + np.log(sqft_unit_500_walk+2)  +     np.log(rich_500_walk
-        + 1) + np.log(singles_500_walk + 1) + np.log(elderly_hh_500_walk + 1) +     np.log(children_500_walk
-        + 1) +     np.log(jobs_500_walk + 1) + np.log(jobs_1500_walk+1) + np.log(jobs_10000+1)
+    model_expression: 'np.log1p(rent_sqft) ~ +  np.log(res_sqft_per_unit) +     np.log(units_500_walk+1)
+        + np.log(sqft_unit_500_walk+2)  +     np.log(rich_500_walk + 1) + np.log(singles_500_walk
+        + 1) + np.log(elderly_hh_500_walk + 1) +     np.log(children_500_walk + 1)
+        +     np.log(jobs_500_walk + 1) + np.log(jobs_1500_walk+1) + np.log(jobs_10000+1)
         + np.log(jobs_25000 + 1) +     np.log(pop_10000+1) + np.log(pop_black_10000+1)
         + np.log(pop_hisp_10000+1) +     np.log(pop_asian_10000+1)  '
     name: hedonic_rent_sqft
@@ -98,45 +103,46 @@ saved_object:
     summary_table: "                             OLS Regression Results          \
         \                  \n===============================================================================\n\
         Dep. Variable:     np.log1p(rent_sqft)   R-squared:                      \
-        \ 0.368\nModel:                             OLS   Adj. R-squared:        \
-        \          0.368\nMethod:                  Least Squares   F-statistic:  \
-        \               1.507e+04\nDate:                 Tue, 17 Jul 2018   Prob (F-statistic):\
-        \               0.00\nTime:                         16:52:08   Log-Likelihood:\
-        \                 72328.\nNo. Observations:               362901   AIC:  \
-        \                      -1.446e+05\nDf Residuals:                   362886\
-        \   BIC:                        -1.445e+05\nDf Model:                    \
-        \       14                                         \nCovariance Type:    \
+        \ 0.630\nModel:                             OLS   Adj. R-squared:        \
+        \          0.630\nMethod:                  Least Squares   F-statistic:  \
+        \               4.126e+04\nDate:                 Mon, 23 Jul 2018   Prob (F-statistic):\
+        \               0.00\nTime:                         20:01:38   Log-Likelihood:\
+        \             1.6976e+05\nNo. Observations:               362901   AIC:  \
+        \                      -3.395e+05\nDf Residuals:                   362885\
+        \   BIC:                        -3.393e+05\nDf Model:                    \
+        \       15                                         \nCovariance Type:    \
         \         nonrobust                                         \n===================================================================================================\n\
         \                                      coef    std err          t      P>|t|\
         \      [0.025      0.975]\n---------------------------------------------------------------------------------------------------\n\
-        Intercept                          -0.8151      0.012    -69.743      0.000\
-        \      -0.838      -0.792\nnp.log(units_500_walk + 1)          0.0338    \
-        \  0.002     20.890      0.000       0.031       0.037\nnp.log(sqft_unit_500_walk\
-        \ + 2)     -0.0040      0.000     -8.696      0.000      -0.005      -0.003\n\
-        np.log(rich_500_walk + 1)           0.0160      0.001     25.516      0.000\
-        \       0.015       0.017\nnp.log(singles_500_walk + 1)        0.0161    \
-        \  0.001     16.544      0.000       0.014       0.018\nnp.log(elderly_hh_500_walk\
-        \ + 1)    -0.0011      0.001     -1.509      0.131      -0.002       0.000\n\
-        np.log(children_500_walk + 1)      -0.0698      0.001    -80.632      0.000\
-        \      -0.071      -0.068\nnp.log(jobs_500_walk + 1)           0.0065    \
-        \  0.000     23.172      0.000       0.006       0.007\nnp.log(jobs_1500_walk\
-        \ + 1)          0.0171      0.000     42.306      0.000       0.016      \
-        \ 0.018\nnp.log(jobs_10000 + 1)              0.0454      0.001     43.151\
-        \      0.000       0.043       0.047\nnp.log(jobs_25000 + 1)             \
-        \ 0.1105      0.001    117.491      0.000       0.109       0.112\nnp.log(pop_10000\
-        \ + 1)               0.1557      0.003     59.863      0.000       0.151 \
-        \      0.161\nnp.log(pop_black_10000 + 1)        -0.0193      0.000    -39.966\
-        \      0.000      -0.020      -0.018\nnp.log(pop_hisp_10000 + 1)         -0.1273\
-        \      0.001   -104.210      0.000      -0.130      -0.125\nnp.log(pop_asian_10000\
-        \ + 1)        -0.0261      0.001    -25.822      0.000      -0.028      -0.024\n\
-        ==============================================================================\n\
-        Omnibus:                    28256.804   Durbin-Watson:                   0.852\n\
-        Prob(Omnibus):                  0.000   Jarque-Bera (JB):           116441.861\n\
-        Skew:                          -0.297   Prob(JB):                        \
-        \ 0.00\nKurtosis:                       5.711   Cond. No.                \
-        \     1.19e+03\n==============================================================================\n\
+        Intercept                           2.0187      0.011    190.161      0.000\
+        \       1.998       2.040\nnp.log(res_sqft_per_unit)          -0.3267    \
+        \  0.001   -489.486      0.000      -0.328      -0.325\nnp.log(units_500_walk\
+        \ + 1)         -0.0154      0.001    -16.817      0.000      -0.017      -0.014\n\
+        np.log(sqft_unit_500_walk + 2)     -0.0052      0.000    -17.443      0.000\
+        \      -0.006      -0.005\nnp.log(rich_500_walk + 1)           0.0597    \
+        \  0.000    148.053      0.000       0.059       0.060\nnp.log(singles_500_walk\
+        \ + 1)        0.0142      0.001     23.745      0.000       0.013       0.015\n\
+        np.log(elderly_hh_500_walk + 1)     0.0101      0.000     23.055      0.000\
+        \       0.009       0.011\nnp.log(children_500_walk + 1)      -0.0510    \
+        \  0.000   -102.608      0.000      -0.052      -0.050\nnp.log(jobs_500_walk\
+        \ + 1)           0.0106      0.000     52.346      0.000       0.010     \
+        \  0.011\nnp.log(jobs_1500_walk + 1)          0.0014      0.000      6.088\
+        \      0.000       0.001       0.002\nnp.log(jobs_10000 + 1)             \
+        \ 0.0336      0.001     42.605      0.000       0.032       0.035\nnp.log(jobs_25000\
+        \ + 1)              0.0923      0.001    127.144      0.000       0.091  \
+        \     0.094\nnp.log(pop_10000 + 1)               0.0675      0.002     42.051\
+        \      0.000       0.064       0.071\nnp.log(pop_black_10000 + 1)        -0.0163\
+        \      0.000    -54.053      0.000      -0.017      -0.016\nnp.log(pop_hisp_10000\
+        \ + 1)         -0.0389      0.001    -62.063      0.000      -0.040      -0.038\n\
+        np.log(pop_asian_10000 + 1)        -0.0277      0.001    -48.968      0.000\
+        \      -0.029      -0.027\n==============================================================================\n\
+        Omnibus:                    32276.744   Durbin-Watson:                   0.732\n\
+        Prob(Omnibus):                  0.000   Jarque-Bera (JB):           155377.765\n\
+        Skew:                          -0.310   Prob(JB):                        \
+        \ 0.00\nKurtosis:                       6.145   Cond. No.                \
+        \     1.39e+03\n==============================================================================\n\
         \nWarnings:\n[1] Standard Errors assume that the covariance matrix of the\
-        \ errors is correctly specified.\n[2] The condition number is large, 1.19e+03.\
+        \ errors is correctly specified.\n[2] The condition number is large, 1.39e+03.\
         \ This might indicate that there are\nstrong multicollinearity or other numerical\
         \ problems."
     tables:
