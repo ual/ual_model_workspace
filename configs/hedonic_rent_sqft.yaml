@@ -105,8 +105,8 @@ saved_object:
         Dep. Variable:     np.log1p(rent_sqft)   R-squared:                      \
         \ 0.630\nModel:                             OLS   Adj. R-squared:        \
         \          0.630\nMethod:                  Least Squares   F-statistic:  \
-        \               4.126e+04\nDate:                 Mon, 23 Jul 2018   Prob (F-statistic):\
-        \               0.00\nTime:                         20:01:38   Log-Likelihood:\
+        \               4.126e+04\nDate:                 Wed, 25 Jul 2018   Prob (F-statistic):\
+        \               0.00\nTime:                         12:50:08   Log-Likelihood:\
         \             1.6976e+05\nNo. Observations:               362901   AIC:  \
         \                      -3.395e+05\nDf Residuals:                   362885\
         \   BIC:                        -3.393e+05\nDf Model:                    \

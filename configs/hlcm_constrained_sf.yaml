@@ -1,0 +1,77 @@
+modelmanager_version: 0.1.dev8
+
+saved_object:
+    alt_filters:
+    - sf_choice_set == 1 & sqft_per_unit > 0
+    alt_sample_size: 50
+    alternatives:
+    - buildings
+    - parcels
+    - nodeswalk
+    - nodessmall
+    choice_column: building_id
+    chooser_filters:
+    - building_type == 2 & recent_mover == 1 & 0 <income < 1000000
+    choosers: households
+    fitted_parameters:
+    - -4.228590114297575
+    - 0.3546132933830263
+    - -0.029001084960683963
+    - 0.00648690837865755
+    - 0.06450783708977242
+    - 0.03776725853842652
+    - 0.10715334662946362
+    - 8.577092714770046
+    - 6.10915958845762
+    - 4.381168346240004
+    - 6.500306788742674
+    - 2.2053554676290616
+    - 9.23385254314165
+    - 3.5045439720851825
+    - 4.518192693091816
+    model_expression: ' np.log1p(rent_sqft) + np.log(income):np.log1p(rent_sqft) +
+        np.log1p(income):np.log(res_sqft_per_unit) + np.log1p(income):np.log(acres)
+        + pop_jobs_ratio_25000 + np.log(jobs_25000+1) + persons:avg_hhs_500_walk +
+        rich:prop_rich_500_walk + poor:prop_poor_500_walk + single:prop_singles_500_walk
+        + elderly:prop_elderly_500_walk + white:prop_white_500_walk + black:prop_black_500_walk
+        + asian:prop_asian_500_walk + hispanic:prop_hisp_500_walk- 1'
+    name: hlcm_constrained_sf
+    out_alt_filters: null
+    out_alternatives: null
+    out_chooser_filters: null
+    out_choosers: null
+    out_column: null
+    summary_table: "                  CHOICEMODELS ESTIMATION RESULTS            \
+        \      \n===================================================================\n\
+        Dep. Var.:                chosen   No. Observations:         22,458\nModel:\
+        \         Multinomial Logit   Df Residuals:             22,443\nMethod:  \
+        \     Maximum Likelihood   Df Model:                     15\nDate:       \
+        \          2018-07-24   Pseudo R-squ.:             0.108\nTime:          \
+        \            14:29   Pseudo R-bar-squ.:         0.108\nAIC:              \
+        \   156,704.699   Log-Likelihood:      -78,337.350\nBIC:                 156,824.990\
+        \   LL-Null:             -87,856.213\n===============================================================================================\n\
+        \                                                coef   std err         z\
+        \     P>|z|   Conf. Int.\n-----------------------------------------------------------------------------------------------\n\
+        np.log1p(rent_sqft)                          -4.2286     0.176   -24.071 \
+        \    0.000             \nnp.log(income):np.log1p(rent_sqft)            0.3546\
+        \     0.014    25.486     0.000             \nnp.log1p(income):np.log(res_sqft_per_unit)\
+        \   -0.0290     0.001   -25.673     0.000             \nnp.log1p(income):np.log(acres)\
+        \                0.0065     0.001    12.355     0.000             \npop_jobs_ratio_25000\
+        \                          0.0645     0.007     9.515     0.000          \
+        \   \nnp.log(jobs_25000 + 1)                        0.0378     0.009     4.285\
+        \     0.000             \npersons:avg_hhs_500_walk                      0.1072\
+        \     0.001    72.583     0.000             \nrich:prop_rich_500_walk    \
+        \                   8.5771     0.112    76.464     0.000             \npoor:prop_poor_500_walk\
+        \                       6.1092     0.180    34.020     0.000             \n\
+        single:prop_singles_500_walk                  4.3812     0.083    53.025 \
+        \    0.000             \nelderly:prop_elderly_500_walk                 6.5003\
+        \     0.091    71.810     0.000             \nwhite:prop_white_500_walk  \
+        \                   2.2054     0.025    89.858     0.000             \nblack:prop_black_500_walk\
+        \                     9.2339     0.147    62.884     0.000             \n\
+        asian:prop_asian_500_walk                     3.5045     0.046    75.753 \
+        \    0.000             \nhispanic:prop_hisp_500_walk                   4.5182\
+        \     0.054    83.784     0.000             \n==============================================================================================="
+    tags:
+    - single_family
+    - constrained
+    type: LargeMultinomialLogitStep
