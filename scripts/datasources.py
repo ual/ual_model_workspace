@@ -24,7 +24,7 @@ if 'data_directory' in orca.list_injectables():
 @orca.table(cache=True)
 def parcels():
     df = pd.read_csv(
-        d + 'mtc_data_platform_format_7-6-18/' + 'parcel_attr.csv',
+        d + 'parcels_with_nodes.csv',
         index_col='primary_id', dtype={'primary_id': int, 'block_id':str})
     return df
 
@@ -67,6 +67,9 @@ def rentals():
     return df
     
 ############################################################
+# Load previously tabulated accessibility vars
+#####################################################
+
 # @orca.table(cache=True)
 # def nodesdrive_vars():
 #     df = pd.read_csv(d + 'nodesdrive_vars.csv')
@@ -75,12 +78,14 @@ def rentals():
 #     return df
 
 @orca.table(cache=True)
-def nodessmall_vars():
+def nodessmall():
     df = pd.read_csv(
         d + 'nodessmall_vars.csv',
         index_col='osmid', dtype={'osmid': int})
-    df.index_name = 'node_id_small'
+    df.index.name = 'node_id_small'
     return df
+
+orca.broadcast('nodessmall', 'parcels', cast_index=True, onto_on='node_id_small')
 
 @orca.table(cache=True)
 def nodeswalk_vars():
@@ -138,8 +143,7 @@ orca.broadcast('buildings', 'units', cast_index=True, onto_on='building_id')
 orca.broadcast('units', 'households', cast_index=True, onto_on='unit_id')
 orca.broadcast('households', 'persons', cast_index=True, onto_on='household_id')
 
-
 #orca.broadcast('nodesdrive_vars', 'rentals', cast_on='nodesdrive_id', onto_on='nodesdrive_id')
-#orca.broadcast('nodessmall_vars', 'rentals', cast_on='nodessmall_id', onto_on='nodessmall_id')
-#orca.broadcast('nodeswalk_vars', 'rentals', cast_on='nodeswalk_id', onto_on='nodeswalk_id')
+# orca.broadcast('nodessmall_vars', 'rentals', cast_on='nodessmall_id', onto_on='nodessmall_id')
+# orca.broadcast('nodeswalk_vars', 'rentals', cast_on='nodeswalk_id', onto_on='nodeswalk_id')
 
