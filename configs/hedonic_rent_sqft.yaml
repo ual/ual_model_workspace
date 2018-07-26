@@ -77,7 +77,7 @@ saved_object:
         fit_rsquared: 0.6303903129249493
         fit_rsquared_adj: 0.6303750349572568
         fitted: true
-        model_expression: 'np.log1p(rent_sqft) ~ +  np.log(res_sqft_per_unit) +     np.log(units_500_walk+1)
+        model_expression: 'np.log1p(rent_sqft) ~ + np.log(res_sqft_per_unit) +     np.log(units_500_walk+1)
             + np.log(sqft_unit_500_walk+2)  +     np.log(rich_500_walk + 1) + np.log(singles_500_walk
             + 1) + np.log(elderly_hh_500_walk + 1) +     np.log(children_500_walk
             + 1) +     np.log(jobs_500_walk + 1) + np.log(jobs_1500_walk+1) + np.log(jobs_10000+1)
@@ -87,7 +87,7 @@ saved_object:
         name: hedonic_rent_sqft
         predict_filters: null
         ytransform: np.expm1
-    model_expression: 'np.log1p(rent_sqft) ~ +  np.log(res_sqft_per_unit) +     np.log(units_500_walk+1)
+    model_expression: 'np.log1p(rent_sqft) ~ + np.log(res_sqft_per_unit) +     np.log(units_500_walk+1)
         + np.log(sqft_unit_500_walk+2)  +     np.log(rich_500_walk + 1) + np.log(singles_500_walk
         + 1) + np.log(elderly_hh_500_walk + 1) +     np.log(children_500_walk + 1)
         +     np.log(jobs_500_walk + 1) + np.log(jobs_1500_walk+1) + np.log(jobs_10000+1)
@@ -106,7 +106,7 @@ saved_object:
         \ 0.630\nModel:                             OLS   Adj. R-squared:        \
         \          0.630\nMethod:                  Least Squares   F-statistic:  \
         \               4.126e+04\nDate:                 Wed, 25 Jul 2018   Prob (F-statistic):\
-        \               0.00\nTime:                         12:50:08   Log-Likelihood:\
+        \               0.00\nTime:                         23:11:57   Log-Likelihood:\
         \             1.6976e+05\nNo. Observations:               362901   AIC:  \
         \                      -3.395e+05\nDf Residuals:                   362885\
         \   BIC:                        -3.393e+05\nDf Model:                    \
