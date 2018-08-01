@@ -77,23 +77,21 @@ def rentals():
 #     df.index_name = 'node_id_drive'
 #     return df
 
-@orca.table(cache=True)
-def nodessmall():
-    df = pd.read_csv(
-        d + 'nodessmall_vars.csv',
-        index_col='osmid', dtype={'osmid': int})
-    df.index.name = 'node_id_small'
-    return df
+# @orca.table(cache=True)
+# def nodessmall():
+#     df = pd.read_csv(
+#         d + 'nodessmall_vars2.csv',
+#         index_col='osmid', dtype={'osmid': int})
+#     df.index_name = 'node_id_small'
+#     return df
 
-orca.broadcast('nodessmall', 'parcels', cast_index=True, onto_on='node_id_small')
-
-@orca.table(cache=True)
-def nodeswalk_vars():
-    df = pd.read_csv(
-        d + 'nodeswalk_vars.csv',
-        index_col='osmid', dtype={'osmid': int})
-    df.index_name = 'node_id_walk'
-    return df
+# @orca.table(cache=True)
+# def nodeswalk():
+#     df = pd.read_csv(
+#         d + 'nodeswalk_vars2.csv',
+#         index_col='osmid',  dtype={'osmid': int})
+#     df.index_name = 'node_id_walk'
+#     return df
 
 
 ############################################################
