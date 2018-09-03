@@ -1,0 +1,175 @@
+modelmanager_version: 0.1.dev8
+
+saved_object:
+    filters: redfin_sale_year > 2010 & residential_units == 1 & sqft_per_unit > 50
+        & res_price_per_sqft < 2000
+    fitted_parameters:
+    - -2.0369588770381366
+    - 0.2897112112917827
+    - -0.0044488960017498285
+    - -0.3449383637997179
+    - 0.6211190416012059
+    - -1.8116617236845323
+    - 0.12002647506877435
+    - 1.0044616090658707
+    - 0.09057294074273836
+    - 0.3241768518961234
+    - 0.14243979041193403
+    - -0.4403153350351784
+    - 0.024554489904661123
+    - 0.47454827197486527
+    - -0.449103225021908
+    - 1.814206942686501
+    - -0.0022781451309196177
+    - -0.0577453689689221
+    - -0.05076224339892091
+    model:
+        fit_filters: redfin_sale_year > 2010 & residential_units == 1 & sqft_per_unit
+            > 50 & res_price_per_sqft < 2000
+        fit_parameters:
+            Coefficient:
+                Intercept: -2.0369588770381366
+                np.log(avg_income_10000 + 1): 1.0044616090658707
+                np.log(avg_income_500_walk + 1): 0.12002647506877435
+                np.log(children_500_walk + 1): -0.4403153350351784
+                np.log(elderly_hh_500_walk + 1): 0.14243979041193403
+                np.log(jobs_25000 + 1): 0.47454827197486527
+                np.log(jobs_500_walk + 1): 0.024554489904661123
+                np.log(pop_25000 + 1): -0.449103225021908
+                np.log(pop_500_walk + 1): 1.814206942686501
+                np.log(pop_asian_500_walk + 1): -0.05076224339892091
+                np.log(pop_black_500_walk + 1): -0.0022781451309196177
+                np.log(pop_hisp_500_walk + 1): -0.0577453689689221
+                np.log(rich_500_walk + 1): 0.09057294074273836
+                np.log(singles_500_walk + 1): 0.3241768518961234
+                np.log(sqft_per_unit + 1): -0.3449383637997179
+                np.log(sqft_unit_500_walk + 2): 0.6211190416012059
+                np.log(units_500_walk + 1): -1.8116617236845323
+                year_built: -0.0044488960017498285
+                year_built > 2010[T.True]: 0.2897112112917827
+            Std. Error:
+                Intercept: 0.25839276448413084
+                np.log(avg_income_10000 + 1): 0.01326129611552566
+                np.log(avg_income_500_walk + 1): 0.00913764784862527
+                np.log(children_500_walk + 1): 0.009565097726688565
+                np.log(elderly_hh_500_walk + 1): 0.004904220076745558
+                np.log(jobs_25000 + 1): 0.00855693608731719
+                np.log(jobs_500_walk + 1): 0.0015807974928612471
+                np.log(pop_25000 + 1): 0.010408673998218489
+                np.log(pop_500_walk + 1): 0.017206363787621616
+                np.log(pop_asian_500_walk + 1): 0.0024454460509863957
+                np.log(pop_black_500_walk + 1): 0.0015092421610541705
+                np.log(pop_hisp_500_walk + 1): 0.002549179122857084
+                np.log(rich_500_walk + 1): 0.005202066645217347
+                np.log(singles_500_walk + 1): 0.0046128944485342264
+                np.log(sqft_per_unit + 1): 0.005766273934638972
+                np.log(sqft_unit_500_walk + 2): 0.009480834493531046
+                np.log(units_500_walk + 1): 0.010007865036932509
+                year_built: 8.935305685979676e-05
+                year_built > 2010[T.True]: 0.01498370723321932
+            T-Score:
+                Intercept: -7.883188529310527
+                np.log(avg_income_10000 + 1): 75.74384889044876
+                np.log(avg_income_500_walk + 1): 13.135379810771758
+                np.log(children_500_walk + 1): -46.033542742235575
+                np.log(elderly_hh_500_walk + 1): 29.0443308381171
+                np.log(jobs_25000 + 1): 55.45773243278341
+                np.log(jobs_500_walk + 1): 15.532976244931563
+                np.log(pop_25000 + 1): -43.14701614238037
+                np.log(pop_500_walk + 1): 105.43813702181833
+                np.log(pop_asian_500_walk + 1): -20.757866802436897
+                np.log(pop_black_500_walk + 1): -1.509462954128174
+                np.log(pop_hisp_500_walk + 1): -22.65253486942177
+                np.log(rich_500_walk + 1): 17.41095355362448
+                np.log(singles_500_walk + 1): 70.276234479879
+                np.log(sqft_per_unit + 1): -59.81997520575903
+                np.log(sqft_unit_500_walk + 2): 65.51311933828264
+                np.log(units_500_walk + 1): -181.0237964839523
+                year_built: -49.79008170622029
+                year_built > 2010[T.True]: 19.335082218470234
+        fit_rsquared: 0.37977350005108246
+        fit_rsquared_adj: 0.37970376945890694
+        fitted: true
+        model_expression: 'np.log1p(res_price_per_sqft) ~ + year_built + year_built
+            > 2010 +     np.log(sqft_per_unit+1) + np.log(sqft_unit_500_walk+2)  +
+            np.log(units_500_walk+1) +     np.log(avg_income_500_walk+1) + np.log(avg_income_10000+1)
+            +     np.log(rich_500_walk + 1) + np.log(singles_500_walk + 1) + np.log(elderly_hh_500_walk
+            + 1) +     np.log(children_500_walk + 1) +     np.log(jobs_500_walk +
+            1) + np.log(jobs_25000 + 1) + np.log(pop_25000 + 1) +    np.log(pop_500_walk+1)
+            + np.log(pop_black_500_walk+1) + np.log(pop_hisp_500_walk+1) +     np.log(pop_asian_500_walk+1)  '
+        model_type: regression
+        name: hedonic_price_sqft_single_family
+        predict_filters: null
+        ytransform: null
+    model_expression: 'np.log1p(res_price_per_sqft) ~ + year_built + year_built >
+        2010 +     np.log(sqft_per_unit+1) + np.log(sqft_unit_500_walk+2)  + np.log(units_500_walk+1)
+        +     np.log(avg_income_500_walk+1) + np.log(avg_income_10000+1) +     np.log(rich_500_walk
+        + 1) + np.log(singles_500_walk + 1) + np.log(elderly_hh_500_walk + 1) +     np.log(children_500_walk
+        + 1) +     np.log(jobs_500_walk + 1) + np.log(jobs_25000 + 1) + np.log(pop_25000
+        + 1) +    np.log(pop_500_walk+1) + np.log(pop_black_500_walk+1) + np.log(pop_hisp_500_walk+1)
+        +     np.log(pop_asian_500_walk+1)  '
+    name: hedonic_price_sqft_single_family
+    out_column: predicted_ln_price_sqft
+    out_filters: null
+    out_tables: null
+    out_transform: null
+    summary_table: "                                 OLS Regression Results      \
+        \                           \n========================================================================================\n\
+        Dep. Variable:     np.log1p(res_price_per_sqft)   R-squared:             \
+        \          0.380\nModel:                                      OLS   Adj. R-squared:\
+        \                  0.380\nMethod:                           Least Squares\
+        \   F-statistic:                     5446.\nDate:                        \
+        \  Tue, 17 Jul 2018   Prob (F-statistic):               0.00\nTime:      \
+        \                            10:27:52   Log-Likelihood:            -1.6634e+05\n\
+        No. Observations:                        160122   AIC:                   \
+        \      3.327e+05\nDf Residuals:                            160103   BIC: \
+        \                        3.329e+05\nDf Model:                            \
+        \        18                                         \nCovariance Type:   \
+        \                   nonrobust                                         \n===================================================================================================\n\
+        \                                      coef    std err          t      P>|t|\
+        \      [0.025      0.975]\n---------------------------------------------------------------------------------------------------\n\
+        Intercept                          -2.0370      0.258     -7.883      0.000\
+        \      -2.543      -1.531\nyear_built > 2010[T.True]           0.2897    \
+        \  0.015     19.335      0.000       0.260       0.319\nyear_built       \
+        \                  -0.0044   8.94e-05    -49.790      0.000      -0.005  \
+        \    -0.004\nnp.log(sqft_per_unit + 1)          -0.3449      0.006    -59.820\
+        \      0.000      -0.356      -0.334\nnp.log(sqft_unit_500_walk + 2)     \
+        \ 0.6211      0.009     65.513      0.000       0.603       0.640\nnp.log(units_500_walk\
+        \ + 1)         -1.8117      0.010   -181.024      0.000      -1.831      -1.792\n\
+        np.log(avg_income_500_walk + 1)     0.1200      0.009     13.135      0.000\
+        \       0.102       0.138\nnp.log(avg_income_10000 + 1)        1.0045    \
+        \  0.013     75.744      0.000       0.978       1.030\nnp.log(rich_500_walk\
+        \ + 1)           0.0906      0.005     17.411      0.000       0.080     \
+        \  0.101\nnp.log(singles_500_walk + 1)        0.3242      0.005     70.276\
+        \      0.000       0.315       0.333\nnp.log(elderly_hh_500_walk + 1)    \
+        \ 0.1424      0.005     29.044      0.000       0.133       0.152\nnp.log(children_500_walk\
+        \ + 1)      -0.4403      0.010    -46.034      0.000      -0.459      -0.422\n\
+        np.log(jobs_500_walk + 1)           0.0246      0.002     15.533      0.000\
+        \       0.021       0.028\nnp.log(jobs_25000 + 1)              0.4745    \
+        \  0.009     55.458      0.000       0.458       0.491\nnp.log(pop_25000 +\
+        \ 1)              -0.4491      0.010    -43.147      0.000      -0.470   \
+        \   -0.429\nnp.log(pop_500_walk + 1)            1.8142      0.017    105.438\
+        \      0.000       1.780       1.848\nnp.log(pop_black_500_walk + 1)     -0.0023\
+        \      0.002     -1.509      0.131      -0.005       0.001\nnp.log(pop_hisp_500_walk\
+        \ + 1)      -0.0577      0.003    -22.653      0.000      -0.063      -0.053\n\
+        np.log(pop_asian_500_walk + 1)     -0.0508      0.002    -20.758      0.000\
+        \      -0.056      -0.046\n==============================================================================\n\
+        Omnibus:                   134597.657   Durbin-Watson:                   1.497\n\
+        Prob(Omnibus):                  0.000   Jarque-Bera (JB):          5317504.944\n\
+        Skew:                          -3.871   Prob(JB):                        \
+        \ 0.00\nKurtosis:                      30.149   Cond. No.                \
+        \     2.98e+05\n==============================================================================\n\
+        \nWarnings:\n[1] Standard Errors assume that the covariance matrix of the\
+        \ errors is correctly specified.\n[2] The condition number is large, 2.98e+05.\
+        \ This might indicate that there are\nstrong multicollinearity or other numerical\
+        \ problems."
+    tables:
+    - buildings
+    - parcels
+    - nodeswalk
+    - nodessmall
+    tags:
+    - paul
+    - version 1
+    type: OLSRegressionStep
+    version: 0.1dev1
