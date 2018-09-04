@@ -17,4 +17,16 @@ dependencies:
   - scipy=1.0
   - statsmodels=0.8
 
-# Orca 1.5 and Pandana 0.4 are not on Conda! We need to fix this.
+
+# HOW TO USE THIS FILE:
+
+# One-time setup (several minutes)
+#   `conda env create -f environment.yml`
+
+# Activate the environment
+#   `source activate ual-model`
+
+# Add UrbanSim Templates (only needs to be done once)
+#   `cd path-to-urbansim_templates`  
+#   `python setup.py develop`
+
