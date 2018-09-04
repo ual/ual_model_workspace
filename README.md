@@ -1,35 +1,13 @@
 # urbansim_parcel_bayarea
 
-This is a repository for us to build a clean UrbanSim model for the Bay Area.
+This repository is a public workspace for notebooks and other material related to developing a suite of template-based UrbanSim model components.
 
-- `scripts` is for manual definitions of Orca tables, steps, etc. using Python functions
-- `configs` is for definitions generated automatically using the modelmanager/template interface
-- `data` is for data
-- `notebooks` is for Jupyter notebooks
+Related repositories:
 
-With just a few lines of code in the manual definitions, we can already load data, estimate and register models, and run steps, all from a notebook: [notebooks/Data-Explore.ipynb](https://github.com/ual/urbansim_parcel_bayarea/blob/master/notebooks/Data-Explore.ipynb)
+- [udst/urbansim_templates](https://github.com/udst/urbansim_templates/) (template library in development)
+- [udst/choicemodels](https://github.com/udst/choicemodels/) (discrete choice statistics library in development)
 
 
-## Setup
+## Tips and guidelines
 
-I think it will save headaches later on if we use an explicitly-defined Python environment for working on this.
-
-My approach in the past has been to use Conda `environment.yml` files. Not sure if this is the best way, so feel free to suggest alternatives.
-
-1. Install the environment specified in the repository - this part is slow:
-
-`conda env create -f environment.yml`
-
-2. Activate the environment:
-
-`source activate ual-model` (Mac or Linux)  
-or, `activate ual-model` (Windows)
-
-3. Add UrbanSim_Templates to the environment (it doesn't have a release yet, sorry) - only needs to be done once:
-
-`cd path-to-urbansim_templates`  
-`python setup.py develop`
-
-4. Launch Jupyter or run scripts
-
-You'll also need to download the data file. Instructions are in the folder.
+See this repo's [wiki](https://github.com/ual/urbansim_parcel_bayarea/wiki)
