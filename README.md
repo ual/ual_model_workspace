@@ -1,6 +1,6 @@
 # urbansim_parcel_bayarea
 
-This repository is a public workspace for notebooks and other material related to developing a suite of template-based UrbanSim model components.
+This repository is a public workspace for notebooks and other material related to developing a suite of template-based UrbanSim model components. See [wiki](https://github.com/ual/urbansim_parcel_bayarea/wiki) for lots more info.
 
 Related repositories:
 
@@ -8,13 +8,34 @@ Related repositories:
 - [udst/choicemodels](https://github.com/udst/choicemodels/) (discrete choice statistics library in development)
 
 
-## Tips and guidelines
+## Setup
 
-Let's use sub-directories for distinct projects, particularly if they require variations to data schemas or base data. Setting a notebook's working directory to a particular sub-folder will give it access to the configs, scripts, and base data it contains.
+The easiest way to get all the dependencies in place is to use a conda environment.
 
-See the [wiki](https://github.com/ual/urbansim_parcel_bayarea/wiki) for more resources.
+1. Install [Anaconda Python](https://www.anaconda.com/download/#macos)
 
+	Or if you've already installed it previously, run: `conda update conda`
 
-## Updates
+2. Build the environment (takes several minutes): `conda env create -f environment.yml`
 
-9-3-2018: Moved older material into a "summer-2018-model" directory and created new directories for parcel and unit model work.
+3. Activate the environment: `source activate template-env`
+
+	(For Windows, just use `activate template-env`)
+
+4. Install development versions of ChoiceModels and UrbanSim Templates
+
+    Navigate to directory where folders should go, then:
+    
+    ```
+    git clone https://github.com/udst/choicemodels.git
+	cd choicemodels
+    python setup.py develop
+	cd ..
+    git clone https://github.com/udst/urbansim_templates.git
+	cd urbansim_templates
+    python setup.py develop
+    ```
+
+5. All set! Whenever you open a new terminal window, use `source activate template-env` to activate the environment
+
+6. Periodically (or when there's new functionality you want to use) run `git pull` from inside the choicemodels and urbansim_templates folders to update the codebases
