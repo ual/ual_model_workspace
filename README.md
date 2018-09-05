@@ -14,15 +14,13 @@ The easiest way to get all the dependencies in place is to use a conda environme
 
 1. Install [Anaconda Python](https://www.anaconda.com/download/#macos)
 
-	Or if you've already installed it previously, run `conda update conda`
+	Or if you've already installed it previously, run: `conda update conda`
 
-2. Build the environment (takes several minutes)
+2. Build the environment (takes several minutes): `conda env create -f environment.yml`
 
-   `conda env create -f environment.yml`
+3. Activate the environment: `source activate template-env`
 
-3. Activate the environment
-
-   `source activate template-env`
+	(For Windows, just use `activate template-env`)
 
 4. Install development versions of ChoiceModels and UrbanSim Templates
 
@@ -40,4 +38,4 @@ The easiest way to get all the dependencies in place is to use a conda environme
 
 5. All set! Whenever you open a new terminal window, use `source activate template-env` to activate the environment
 
-6. Periodically (or when there's new functionality you want to use) run `git pull` from within the choicemodels and urbansim_templates folders to update the codebases
+6. Periodically (or when there's new functionality you want to use) run `git pull` from inside the choicemodels and urbansim_templates folders to update the codebases
