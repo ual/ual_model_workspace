@@ -1,16 +1,11 @@
 # urbansim_parcel_bayarea
 
-This repository is a public workspace for notebooks and other material related to developing a suite of template-based UrbanSim model components.
+This repository is a public workspace for notebooks and other material related to developing a suite of template-based UrbanSim model components. See [wiki](https://github.com/ual/urbansim_parcel_bayarea/wiki) for lots more info.
 
 Related repositories:
 
 - [udst/urbansim_templates](https://github.com/udst/urbansim_templates/) (template library in development)
 - [udst/choicemodels](https://github.com/udst/choicemodels/) (discrete choice statistics library in development)
-
-
-## Tips and guidelines
-
-See [wiki](https://github.com/ual/urbansim_parcel_bayarea/wiki))
 
 
 ## Setup
@@ -46,10 +41,3 @@ The easiest way to get all the dependencies in place is to use a conda environme
 5. All set! Whenever you open a new terminal window, use `source activate template-env` to activate the environment
 
 6. Periodically (or when there's new functionality you want to use) run `git pull` from within the choicemodels and urbansim_templates folders to update the codebases
-
-
-## Updates
-
-9-5-2018: Updated the conda environment in `environment.yml` with some newer library versions. Feel free to create separate environment files for different projects as needed.
-
-9-3-2018: Moved older material into a "summer-2018-model" directory and created new directories for parcel and unit model work.
