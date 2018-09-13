@@ -1,4 +1,4 @@
-# urbansim_parcel_bayarea
+# ual_model_workspace
 
 This repository is a public workspace for notebooks and other material related to developing a suite of template-based UrbanSim model components. See [wiki](https://github.com/ual/urbansim_parcel_bayarea/wiki) for lots more info.
 
