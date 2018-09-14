@@ -1,35 +1,41 @@
-# urbansim_parcel_bayarea
+# ual_model_workspace
 
-This is a repository for us to build a clean UrbanSim model for the Bay Area.
+This repository is a public workspace for notebooks and other material related to developing a suite of template-based UrbanSim model components. See [wiki](https://github.com/ual/urbansim_parcel_bayarea/wiki) for lots more info.
 
-- `scripts` is for manual definitions of Orca tables, steps, etc. using Python functions
-- `configs` is for definitions generated automatically using the modelmanager/template interface
-- `data` is for data
-- `notebooks` is for Jupyter notebooks
+Related repositories:
 
-With just a few lines of code in the manual definitions, we can already load data, estimate and register models, and run steps, all from a notebook: [notebooks/Data-Explore.ipynb](https://github.com/ual/urbansim_parcel_bayarea/blob/master/notebooks/Data-Explore.ipynb)
+- [udst/urbansim_templates](https://github.com/udst/urbansim_templates/) (template library in development)
+- [udst/choicemodels](https://github.com/udst/choicemodels/) (discrete choice statistics library in development)
 
 
 ## Setup
 
-I think it will save headaches later on if we use an explicitly-defined Python environment for working on this.
+The easiest way to get all the dependencies in place is to use a conda environment.
 
-My approach in the past has been to use Conda `environment.yml` files. Not sure if this is the best way, so feel free to suggest alternatives.
+1. Install [Anaconda Python](https://www.anaconda.com/download/#macos)
 
-1. Install the environment specified in the repository - this part is slow:
+	Or if you've already installed it previously, run: `conda update conda`
 
-`conda env create -f environment.yml`
+2. Build the environment (takes several minutes): `conda env create -f environment.yml`
 
-2. Activate the environment:
+3. Activate the environment: `source activate template-env`
 
-`source activate ual-model` (Mac or Linux)  
-or, `activate ual-model` (Windows)
+	(For Windows, just use `activate template-env`)
 
-3. Add UrbanSim_Templates to the environment (it doesn't have a release yet, sorry) - only needs to be done once:
+4. Install development versions of ChoiceModels and UrbanSim Templates
 
-`cd path-to-urbansim_templates`  
-`python setup.py develop`
+    Navigate to directory where folders should go, then:
+    
+    ```
+    git clone https://github.com/udst/choicemodels.git
+	cd choicemodels
+    python setup.py develop
+	cd ..
+    git clone https://github.com/udst/urbansim_templates.git
+	cd urbansim_templates
+    python setup.py develop
+    ```
 
-4. Launch Jupyter or run scripts
+5. All set! Whenever you open a new terminal window, use `source activate template-env` to activate the environment
 
-You'll also need to download the data file. Instructions are in the folder.
+6. Periodically (or when there's new functionality you want to use) run `git pull` from inside the choicemodels and urbansim_templates folders to update the codebases
