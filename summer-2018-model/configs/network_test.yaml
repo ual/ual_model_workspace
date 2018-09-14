@@ -1,0 +1,8 @@
+model_type: networks
+node_col: node_id_small
+variable_definitions:
+
+  - name: residential_units_500
+    dataframe: buildings
+    varname: residential_units
+    radius: 500

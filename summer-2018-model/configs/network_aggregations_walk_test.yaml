@@ -1,0 +1,42 @@
+name: network_aggregations
+
+desc: Network aggregations
+
+model_type: networks
+
+node_col: node_id_walk
+
+variable_definitions:
+
+  - name: pop_500_walk
+    dataframe: households
+    varname: persons
+    radius: 500
+    decay: flat
+    
+  - name: sqft_unit_500_walk
+    dataframe: buildings
+    varname: sqft_per_unit
+    aggregation: ave
+    radius: 500
+    decay: flat
+
+  - name: singles_500_walk
+    dataframe: households
+    filters:
+    - persons == 1
+    radius: 500
+    decay: flat
+
+  - name: elderly_hh_500_walk
+    dataframe: households
+    filters:
+    - age_of_head > 65
+    radius: 500
+    decay: flat
+
+  - name: children_500_walk
+    dataframe: households
+    varname: children
+    radius: 500
+    decay: flat
