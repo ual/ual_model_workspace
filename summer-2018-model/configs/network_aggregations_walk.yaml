@@ -42,7 +42,6 @@ variable_definitions:
     radius: 500
     decay: flat
 
-
   - name: units_sf_500_walk
     dataframe: buildings
     varname: residential_units
@@ -308,5 +307,89 @@ variable_definitions:
     varname: persons
     filters:
     - hispanic_head == 'yes'
+    radius: 2500
+    decay: flat
+
+  - name: jobs_500_walk_retail
+    dataframe: jobs
+    filters:
+    - sector_id in [44, 45]
+    radius: 500
+    decay: flat
+
+  - name: jobs_1500_walk_retail
+    dataframe: jobs
+    filters:
+    - sector_id in [44, 45]
+    radius: 1500
+    decay: flat
+
+  - name: jobs_2500_walk_retail
+    dataframe: jobs
+    filters:
+    - sector_id in [44, 45]
+    radius: 2500
+    decay: flat
+
+  - name: jobs_500_walk_fire
+    dataframe: jobs
+    filters:
+    - sector_id in [52, 53]
+    radius: 500
+    decay: flat
+
+  - name: jobs_1500_walk_fire
+    dataframe: jobs
+    filters:
+    - sector_id in [52, 53]
+    radius: 1500
+    decay: flat
+
+  - name: jobs_2500_walk_fire
+    dataframe: jobs
+    filters:
+    - sector_id in [52, 53]
+    radius: 2500
+    decay: flat
+
+  - name: jobs_500_walk_tech
+    dataframe: jobs
+    filters:
+    - sector_id in [51, 54]
+    radius: 500
+    decay: flat
+
+  - name: jobs_1500_walk_tech
+    dataframe: jobs
+    filters:
+    - sector_id in [51, 54]
+    radius: 1500
+    decay: flat
+
+  - name: jobs_2500_walk_tech
+    dataframe: jobs
+    filters:
+    - sector_id in [51, 54]
+    radius: 2500
+    decay: flat
+
+  - name: jobs_500_walk_serv
+    dataframe: jobs
+    filters:
+    - sector_id == 72
+    radius: 500
+    decay: flat
+
+  - name: jobs_1500_walk_serv
+    dataframe: jobs
+    filters:
+    - sector_id == 72
+    radius: 1500
+    decay: flat
+
+  - name: jobs_2500_walk_serv
+    dataframe: jobs
+    filters:
+    - sector_id == 72
     radius: 2500
     decay: flat
