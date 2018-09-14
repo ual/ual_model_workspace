@@ -70,6 +70,9 @@ def rentals():
 
 
 ############################################################
+# Load previously tabulated accessibility vars
+#####################################################
+
 # @orca.table(cache=True)
 # def nodesdrive_vars():
 #     df = pd.read_csv(d + 'nodesdrive_vars.csv')
@@ -77,21 +80,21 @@ def rentals():
 #     df.index_name = 'node_id_drive'
 #     return df
 
-@orca.table(cache=True)
-def nodessmall():
-    df = pd.read_csv(
-        d + 'nodessmall_vars.csv',
-        index_col='osmid', dtype={'osmid': int})
-    df.index_name = 'node_id_small'
-    return df
+# @orca.table(cache=True)
+# def nodessmall():
+#     df = pd.read_csv(
+#         d + 'nodessmall_vars2.csv',
+#         index_col='osmid', dtype={'osmid': int})
+#     df.index_name = 'node_id_small'
+#     return df
 
-@orca.table(cache=True)
-def nodeswalk():
-    df = pd.read_csv(
-        d + 'nodeswalk_vars.csv',
-        index_col='osmid',  dtype={'osmid': int})
-    df.index_name = 'node_id_walk'
-    return df
+# @orca.table(cache=True)
+# def nodeswalk():
+#     df = pd.read_csv(
+#         d + 'nodeswalk_vars2.csv',
+#         index_col='osmid',  dtype={'osmid': int})
+#     df.index_name = 'node_id_walk'
+#     return df
 
 
 ############################################################
@@ -140,12 +143,10 @@ orca.broadcast('parcels', 'buildings', cast_index=True, onto_on='parcel_id')
 orca.broadcast('buildings', 'units', cast_index=True, onto_on='building_id')
 orca.broadcast('units', 'households', cast_index=True, onto_on='unit_id')
 orca.broadcast('households', 'persons', cast_index=True, onto_on='household_id')
-orca.broadcast('nodeswalk', 'rentals', cast_index=True, onto_on='node_id_walk')
-orca.broadcast('nodeswalk', 'parcels', cast_index=True, onto_on='node_id_walk')
-orca.broadcast('nodessmall', 'rentals', cast_index=True, onto_on='node_id_small')
-orca.broadcast('nodessmall', 'parcels', cast_index=True, onto_on='node_id_small')
+orca.broadcast('buildings', 'jobs', cast_index=True, onto_on='building_id')
+
 
 #orca.broadcast('nodesdrive_vars', 'rentals', cast_on='nodesdrive_id', onto_on='nodesdrive_id')
-#orca.broadcast('nodessmall_vars', 'rentals', cast_on='nodessmall_id', onto_on='nodessmall_id')
-#orca.broadcast('nodeswalk_vars', 'rentals', cast_on='nodeswalk_id', onto_on='nodeswalk_id')
+# orca.broadcast('nodessmall_vars', 'rentals', cast_on='nodessmall_id', onto_on='nodessmall_id')
+# orca.broadcast('nodeswalk_vars', 'rentals', cast_on='nodeswalk_id', onto_on='nodeswalk_id')
 
