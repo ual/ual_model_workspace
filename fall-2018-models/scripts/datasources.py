@@ -74,7 +74,7 @@ def households():
     df = pd.read_csv(
         d + 'households_v2.csv',
         index_col='household_id', dtype={
-            'househould_id': int, 'block_group_id': str, 'state': str,
+            'household_id': int, 'block_group_id': str, 'state': str,
             'county': str, 'tract': str, 'block_group': str,
             'building_id': int, 'unit_id': int})
     return df
