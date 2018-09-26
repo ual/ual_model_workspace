@@ -73,9 +73,9 @@ def initialize_network_small():
 
     # While we're at it, we can use these node_id columns to define direct broadcasts
     # between the nodes table and lower-level ones, which speeds up merging
-
-    orca.broadcast(
-        'nodessmall', 'units', cast_index=True, onto_on='node_id_small')
+# two lines below commented out to fix small MNL merge
+   # orca.broadcast(
+   #     'nodessmall', 'units', cast_index=True, onto_on='node_id_small')
 
 
 # @orca.step()
@@ -154,6 +154,7 @@ def initialize_network_walk():
         netwalk = pdna.Network(nodeswalk.x, nodeswalk.y, edgeswalk.u,
                                edgeswalk.v, edgeswalk[['length']], twoway=True)
         netwalk.precompute(2500)
+        
         return netwalk
 
     parcels = orca.get_table('parcels').to_frame(columns=['x', 'y'])
@@ -194,9 +195,9 @@ def initialize_network_walk():
     # While we're at it, we can use these node_id columns to define direct
     # broadcasts between the nodes table and lower-level ones, which
     # speeds up merging
-
-    orca.broadcast(
-        'nodeswalk', 'units', cast_index=True, onto_on='node_id_walk')
+# two lines below commented out to fix small MNL merge
+ #   orca.broadcast(
+ #       'nodeswalk', 'units', cast_index=True, onto_on='node_id_walk')
 
 
 # @orca.step()
