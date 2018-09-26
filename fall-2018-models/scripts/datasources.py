@@ -74,7 +74,7 @@ def households():
     df = pd.read_csv(
         d + 'households_v2.csv',
         index_col='household_id', dtype={
-            'househould_id': int, 'block_group_id': str, 'state': str,
+            'household_id': int, 'block_group_id': str, 'state': str,
             'county': str, 'tract': str, 'block_group': str,
             'building_id': int, 'unit_id': int})
     return df
@@ -100,9 +100,21 @@ def jobs():
 
 # Broadcasts, a.k.a. merge relationships
 
-orca.broadcast('parcels', 'buildings', cast_index=True, onto_on='parcel_id')
-orca.broadcast('buildings', 'units', cast_index=True, onto_on='building_id')
-orca.broadcast('units', 'households', cast_index=True, onto_on='unit_id')
+orca.broadcast(
+    'parcels', 'buildings', cast_index=True, onto_on='parcel_id')
+orca.broadcast(
+    'buildings', 'units', cast_index=True, onto_on='building_id')
+orca.broadcast(
+    'units', 'households', cast_index=True, onto_on='unit_id')
 orca.broadcast(
     'households', 'persons', cast_index=True, onto_on='household_id')
-orca.broadcast('buildings', 'jobs', cast_index=True, onto_on='building_id')
+orca.broadcast(
+    'buildings', 'jobs', cast_index=True, onto_on='building_id')
+orca.broadcast(
+    'nodeswalk', 'parcels', cast_index=True, onto_on='node_id_walk')
+orca.broadcast(
+    'nodeswalk', 'rentals', cast_index=True, onto_on='node_id_walk')
+orca.broadcast(
+    'nodessmall', 'rentals', cast_index=True, onto_on='node_id_small')
+orca.broadcast(
+    'nodessmall', 'parcels', cast_index=True, onto_on='node_id_small')
