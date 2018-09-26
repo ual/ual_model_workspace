@@ -36,48 +36,6 @@ def initialize_network_small():
         netsmall.precompute(25000)
         return netsmall
 
-    parcels = orca.get_table('parcels').to_frame(columns=['x', 'y'])
-    idssmall_parcel = orca.get_injectable('netsmall').get_node_ids(
-        parcels.x, parcels.y)
-    orca.add_column('parcels', 'node_id_small', idssmall_parcel, cache=False)
-    orca.broadcast(
-        'nodessmall', 'parcels', cast_index=True, onto_on='node_id_small')
-
-    rentals = orca.get_table('rentals').to_frame(
-        columns=['longitude', 'latitude'])
-    idssmall_rentals = orca.get_injectable('netsmall').get_node_ids(
-        rentals.longitude, rentals.latitude)
-    orca.add_column('rentals', 'node_id_small', idssmall_rentals, cache=False)
-    orca.broadcast(
-        'nodessmall', 'rentals', cast_index=True, onto_on='node_id_small')
-
-    @orca.column('buildings', 'node_id_small')
-    def node_id(parcels, buildings):
-        return misc.reindex(parcels.node_id_small, buildings.parcel_id)
-
-    @orca.column('units', 'node_id_small')
-    def node_id(buildings, units):
-        return misc.reindex(buildings.node_id_small, units.building_id)
-
-    @orca.column('households', 'node_id_small')
-    def node_id(units, households):
-        return misc.reindex(units.node_id_small, households.unit_id)
-
-    @orca.column('persons', 'node_id_small')
-    def node_id(households, persons):
-        return misc.reindex(households.node_id_small, persons.household_id)
-
-    @orca.column('jobs', 'node_id_small')
-    def node_id(buildings, jobs):
-        return misc.reindex(buildings.node_id_small, jobs.building_id)
-
-    # While we're at it, we can use these node_id columns to define direct broadcasts
-    # between the nodes table and lower-level ones, which speeds up merging
-
-    orca.broadcast(
-        'nodessmall', 'units', cast_index=True, onto_on='node_id_small')
-
-
 # @orca.step()
 # def initialize_network_drive():
 #     """
@@ -155,48 +113,6 @@ def initialize_network_walk():
                                edgeswalk.v, edgeswalk[['length']], twoway=True)
         netwalk.precompute(2500)
         return netwalk
-
-    parcels = orca.get_table('parcels').to_frame(columns=['x', 'y'])
-    idswalk_parcel = orca.get_injectable('netwalk').get_node_ids(
-        parcels.x, parcels.y)
-    orca.add_column('parcels', 'node_id_walk', idswalk_parcel, cache=False)
-    orca.broadcast(
-        'nodeswalk', 'parcels', cast_index=True, onto_on='node_id_walk')
-
-    rentals = orca.get_table('rentals').to_frame(
-        columns=['longitude', 'latitude'])
-    idswalk_rentals = orca.get_injectable('netwalk').get_node_ids(
-        rentals.longitude, rentals.latitude)
-    orca.add_column('rentals', 'node_id_walk', idswalk_rentals, cache=False)
-    orca.broadcast(
-        'nodeswalk', 'rentals', cast_index=True, onto_on='node_id_walk')
-
-    @orca.column('buildings', 'node_id_walk')
-    def node_id(parcels, buildings):
-        return misc.reindex(parcels.node_id_walk, buildings.parcel_id)
-
-    @orca.column('units', 'node_id_walk')
-    def node_id(buildings, units):
-        return misc.reindex(buildings.node_id_walk, units.building_id)
-
-    @orca.column('households', 'node_id_walk')
-    def node_id(units, households):
-        return misc.reindex(units.node_id_walk, households.unit_id)
-
-    @orca.column('persons', 'node_id_walk')
-    def node_id(households, persons):
-        return misc.reindex(households.node_id_walk, persons.household_id)
-
-    @orca.column('jobs', 'node_id_walk')
-    def node_id(buildings, jobs):
-        return misc.reindex(buildings.node_id_walk, jobs.building_id)
-
-    # While we're at it, we can use these node_id columns to define direct
-    # broadcasts between the nodes table and lower-level ones, which
-    # speeds up merging
-
-    orca.broadcast(
-        'nodeswalk', 'units', cast_index=True, onto_on='node_id_walk')
 
 
 # @orca.step()
