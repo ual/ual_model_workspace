@@ -36,6 +36,7 @@ def initialize_network_small():
         netsmall.precompute(25000)
         return netsmall
 
+
 # @orca.step()
 # def initialize_network_drive():
 #     """
@@ -112,7 +113,9 @@ def initialize_network_walk():
         netwalk = pdna.Network(nodeswalk.x, nodeswalk.y, edgeswalk.u,
                                edgeswalk.v, edgeswalk[['length']], twoway=True)
         netwalk.precompute(2500)
+        
         return netwalk
+
 
 
 # @orca.step()
