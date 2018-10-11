@@ -1,0 +1,91 @@
+modelmanager_version: 0.1.dev14
+
+saved_object:
+    alt_filters: null
+    alt_sample_size: null
+    alternatives: null
+    choice_column: null
+    chooser_filters:
+    - age < 100
+    - age > 16
+    chooser_sample_size: null
+    choosers: null
+    fitted_parameters:
+    - 0.06412324718707738
+    - 0.05870930251036348
+    - -2.3805927247504184
+    - 0.4284270724340512
+    - -1.0872962653616964
+    - -0.7851813685651534
+    - -1.6351957904314076
+    - -0.6497942978144521
+    - 1.0880269185812668
+    - -1.5237787797800944
+    - 0.4717748738898265
+    - -0.7717073873635791
+    - 0.7550355965127932
+    - -1.2705007172201919
+    - 0.7846507331199077
+    - -0.5154153395822141
+    - -2.0884822667987994
+    - 1.0740085875933545
+    - -0.7138523918046178
+    - -1.4669914877811279
+    - 0.47513820663701684
+    - -2.3210057483769813
+    - -1.0547835402084162
+    - 0.5493510154632865
+    - 0.0001826627516882258
+    model_expression: np.log1p(jobs_1500_walk) + np.log(jobs_25000) + np.log1p(tt_da)
+        + no_higher_ed:(retail + fire + healthcare + tech + mfg + food_and_hosp +
+        edu_serv + constr + gov + whlsale) + retail + tech + mfg + food_and_hosp +
+        edu_serv + oth_serv + constr + gov + whlsale + admin + util +tt_wTrnW - 1
+    name: WLCM-higher_ed_x_sector
+    out_alt_filters: null
+    out_alternatives: null
+    out_chooser_filters: null
+    out_choosers: null
+    out_column: null
+    summary_table: "                  CHOICEMODELS ESTIMATION RESULTS            \
+        \      \n===================================================================\n\
+        Dep. Var.:                chosen   No. Observations:          8,918\nModel:\
+        \         Multinomial Logit   Df Residuals:              8,893\nMethod:  \
+        \     Maximum Likelihood   Df Model:                     25\nDate:       \
+        \          2018-10-10   Pseudo R-squ.:             0.480\nTime:          \
+        \            21:13   Pseudo R-bar-squ.:         0.479\nAIC:              \
+        \    21,388.613   Log-Likelihood:      -10,669.307\nBIC:                 \
+        \ 21,566.009   LL-Null:             -20,534.454\n================================================================================\n\
+        \                                coef   std err          z     P>|z|   Conf.\
+        \ Int.\n--------------------------------------------------------------------------------\n\
+        np.log1p(jobs_1500_walk)      0.0641     0.009      7.511     0.000      \
+        \       \nnp.log(jobs_25000)            0.0587     0.008      7.597     0.000\
+        \             \nnp.log1p(tt_da)              -2.3806     0.023   -103.496\
+        \     0.000             \nno_higher_ed:retail           0.4284     0.102 \
+        \     4.218     0.000             \nno_higher_ed:fire            -1.0873 \
+        \    0.105    -10.324     0.000             \nno_higher_ed:healthcare    \
+        \  -0.7852     0.083     -9.509     0.000             \nno_higher_ed:tech\
+        \            -1.6352     0.077    -21.109     0.000             \nno_higher_ed:mfg\
+        \             -0.6498     0.109     -5.956     0.000             \nno_higher_ed:food_and_hosp\
+        \    1.0880     0.159      6.855     0.000             \nno_higher_ed:edu_serv\
+        \        -1.5238     0.119    -12.778     0.000             \nno_higher_ed:constr\
+        \           0.4718     0.184      2.570     0.010             \nno_higher_ed:gov\
+        \             -0.7717     0.113     -6.857     0.000             \nno_higher_ed:whlsale\
+        \          0.7550     0.274      2.754     0.006             \nretail    \
+        \                   -1.2705     0.077    -16.527     0.000             \n\
+        tech                          0.7847     0.044     17.694     0.000      \
+        \       \nmfg                          -0.5154     0.067     -7.646     0.000\
+        \             \nfood_and_hosp                -2.0885     0.129    -16.236\
+        \     0.000             \nedu_serv                      1.0740     0.059 \
+        \    18.215     0.000             \noth_serv                     -0.7139 \
+        \    0.077     -9.245     0.000             \nconstr                     \
+        \  -1.4670     0.134    -10.916     0.000             \ngov              \
+        \             0.4751     0.068      6.995     0.000             \nwhlsale\
+        \                      -2.3210     0.211    -10.985     0.000            \
+        \ \nadmin                        -1.0548     0.106     -9.954     0.000  \
+        \           \nutil                          0.5494     0.136      4.053  \
+        \   0.000             \ntt_wTrnW                      0.0002     0.000   \
+        \   5.856     0.000             \n================================================================================"
+    tags:
+    - max
+    template: LargeMultinomialLogitStep
+    template_version: 0.1.dev14
