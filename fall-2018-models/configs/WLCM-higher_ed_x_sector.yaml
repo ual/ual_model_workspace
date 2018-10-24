@@ -1,6 +1,7 @@
 modelmanager_version: 0.1.dev14
 
 saved_object:
+    alt_capacity: null
     alt_filters: null
     alt_sample_size: null
     alternatives: null
@@ -9,7 +10,9 @@ saved_object:
     - age < 100
     - age > 16
     chooser_sample_size: null
+    chooser_size: null
     choosers: null
+    constrained_choices: False
     fitted_parameters:
     - 0.06412324718707738
     - 0.05870930251036348
@@ -36,6 +39,7 @@ saved_object:
     - -1.0547835402084162
     - 0.5493510154632865
     - 0.0001826627516882258
+    max_iter: null
     model_expression: np.log1p(jobs_1500_walk) + np.log(jobs_25000) + np.log1p(tt_da)
         + no_higher_ed:(retail + fire + healthcare + tech + mfg + food_and_hosp +
         edu_serv + constr + gov + whlsale) + retail + tech + mfg + food_and_hosp +
