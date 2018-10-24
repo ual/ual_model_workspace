@@ -1,6 +1,7 @@
 modelmanager_version: 0.1.dev14
 
 saved_object:
+    alt_capacity: null
     alt_filters: null
     alt_sample_size: null
     alternatives: null
@@ -10,7 +11,9 @@ saved_object:
     - income < 98
     - edu < 98
     chooser_sample_size: null
+    chooser_size: null
     choosers: null
+    constrained_choices: False
     fitted_parameters:
     - -0.10527841542636611
     - 0.0001542869561805245
@@ -39,6 +42,7 @@ saved_object:
     - -2.34055560140617
     - -1.2004270219052788
     - 0.4511408283824262
+    max_iter: null
     model_expression: dist_da/tt_da + tt_wTrnW + np.log1p(jobs_1500_walk_retail) +
         np.log1p(cost_da_toll):(hh_inc_under_25k + hh_inc_25_to_75k + hh_inc_75_to_200k)
         + no_higher_ed:(sector_retail + sector_fire + sector_healthcare + sector_tech

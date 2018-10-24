@@ -1,0 +1,106 @@
+modelmanager_version: 0.1.dev15
+
+saved_object:
+    alt_capacity: null
+    alt_filters: null
+    alt_sample_size: null
+    alternatives: null
+    choice_column: null
+    chooser_filters:
+    - age < 115
+    - income < 98
+    - edu < 98
+    chooser_sample_size: null
+    chooser_size: null
+    choosers: null
+    constrained_choices: true
+    fitted_parameters:
+    - -0.11093513765122329
+    - 0.00021451856236086276
+    - -0.00010496424117609582
+    - 0.012433512972498234
+    - -0.5689579090165822
+    - -0.47912610162495944
+    - -0.2584279932612762
+    - 0.3597418473883604
+    - -1.0086728730402355
+    - -0.7369829720548989
+    - -1.5648198533852742
+    - -0.6124782957888832
+    - 1.1383595140472669
+    - -1.550869736324329
+    - -0.605108227214032
+    - 0.5762811003442693
+    - -1.2032149449656924
+    - 0.6909571819787215
+    - -0.5331780597389811
+    - -2.0472236323335937
+    - 1.1642025300756003
+    - -0.5929040344799994
+    - -1.1920636052481741
+    - 0.45496934915313403
+    - -2.2616850816506138
+    - -1.1840214551890318
+    - 0.5491123085376665
+    max_iter: null
+    model_expression: dist_da/tt_da + tt_wTrnW + np.log1p(jobs_1500_walk_retail) +
+        np.log1p(cost_da_toll):(hh_inc_under_25k + hh_inc_25_to_75k + hh_inc_75_to_200k)
+        + no_higher_ed:(sector_retail + sector_fire + sector_healthcare + sector_tech
+        + sector_mfg + sector_food_and_hosp + sector_edu_serv + sector_gov + sector_whlsale)
+        + sector_retail + sector_tech + sector_mfg + sector_food_and_hosp + sector_edu_serv
+        + sector_oth_serv + sector_constr + sector_gov + sector_whlsale + sector_admin
+        + sector_util - 1
+    name: WLCM_constrained-higher_ed_x_sector-tt_x_dist-cost_x_income
+    out_alt_filters: null
+    out_alternatives: null
+    out_chooser_filters: null
+    out_choosers: null
+    out_column: null
+    summary_table: "                  CHOICEMODELS ESTIMATION RESULTS            \
+        \      \n===================================================================\n\
+        Dep. Var.:                chosen   No. Observations:          8,918\nModel:\
+        \         Multinomial Logit   Df Residuals:              8,891\nMethod:  \
+        \     Maximum Likelihood   Df Model:                     27\nDate:       \
+        \          2018-10-24   Pseudo R-squ.:             0.504\nTime:          \
+        \            01:11   Pseudo R-bar-squ.:         0.503\nAIC:              \
+        \    20,407.853   Log-Likelihood:      -10,176.927\nBIC:                 \
+        \ 20,599.441   LL-Null:             -20,534.454\n=============================================================================================\n\
+        \                                              coef   std err         z  \
+        \   P>|z|   Conf. Int.\n---------------------------------------------------------------------------------------------\n\
+        dist_da                                    -0.1109     0.003   -43.178   \
+        \  0.000             \ndist_da:tt_da                               0.0002\
+        \     0.000     6.954     0.000             \ntt_wTrnW                   \
+        \                -0.0001     0.000    -3.334     0.001             \nnp.log1p(jobs_1500_walk_retail)\
+        \             0.0124     0.005     2.581     0.010             \nnp.log1p(cost_da_toll):hh_inc_under_25k\
+        \    -0.5690     0.017   -34.058     0.000             \nnp.log1p(cost_da_toll):hh_inc_25_to_75k\
+        \    -0.4791     0.008   -60.751     0.000             \nnp.log1p(cost_da_toll):hh_inc_75_to_200k\
+        \   -0.2584     0.006   -44.013     0.000             \nno_higher_ed:sector_retail\
+        \                  0.3597     0.103     3.479     0.001             \nno_higher_ed:sector_fire\
+        \                   -1.0087     0.108    -9.326     0.000             \nno_higher_ed:sector_healthcare\
+        \             -0.7370     0.081    -9.073     0.000             \nno_higher_ed:sector_tech\
+        \                   -1.5648     0.077   -20.229     0.000             \nno_higher_ed:sector_mfg\
+        \                    -0.6125     0.113    -5.431     0.000             \n\
+        no_higher_ed:sector_food_and_hosp           1.1384     0.164     6.946   \
+        \  0.000             \nno_higher_ed:sector_edu_serv               -1.5509\
+        \     0.116   -13.406     0.000             \nno_higher_ed:sector_gov    \
+        \                -0.6051     0.115    -5.245     0.000             \nno_higher_ed:sector_whlsale\
+        \                 0.5763     0.277     2.083     0.037             \nsector_retail\
+        \                              -1.2032     0.079   -15.237     0.000     \
+        \        \nsector_tech                                 0.6910     0.043  \
+        \  16.011     0.000             \nsector_mfg                             \
+        \    -0.5332     0.067    -7.951     0.000             \nsector_food_and_hosp\
+        \                       -2.0472     0.134   -15.324     0.000            \
+        \ \nsector_edu_serv                             1.1642     0.059    19.804\
+        \     0.000             \nsector_oth_serv                            -0.5929\
+        \     0.078    -7.613     0.000             \nsector_constr              \
+        \                -1.1921     0.097   -12.228     0.000             \nsector_gov\
+        \                                  0.4550     0.069     6.557     0.000  \
+        \           \nsector_whlsale                             -2.2617     0.214\
+        \   -10.560     0.000             \nsector_admin                         \
+        \      -1.1840     0.103   -11.452     0.000             \nsector_util   \
+        \                              0.5491     0.142     3.858     0.000      \
+        \       \n============================================================================================="
+    tags:
+    - max
+    template: LargeMultinomialLogitStep
+    template_version: 0.1.dev15

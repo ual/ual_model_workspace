@@ -1,0 +1,14 @@
+name: network_aggregations
+
+desc: Network aggregations
+
+model_type: networks
+
+node_col: node_id_beam
+
+variable_definitions:
+
+  - name: jobs_30_minutes
+    dataframe: jobs
+    radius: 1800
+    decay: flat

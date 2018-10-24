@@ -1,13 +1,16 @@
 modelmanager_version: 0.1.dev14
 
 saved_object:
+    alt_capacity: null
     alt_filters: null
     alt_sample_size: null
     alternatives: null
     choice_column: null
     chooser_filters: null
     chooser_sample_size: null
+    chooser_size: null
     choosers: null
+    constrained_choices: False
     fitted_parameters:
     - 0.0683092241052872
     - 0.06996908591554304
@@ -30,6 +33,7 @@ saved_object:
     - -0.0004483836085968317
     - -0.000106180173879327
     - 0.0001876524234655807
+    max_iter: null
     model_expression: np.log1p(jobs_1500_walk) + np.log(jobs_25000) + np.log1p(tt_da)
         + age*(retail + fire + healthcare + tech + mfg + food_and_hosp + edu_serv
         + gov) + tt_wTrnW - 1
