@@ -1,18 +1,22 @@
 modelmanager_version: 0.1.dev14
 
 saved_object:
+    alt_capacity: null
     alt_filters: null
     alt_sample_size: null
     alternatives: null
     choice_column: null
     chooser_filters: null
     chooser_sample_size: null
+    chooser_size: null
     choosers: null
+    constrained_choices: False
     fitted_parameters:
     - 0.07190344563715265
     - 0.12369532397832214
     - -2.348455449363873
     - 0.00014136552127896838
+    max_iter: null
     model_expression: np.log1p(jobs_1500_walk) + np.log(jobs_25000) + np.log1p(tt_da)
         + tt_wTrnW - 1
     name: WLCM
