@@ -3,7 +3,7 @@ modelmanager_version: 0.1.dev15
 saved_object:
     alt_capacity: null
     alt_filters: null
-    alt_sample_size: null
+    alt_sample_size: 10
     alternatives: null
     choice_column: null
     chooser_filters:
@@ -61,8 +61,8 @@ saved_object:
         Dep. Var.:                chosen   No. Observations:          8,918\nModel:\
         \         Multinomial Logit   Df Residuals:              8,891\nMethod:  \
         \     Maximum Likelihood   Df Model:                     27\nDate:       \
-        \          2018-10-24   Pseudo R-squ.:             0.504\nTime:          \
-        \            01:11   Pseudo R-bar-squ.:         0.503\nAIC:              \
+        \          2018-10-25   Pseudo R-squ.:             0.504\nTime:          \
+        \            20:00   Pseudo R-bar-squ.:         0.503\nAIC:              \
         \    20,407.853   Log-Likelihood:      -10,176.927\nBIC:                 \
         \ 20,599.441   LL-Null:             -20,534.454\n=============================================================================================\n\
         \                                              coef   std err         z  \
