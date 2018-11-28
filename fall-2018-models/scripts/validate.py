@@ -10,11 +10,16 @@ def get_predicted_choices(model_obj):
     if model_obj.probabilities is None:
         return 'The model needs to be run first!'
     
-    return model_obj.probabilities[
+    predicted_choices = model_obj.probabilities[
     model_obj.probabilities.groupby(['_obs_id'])['_probability'].transform('max') ==  model_obj.probabilities['_probability']
 ]['_alt_id'].reset_index(drop=True)
+    
+    return predicted_choices.rename('predicted')
 
 def tp_rates(model_obj):
+    '''
+    This returns a list of true-positive rates of the model.
+    '''
     if model_obj.probabilities is None:
         return 'The model needs to be run first!'
     
@@ -42,5 +47,5 @@ def model_crosstab(model_obj):
     if model_obj.probabilities is None:
         return 'The model needs to be run first!'
 
-    crosstab = pd.crosstab(model_obj.choices, get_predicted_choices(model_obj), normalize = 'index')
+    crosstab = pd.crosstab(model_obj.choices.rename('observed'), get_predicted_choices(model_obj), normalize = 'index')
     return crosstab
