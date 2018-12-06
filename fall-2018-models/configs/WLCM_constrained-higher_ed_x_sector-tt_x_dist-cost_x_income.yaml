@@ -1,18 +1,27 @@
-modelmanager_version: 0.1.dev15
+modelmanager_version: 0.1.dev18
 
 saved_object:
     alt_capacity: null
     alt_filters: null
     alt_sample_size: 10
-    alternatives: null
+    alternatives:
+    - jobs
+    - buildings
+    - parcels
+    - nodeswalk
+    - nodessmall
     choice_column: null
     chooser_filters:
-    - age < 115
-    - income < 98
-    - edu < 98
+    - worker == 1
+    - work_at_home == 0
     chooser_sample_size: null
     chooser_size: null
-    choosers: null
+    choosers:
+    - persons
+    - households
+    - units
+    - buildings
+    - parcels
     constrained_choices: true
     fitted_parameters:
     - -0.11093513765122329
@@ -55,7 +64,7 @@ saved_object:
     out_alternatives: null
     out_chooser_filters: null
     out_choosers: null
-    out_column: null
+    out_column: job_id
     summary_table: "                  CHOICEMODELS ESTIMATION RESULTS            \
         \      \n===================================================================\n\
         Dep. Var.:                chosen   No. Observations:          8,918\nModel:\
@@ -103,4 +112,4 @@ saved_object:
     tags:
     - max
     template: LargeMultinomialLogitStep
-    template_version: 0.1.dev15
+    template_version: 0.1.dev18
