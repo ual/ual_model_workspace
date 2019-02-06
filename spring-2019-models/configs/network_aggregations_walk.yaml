@@ -1,0 +1,395 @@
+name: network_aggregations
+
+desc: Network aggregations
+
+model_type: networks
+
+node_col: node_id_walk
+
+variable_definitions:
+
+
+  - name: units_500_walk
+    dataframe: buildings
+    varname: residential_units
+    radius: 500
+    decay: flat
+
+  - name: sqft_unit_500_walk
+    dataframe: buildings
+    varname: sqft_per_unit
+    aggregation: ave
+    radius: 500
+    decay: flat
+
+  - name: singles_500_walk
+    dataframe: households
+    filters:
+    - persons == 1
+    radius: 500
+    decay: flat
+
+  - name: elderly_hh_500_walk
+    dataframe: households
+    filters:
+    - age_of_head > 65
+    radius: 500
+    decay: flat
+
+  - name: children_500_walk
+    dataframe: households
+    varname: children
+    radius: 500
+    decay: flat
+
+  - name: units_sf_500_walk
+    dataframe: buildings
+    varname: residential_units
+    filters:
+    - building_type_id == 1
+    radius: 500
+    decay: flat
+
+  - name: units_mf_500_walk
+    dataframe: buildings
+    varname: residential_units
+    filters:
+    - building_type_id == 3
+    radius: 500
+    decay: flat
+
+  - name: pop_500_walk
+    dataframe: households
+    varname: persons
+    radius: 500
+    decay: flat
+
+  - name: hh_500_walk
+    dataframe: households
+    radius: 500
+    decay: flat
+
+  - name: poor_500_walk
+    dataframe: households
+    filters:
+    - income < 40000
+    radius: 500
+    decay: flat
+
+  - name: rich_500_walk
+    dataframe: households
+    filters:
+    - income > 150000
+    radius: 500
+    decay: flat
+
+  - name: renters_500_walk
+    dataframe: households
+    filters:
+    - tenure == 2
+    radius: 500
+    decay: flat
+
+  - name: avg_income_500_walk
+    aggregation: ave
+    dataframe: households
+    varname: income
+    radius: 500
+    decay: flat
+
+  - name: jobs_500_walk
+    dataframe: jobs
+    radius: 500
+    decay: flat
+
+  - name: avg_rent_500_walk
+    dataframe: rentals
+    varname: rent
+    radius: 500
+    aggregation: ave
+    decay: flat
+
+  - name: pop_white_500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 1
+    radius: 500
+    decay: flat
+
+  - name: pop_black_500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 2
+    radius: 500
+    decay: flat
+
+  - name: pop_asian_500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 6
+    radius: 500
+    decay: flat
+
+  - name: pop_hisp_500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - hispanic_head == 'yes'
+    radius: 500
+    decay: flat
+
+  - name: units_1500_walk
+    dataframe: buildings
+    varname: residential_units
+    radius: 1500
+    decay: flat
+
+  - name: sqft_unit_1500_walk
+    dataframe: buildings
+    varname: sqft_per_unit
+    aggregation: ave
+    radius: 1500
+    decay: flat
+
+  - name: singles_1500_walk
+    dataframe: households
+    filters:
+    - persons == 1
+    radius: 1500
+    decay: flat
+
+  - name: elderly_hh_1500_walk
+    dataframe: households
+    filters:
+    - age_of_head > 65
+    radius: 1500
+    decay: flat
+
+  - name: children_1500_walk
+    dataframe: households
+    varname: children
+    radius: 1500
+    decay: flat
+  - name: units_sf_1500_walk
+    dataframe: buildings
+    varname: residential_units
+    filters:
+    - building_type_id == 1
+    radius: 1500
+    decay: flat
+
+  - name: units_mf_1500_walk
+    dataframe: buildings
+    varname: residential_units
+    filters:
+    - building_type_id == 3
+    radius: 1500
+    decay: flat
+
+  - name: pop_1500_walk
+    dataframe: households
+    varname: persons
+    radius: 1500
+    decay: flat
+
+  - name: hh_1500_walk
+    dataframe: households
+    radius: 1500
+    decay: flat
+
+  - name: poor_1500_walk
+    dataframe: households
+    filters:
+    - income < 40000
+    radius: 1500
+    decay: flat
+
+  - name: rich_1500_walk
+    dataframe: households
+    filters:
+    - income > 150000
+    radius: 1500
+    decay: flat
+
+  - name: renters_1500_walk
+    dataframe: households
+    filters:
+    - tenure == 2
+    radius: 1500
+    decay: flat
+
+  - name: avg_income_1500_walk
+    aggregation: median
+    dataframe: households
+    varname: income
+    radius: 1500
+    decay: flat
+
+  - name: jobs_1500_walk
+    dataframe: jobs
+    radius: 1500
+    decay: flat
+
+  - name: avg_rent_1500_walk
+    dataframe: rentals
+    varname: rent
+    radius: 1500
+    aggregation: median
+    decay: flat
+
+  - name: pop_white_1500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 1
+    radius: 1500
+    decay: flat
+
+  - name: pop_black_1500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 2
+    radius: 1500
+    decay: flat
+
+  - name: pop_asian_1500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 6
+    radius: 1500
+    decay: flat
+
+  - name: pop_hisp_1500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - hispanic_head == 'yes'
+    radius: 1500
+    decay: flat
+
+  - name: pop_2500_walk
+    dataframe: households
+    varname: persons
+    radius: 2500
+    decay: flat
+
+  - name: pop_white_2500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 1
+    radius: 2500
+    decay: flat
+
+  - name: pop_black_2500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 2
+    radius: 2500
+    decay: flat
+
+  - name: pop_asian_2500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - race_of_head == 6
+    radius: 2500
+    decay: flat
+
+  - name: pop_hisp_2500_walk
+    dataframe: households
+    varname: persons
+    filters:
+    - hispanic_head == 'yes'
+    radius: 2500
+    decay: flat
+
+  - name: jobs_500_walk_retail
+    dataframe: jobs
+    filters:
+    - sector_id in [44, 45]
+    radius: 500
+    decay: flat
+
+  - name: jobs_1500_walk_retail
+    dataframe: jobs
+    filters:
+    - sector_id in [44, 45]
+    radius: 1500
+    decay: flat
+
+  - name: jobs_2500_walk_retail
+    dataframe: jobs
+    filters:
+    - sector_id in [44, 45]
+    radius: 2500
+    decay: flat
+
+  - name: jobs_500_walk_fire
+    dataframe: jobs
+    filters:
+    - sector_id in [52, 53]
+    radius: 500
+    decay: flat
+
+  - name: jobs_1500_walk_fire
+    dataframe: jobs
+    filters:
+    - sector_id in [52, 53]
+    radius: 1500
+    decay: flat
+
+  - name: jobs_2500_walk_fire
+    dataframe: jobs
+    filters:
+    - sector_id in [52, 53]
+    radius: 2500
+    decay: flat
+
+  - name: jobs_500_walk_tech
+    dataframe: jobs
+    filters:
+    - sector_id in [51, 54]
+    radius: 500
+    decay: flat
+
+  - name: jobs_1500_walk_tech
+    dataframe: jobs
+    filters:
+    - sector_id in [51, 54]
+    radius: 1500
+    decay: flat
+
+  - name: jobs_2500_walk_tech
+    dataframe: jobs
+    filters:
+    - sector_id in [51, 54]
+    radius: 2500
+    decay: flat
+
+  - name: jobs_500_walk_serv
+    dataframe: jobs
+    filters:
+    - sector_id == 72
+    radius: 500
+    decay: flat
+
+  - name: jobs_1500_walk_serv
+    dataframe: jobs
+    filters:
+    - sector_id == 72
+    radius: 1500
+    decay: flat
+
+  - name: jobs_2500_walk_serv
+    dataframe: jobs
+    filters:
+    - sector_id == 72
+    radius: 2500
+    decay: flat
