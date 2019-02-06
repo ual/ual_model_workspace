@@ -89,27 +89,27 @@ def node_id_walk(buildings, jobs):
 ###########################
 #    beam network vars    #
 ###########################
-# @orca.column('parcels')
-# def node_id_beam(parcels, netbeam):
-#     idsbeam_parcel = netbeam.get_node_ids(parcels.x, parcels.y)
-#     return idsbeam_parcel
+@orca.column('parcels')
+def node_id_beam(parcels, netbeam):
+    idsbeam_parcel = netbeam.get_node_ids(parcels.x, parcels.y)
+    return idsbeam_parcel
 
 
-# @orca.column('rentals')
-# def node_id_beam(rentals, netbeam):
-#     idsbeam_rentals = netbeam.get_node_ids(
-#         rentals.longitude, rentals.latitude)
-#     return idsbeam_rentals
+@orca.column('rentals')
+def node_id_beam(rentals, netbeam):
+    idsbeam_rentals = netbeam.get_node_ids(
+        rentals.longitude, rentals.latitude)
+    return idsbeam_rentals
 
 
-# @orca.column('buildings')
-# def node_id_beam(parcels, buildings):
-#     return misc.reindex(parcels.node_id_beam, buildings.parcel_id)
+@orca.column('buildings')
+def node_id_beam(parcels, buildings):
+    return misc.reindex(parcels.node_id_beam, buildings.parcel_id)
 
 
-# @orca.column('jobs')
-# def node_id_beam(buildings, jobs):
-#     return misc.reindex(buildings.node_id_beam, jobs.building_id)
+@orca.column('jobs')
+def node_id_beam(buildings, jobs):
+    return misc.reindex(buildings.node_id_beam, jobs.building_id)
 
 
 ###############################
