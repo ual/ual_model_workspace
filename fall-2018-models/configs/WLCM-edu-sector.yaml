@@ -1,0 +1,84 @@
+modelmanager_version: 0.1.dev14
+
+saved_object:
+    alt_capacity: null
+    alt_filters: null
+    alt_sample_size: null
+    alternatives: null
+    choice_column: null
+    chooser_filters: null
+    chooser_sample_size: null
+    chooser_size: null
+    choosers: null
+    constrained_choices: False
+    fitted_parameters:
+    - 0.0692833591002829
+    - 0.08045430157370566
+    - -2.354862740181312
+    - -4.718720722629349e-16
+    - -0.5564686649565019
+    - 0.7463128400465663
+    - 0.8394244243571067
+    - 1.4332109727431819
+    - 0.16867830021446192
+    - -1.2492833783158135
+    - 1.8058714839062586
+    - 1.2627102309814056
+    - 0.43843132929616463
+    - -1.1869510715114062
+    - -0.9285291252129306
+    - -1.6069412014432247
+    - -0.6097882329182935
+    - 0.8492298898622996
+    - -1.6394874513100197
+    - -0.912962419401828
+    - 0.0001937806159222116
+    max_iter: null
+    model_expression: np.log1p(jobs_1500_walk) + np.log(jobs_25000) + np.log1p(tt_da)
+        + no_higher_ed*(retail + fire + healthcare + tech + mfg + food_and_hosp +
+        edu_serv + gov) + tt_wTrnW - 1
+    name: WLCM-edu-sector
+    out_alt_filters: null
+    out_alternatives: null
+    out_chooser_filters: null
+    out_choosers: null
+    out_column: null
+    summary_table: "                  CHOICEMODELS ESTIMATION RESULTS            \
+        \      \n===================================================================\n\
+        Dep. Var.:                chosen   No. Observations:          8,918\nModel:\
+        \         Multinomial Logit   Df Residuals:              8,897\nMethod:  \
+        \     Maximum Likelihood   Df Model:                     21\nDate:       \
+        \          2018-10-10   Pseudo R-squ.:             0.467\nTime:          \
+        \            20:41   Pseudo R-bar-squ.:         0.466\nAIC:              \
+        \    21,935.650   Log-Likelihood:      -10,946.825\nBIC:                 \
+        \ 22,084.663   LL-Null:             -20,534.454\n================================================================================\n\
+        \                                coef   std err          z     P>|z|   Conf.\
+        \ Int.\n--------------------------------------------------------------------------------\n\
+        np.log1p(jobs_1500_walk)      0.0693     0.009      8.143     0.000      \
+        \       \nnp.log(jobs_25000)            0.0805     0.008     10.206     0.000\
+        \             \nnp.log1p(tt_da)              -2.3549     0.022   -104.786\
+        \     0.000             \nno_higher_ed                 -0.0000     0.066 \
+        \    -0.000     1.000             \nretail                       -0.5565 \
+        \    0.083     -6.725     0.000             \nfire                       \
+        \   0.7463     0.075      9.991     0.000             \nhealthcare       \
+        \             0.8394     0.064     13.136     0.000             \ntech   \
+        \                       1.4332     0.054     26.420     0.000            \
+        \ \nmfg                           0.1687     0.074      2.289     0.022  \
+        \           \nfood_and_hosp                -1.2493     0.134     -9.329  \
+        \   0.000             \nedu_serv                      1.8059     0.066   \
+        \  27.199     0.000             \ngov                           1.2627   \
+        \  0.076     16.554     0.000             \nno_higher_ed:retail          \
+        \ 0.4384     0.121      3.624     0.000             \nno_higher_ed:fire  \
+        \          -1.1870     0.134     -8.878     0.000             \nno_higher_ed:healthcare\
+        \      -0.9285     0.112     -8.279     0.000             \nno_higher_ed:tech\
+        \            -1.6069     0.102    -15.819     0.000             \nno_higher_ed:mfg\
+        \             -0.6098     0.127     -4.806     0.000             \nno_higher_ed:food_and_hosp\
+        \    0.8492     0.174      4.885     0.000             \nno_higher_ed:edu_serv\
+        \        -1.6395     0.132    -12.437     0.000             \nno_higher_ed:gov\
+        \             -0.9130     0.130     -6.999     0.000             \ntt_wTrnW\
+        \                      0.0002     0.000      6.346     0.000             \n\
+        ================================================================================"
+    tags:
+    - max
+    template: LargeMultinomialLogitStep
+    template_version: 0.1.dev14
