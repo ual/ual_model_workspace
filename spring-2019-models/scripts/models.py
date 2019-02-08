@@ -69,13 +69,16 @@ def initialize_network_beam():
 
     @orca.injectable('netbeam', cache=True)
     def build_networkbeam():
-        nodesbeam = pd.read_csv(d + 'physsim-network-nodes.csv') \
-            .set_index('id')
-        edgesbeam = pd.read_csv(d + 'physsim-network-links.csv')
+        nodesbeam = pd.read_csv(
+            '/home/data/spring_2019/beam_to_urbansim/'
+            'beam-network-nodes.csv').set_index('id')
+        edgesbeam = pd.read_csv(
+            '/home/data/spring_2019/beam_to_urbansim/'
+            'beam_links_8am.csv')
         netbeam = pdna.Network(
-            nodesbeam['x'], nodesbeam['y'], edgesbeam['from'],
-            edgesbeam['to'], edgesbeam[['travelTime']], twoway=False)
-        netbeam.precompute(7200)
+            nodesbeam['lon'], nodesbeam['lat'], edgesbeam['from'],
+            edgesbeam['to'], edgesbeam[['traveltime']], twoway=False)
+        netbeam.precompute(500)
         return netbeam
 
 
