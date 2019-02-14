@@ -4,56 +4,90 @@ from tqdm import tqdm
 import sys
 
 
-nodes = pd.read_csv(sys.argv[1])
-edges = pd.read_csv(sys.argv[2]).reset_index()
-
-nodes.fillna('', inplace=True)
-edges.fillna('', inplace=True)
-
-nodes.rename(columns={'osmid': 'id', 'x': 'lon', 'y': 'lat'}, inplace=True)
-
-nodes['timestamp'] = ''
-nodes['uid'] = ''
-nodes['user'] = ''
-nodes['version'] = ''
-nodes['changeset'] = ''
-
-nodes['id'] = nodes['id'].astype(str)
-nodes['lon'] = nodes['lon'].astype(str)
-nodes['lat'] = nodes['lat'].astype(str)
-
-edges['timestamp'] = ''
-edges['uid'] = ''
-edges['user'] = ''
-edges['version'] = ''
-edges['changeset'] = ''
-
-edges['index'] = edges['index'].astype(str)
-edges['u'] = edges['u'].astype(str)
-edges['v'] = edges['v'].astype(str)
-edges['lanes'] = edges['lanes'].astype(str)
-edges['maxspeed'] = edges['maxspeed'].astype(str)
-edges['oneway'] = edges['oneway'].astype(str)
-
-edges.rename(columns={'index': 'id'}, inplace=True)
-
-root = etree.Element('osm')
 node_attrs = [
     'id', 'timestamp', 'uid', 'user', 'version', 'changeset', 'lat', 'lon']
 edge_attrs = ['id', 'timestamp', 'uid', 'user', 'version', 'changeset']
 edge_tags = ['highway', 'lanes', 'maxspeed', 'name', 'oneway']
 
-for i, row in tqdm(nodes.iterrows(), total=len(nodes)):
-    node = etree.SubElement(root, 'node', attrib=row[node_attrs].to_dict())
-    tag = etree.SubElement(
-        node, 'tag', attrib={'k': 'highway', 'v': row['highway']})
 
-for i, row in tqdm(edges.iterrows(), total=len(edges)):
-    edge = etree.SubElement(root, 'way', attrib=row[edge_attrs].to_dict())
-    nd_u = etree.SubElement(edge, 'nd', attrib={'ref': row['u']})
-    nd_v = etree.SubElement(edge, 'nd', attrib={'ref': row['v']})
-    for tag in edge_tags:
-        etree.SubElement(edge, 'tag', attrib={tag: row[tag]})
+def pre_process_nodes(nodes):
 
-et = etree.ElementTree(root)
-et.write(sys.argv[3], pretty_print=True)
+    # convert NaNs to string
+    nodes.fillna('', inplace=True)
+
+    # rename columns per osm specification
+    nodes.rename(columns={'osmid': 'id', 'x': 'lon', 'y': 'lat'}, inplace=True)
+
+    # add empty columns for attributes not already in the df
+    for attr in node_attrs:
+        if attr not in nodes.columns:
+            nodes[attr] = ''
+
+    # convert all datatypes to str
+    nodes = nodes.applymap(str)
+
+    return nodes
+
+
+def pre_process_edges(edges):
+
+    # convert NaNs to string
+    edges.fillna('', inplace=True)
+
+    # rename columns per osm specification
+    edges.rename(columns={'index': 'id'}, inplace=True)
+
+    # add empty columns for attributes/tags not already in the df
+    for attr in edge_attrs + edge_tags:
+        if attr not in edges.columns:
+            edges[attr] = ''
+
+    # convert all datatypes to str
+    edges = edges.applymap(str)
+
+    return edges
+
+
+def make_osm_root_element():
+    root = etree.Element('osm')
+    return root
+
+
+def append_nodes(rootElement, nodes):
+
+    for i, row in tqdm(nodes.iterrows(), total=len(nodes)):
+        node = etree.SubElement(
+            rootElement, 'node', attrib=row[node_attrs].to_dict())
+        etree.SubElement(
+            node, 'tag', attrib={'k': 'highway', 'v': row['highway']})
+
+
+def append_edges(rootElement, edges):
+
+    for i, row in tqdm(edges.iterrows(), total=len(edges)):
+        edge = etree.SubElement(
+            rootElement, 'way', attrib=row[edge_attrs].to_dict())
+        etree.SubElement(edge, 'nd', attrib={'ref': row['u']})
+        etree.SubElement(edge, 'nd', attrib={'ref': row['v']})
+        for tag in edge_tags:
+            etree.SubElement(edge, 'tag', attrib={tag: row[tag]})
+
+
+def write_to_osm(rootElement, outpath):
+    et = etree.ElementTree(rootElement)
+    et.write(outpath, pretty_print=True)
+
+
+if __name__ == "__main__":
+
+    nodes = pd.read_csv(sys.argv[1])
+    edges = pd.read_csv(sys.argv[2]).reset_index()
+    outpath = sys.argv[3]
+
+    processed_nodes = pre_process_nodes(nodes)
+    processed_edges = pre_process_edges(edges)
+    root = make_osm_root_element()
+    append_nodes(root, processed_nodes)
+    append_edges(root, processed_edges)
+
+    write_to_osm(root, outpath)
