@@ -6,6 +6,7 @@ import sys
 
 node_attrs = [
     'id', 'timestamp', 'uid', 'user', 'version', 'changeset', 'lat', 'lon']
+node_tags = ['highway']
 edge_attrs = ['id', 'timestamp', 'uid', 'user', 'version', 'changeset']
 edge_tags = ['highway', 'lanes', 'maxspeed', 'name', 'oneway']
 
@@ -19,7 +20,7 @@ def pre_process_nodes(nodes):
     nodes.rename(columns={'osmid': 'id', 'x': 'lon', 'y': 'lat'}, inplace=True)
 
     # add empty columns for attributes not already in the df
-    for attr in node_attrs:
+    for attr in node_attrs + node_tags:
         if attr not in nodes.columns:
             nodes[attr] = ''
 
@@ -58,8 +59,9 @@ def append_nodes(rootElement, nodes):
     for i, row in tqdm(nodes.iterrows(), total=len(nodes)):
         node = etree.SubElement(
             rootElement, 'node', attrib=row[node_attrs].to_dict())
-        etree.SubElement(
-            node, 'tag', attrib={'k': 'highway', 'v': row['highway']})
+        for tag in node_tags:
+            etree.SubElement(
+                node, 'tag', attrib={'k': tag, 'v': row[tag]})
 
 
 def append_edges(rootElement, edges):
@@ -70,7 +72,8 @@ def append_edges(rootElement, edges):
         etree.SubElement(edge, 'nd', attrib={'ref': row['u']})
         etree.SubElement(edge, 'nd', attrib={'ref': row['v']})
         for tag in edge_tags:
-            etree.SubElement(edge, 'tag', attrib={tag: row[tag]})
+            etree.SubElement(
+                edge, 'tag', attrib={'k': tag, 'v': row[tag]})
 
 
 def write_to_osm(rootElement, outpath):
