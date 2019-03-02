@@ -1,8 +1,11 @@
 import orca
+import os
 import pandana as pdna
 import pandas as pd
 import scipy.stats as st
 import numpy as np
+import subprocess
+from subprocess import PIPE
 
 from urbansim.utils import networks
 from urbansim_templates import modelmanager as mm
@@ -14,6 +17,11 @@ d = '/home/data/fall_2018/'
 
 if 'data_directory' in orca.list_injectables():
     d = orca.get_injectable('data_directory')
+
+b = '/home/data/spring_2019/beam_to_urbansim-v2/'
+
+if 'beam_network_dir' in orca.list_injectables():
+    b = orca.get_injectable('beam_network_dir')
 
 # load existing model steps from the model manager
 mm.initialize()
@@ -69,16 +77,31 @@ def initialize_network_beam():
 
     @orca.injectable('netbeam', cache=True)
     def build_networkbeam():
+        beam_nodes_fname = 'beam-network-nodes.csv'
+        beam_links_fname = '10.linkstats.csv'
+        beam_links_filtered_fname = 'beam_links_8am.csv'
+
         nodesbeam = pd.read_csv(
-            '/home/data/spring_2019/beam_to_urbansim/'
-            'beam-network-nodes.csv').set_index('id')
+            b + beam_nodes_fname).set_index('id')
+
+        if not os.path.exists(b + beam_links_filtered_fname):
+            with open(b + beam_links_filtered_fname, 'w') as f:
+                p1 = subprocess.Popen(
+                    ["cat", b + beam_links_fname], stdout=PIPE)
+                p2 = subprocess.Popen([
+                    "awk", "-F", ",",
+                    '(NR==1) || ($4 == "8.0" && $8 == "AVG")'],
+                    stdin=p1.stdout, stdout=f)
+                p2.wait()
+
         edgesbeam = pd.read_csv(
-            '/home/data/spring_2019/beam_to_urbansim/'
-            'beam_links_8am.csv')
+            b + beam_links_filtered_fname).set_index('link')
+        edgesbeam = edgesbeam[
+            (edgesbeam['hour'] == 8) & (edgesbeam['stat'] == 'AVG')]
         netbeam = pdna.Network(
             nodesbeam['lon'], nodesbeam['lat'], edgesbeam['from'],
             edgesbeam['to'], edgesbeam[['traveltime']], twoway=False)
-        netbeam.precompute(500)
+        netbeam.precompute(1000)
         return netbeam
 
 
