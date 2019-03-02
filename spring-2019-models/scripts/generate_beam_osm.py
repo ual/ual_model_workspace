@@ -76,7 +76,7 @@ for u, v, k, d in G_ter_simp.edges(data=True, keys=True):
     i += 1
 
 # convert to two-way
-H = ox.get_undirected(G)
+H = ox.get_undirected(G_ter_simp)
 
 # save graph as OSM
 ox.save_graph_osm(
