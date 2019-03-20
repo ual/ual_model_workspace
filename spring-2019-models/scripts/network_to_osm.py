@@ -14,7 +14,7 @@ edge_tags = ['highway', 'lanes', 'maxspeed', 'name', 'oneway']
 def pre_process_nodes(nodes):
 
     # convert NaNs to string
-    nodes.fillna('', inplace=True)
+    nodes.fillna('none', inplace=True)
 
     # rename columns per osm specification
     nodes.rename(columns={'osmid': 'id', 'x': 'lon', 'y': 'lat'}, inplace=True)
@@ -22,7 +22,7 @@ def pre_process_nodes(nodes):
     # add empty columns for attributes not already in the df
     for attr in node_attrs + node_tags:
         if attr not in nodes.columns:
-            nodes[attr] = ''
+            nodes[attr] = 'none'
 
     # convert all datatypes to str
     nodes = nodes.applymap(str)
@@ -45,6 +45,11 @@ def pre_process_edges(edges):
 
     # convert all datatypes to str
     edges = edges.applymap(str)
+
+    if 'oneway' in edges.columns:
+        edges['oneway'] = edges['oneway'].str.replace(
+            'False', 'no').replace(
+            'True', 'yes')
 
     return edges
 

@@ -75,9 +75,10 @@ for u, v, k, d in G_ter_simp.edges(data=True, keys=True):
     d['uniqueid'] = i
     i += 1
 
-# convert to two-way
+
+# # convert to two-way
 H = ox.get_undirected(G_ter_simp)
 
-# save graph as OSM
-ox.save_graph_osm(
-    H, oneway=False, filename='bay_area_simplified_tertiary_strongly_2_way_network.osm')
+# # save graph as OSM
+# ox.save_graph_osm(
+#     H, oneway=False, filename='bay_area_simplified_tertiary_strongly_2_way_network.osm')
