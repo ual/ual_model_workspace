@@ -61,25 +61,6 @@ def initialize_network_walk():
 
 
 @orca.step()
-def initialize_network_beam():
-    """
-    This will be turned into a data loading template.
-
-    """
-
-    @orca.injectable('netbeam', cache=True)
-    def build_networkbeam():
-        nodesbeam = pd.read_csv(d + 'physsim-network-nodes.csv') \
-            .set_index('id')
-        edgesbeam = pd.read_csv(d + 'physsim-network-links.csv')
-        netbeam = pdna.Network(
-            nodesbeam['x'], nodesbeam['y'], edgesbeam['from'],
-            edgesbeam['to'], edgesbeam[['travelTime']], twoway=False)
-        netbeam.precompute(7200)
-        return netbeam
-
-
-@orca.step()
 def network_aggregations_small(netsmall):
     """
     This will be turned into a network aggregation template.
