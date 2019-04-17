@@ -8,6 +8,8 @@ from urbansim.utils import networks
 from urbansim_templates import modelmanager as mm
 from urbansim_templates.models import LargeMultinomialLogitStep
 
+from .utils import register_skim_access_variable
+
 
 # Set data directory
 d = '/home/data/fall_2018/'
@@ -17,6 +19,99 @@ if 'data_directory' in orca.list_injectables():
 
 # load existing model steps from the model manager
 mm.initialize()
+
+
+@orca.step()
+def impute_missing_skims(skims, beam_skims):
+    df = beam_skims.to_frame()
+    mtc = skims.to_frame(columns=['orig', 'dest', 'da_distance_AM'])
+    mtc.rename(
+        columns={'orig': 'from_zone_id', 'dest': 'to_zone_id'},
+        inplace=True)
+    mtc.set_index(['from_zone_id', 'to_zone_id'], inplace=True)
+
+    # miles to meters
+    mtc['dist'] = mtc['da_distance_AM'] * 1609.34
+
+    # create morning peak lookup
+    df['gen_time_per_m'] = df['gen_tt'] / df['distanceInM']
+    df['gen_cost_per_m'] = df['gen_cost'] / df['distanceInM']
+    df.loc[df['hour'].isin([7, 8, 9]), 'period'] = 'AM'
+    df_am = df[df['period'] == 'AM']
+    df_am = df_am.replace([np.inf, -np.inf], np.nan)
+    am_lookup = df_am[[
+        'mode', 'gen_time_per_m', 'gen_cost_per_m']].dropna().groupby(
+            ['mode']).mean().reset_index()
+
+    # morning averages
+    df_am_avg = df_am[[
+        'from_zone_id', 'to_zone_id', 'mode', 'gen_tt',
+        'gen_cost']].groupby(
+        ['from_zone_id', 'to_zone_id', 'mode']).mean().reset_index()
+
+    # long to wide
+    df_am_pivot = df_am_avg.pivot_table(
+        index=['from_zone_id', 'to_zone_id'], columns='mode')
+    df_am_pivot.columns = ['_'.join(col) for col in df_am_pivot.columns.values]
+
+    # combine with mtc-based dists
+    merged = pd.merge(
+        mtc[['dist']], df_am_pivot, left_index=True, right_index=True,
+        how='left')
+
+    # impute
+    for mode in am_lookup['mode'].values:
+        for impedance in ['gen_tt', 'gen_cost']:
+            if impedance == 'gen_tt':
+                lookup_col = 'gen_time_per_m'
+            elif impedance == 'gen_cost':
+                lookup_col = 'gen_cost_per_m'
+            colname = impedance + '_' + mode
+            lookup_val = am_lookup.loc[
+                am_lookup['mode'] == mode, lookup_col].values[0]
+            merged.loc[pd.isnull(merged[colname]), colname] = merged.loc[
+                pd.isnull(merged[colname]), 'dist'] * lookup_val
+
+    orca.add_table('beam_skims', merged, cache=True)
+
+
+@orca.step()
+def skims_aggregations_drive(beam_drive_skims):
+
+    for impedance in ['gen_tt_CAR']:
+
+        # each of these columns must be defined for the
+        # zones table since the skims are reported at
+        # the zone level
+        for col in [
+                'total_jobs', 'sum_persons', 'sum_income',
+                'sum_residential_units']:
+            for tt in [15, 45]:
+                register_skim_access_variable(
+                    col + '_{0}_'.format(impedance) + str(tt),
+                    col, impedance, tt, beam_drive_skims, np.sum)
+        for col in ['avg_income']:
+            for tt in [30]:
+                register_skim_access_variable(
+                    col + '_{0}_'.format(impedance) + str(tt),
+                    col, impedance, tt, beam_drive_skims, np.mean)
+
+
+@orca.step()
+def skims_aggregations_other(beam_skims):
+
+    for impedance in ['gen_tt_WALK_TRANSIT', 'gen_tt_RIDE_HAIL']:
+
+        # each of these columns must be defined for the
+        # zones table since the skims are reported at
+        # the zone level
+        for col in [
+                'total_jobs', 'sum_persons', 'sum_income',
+                'sum_residential_units']:
+            for tt in [15, 45]:
+                register_skim_access_variable(
+                    col + '_{0}_'.format(impedance) + str(tt),
+                    col, impedance, tt, beam_skims)
 
 
 @orca.step()

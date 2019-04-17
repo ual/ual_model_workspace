@@ -1,7 +1,51 @@
 import orca
 from urbansim.utils import misc
 
-import pandas as pd
+
+#########################
+#    ZONES VARIABLES    #
+#########################
+
+# these are primarily used for calculating skim-based
+# acccessibilities
+
+
+@orca.column('zones', cache=True)
+def total_jobs(jobs, zones):
+    return jobs.zone_id_work.groupby(
+        jobs.zone_id_work).count().reindex(zones.index).fillna(0)
+
+
+@orca.column('zones')
+def sum_residential_units(parcels, buildings, zones):
+    s = buildings.residential_units.groupby(
+        buildings.parcel_id).sum().groupby(parcels.zone_id).sum()
+    return s.reindex(zones.index).fillna(0)
+
+
+@orca.column('zones', cache=True)
+def sum_persons(households, buildings, parcels, zones):
+    s = households.persons.groupby(
+        households.building_id).sum().groupby(
+        buildings.parcel_id).sum().groupby(parcels.zone_id).sum()
+    return s.reindex(zones.index).fillna(0)
+
+
+@orca.column('zones', cache=True)
+def sum_income(households, buildings, parcels, zones):
+    s = households.income.groupby(
+        households.building_id).sum().groupby(
+        buildings.parcel_id).sum().groupby(parcels.zone_id).sum()
+    return s.reindex(zones.index).fillna(0)
+
+
+@orca.column('zones', cache=True)
+def avg_income(households, buildings, parcels, zones):
+    s = households.income.groupby(
+        households.building_id).mean().groupby(
+        buildings.parcel_id).mean().groupby(parcels.zone_id).mean()
+    return s.reindex(zones.index).fillna(0)
+
 
 ############################
 # small drive network vars #
