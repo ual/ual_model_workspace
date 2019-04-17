@@ -2,48 +2,91 @@ import orca
 from urbansim.utils import misc
 
 
+#########################
+#    ZONES VARIABLES    #
+#########################
+
+# these are primarily used for calculating skim-based
+# acccessibilities
+
+
+@orca.column('zones', cache=True)
+def total_jobs(jobs, zones):
+    return jobs.zone_id_work.groupby(
+        jobs.zone_id_work).count().reindex(zones.index).fillna(0)
+
+
+@orca.column('zones')
+def sum_residential_units(parcels, buildings, zones):
+    s = buildings.residential_units.groupby(
+        buildings.parcel_id).sum().groupby(parcels.zone_id).sum()
+    return s.reindex(zones.index).fillna(0)
+
+
+@orca.column('zones', cache=True)
+def sum_persons(households, buildings, parcels, zones):
+    s = households.persons.groupby(
+        households.building_id).sum().groupby(
+        buildings.parcel_id).sum().groupby(parcels.zone_id).sum()
+    return s.reindex(zones.index).fillna(0)
+
+
+@orca.column('zones', cache=True)
+def sum_income(households, buildings, parcels, zones):
+    s = households.income.groupby(
+        households.building_id).sum().groupby(
+        buildings.parcel_id).sum().groupby(parcels.zone_id).sum()
+    return s.reindex(zones.index).fillna(0)
+
+
+@orca.column('zones', cache=True)
+def avg_income(households, buildings, parcels, zones):
+    s = households.income.groupby(
+        households.building_id).mean().groupby(
+        buildings.parcel_id).mean().groupby(parcels.zone_id).mean()
+    return s.reindex(zones.index).fillna(0)
+
+
 ############################
 # small drive network vars #
 ############################
 
-
-# @orca.column('parcels')
-# def node_id_small(parcels, netsmall):
-#     idssmall_parcel = netsmall.get_node_ids(parcels.x, parcels.y)
-#     return idssmall_parcel
-
-
-# @orca.column('rentals')
-# def node_id_small(rentals, netsmall):
-#     idssmall_rentals = netsmall.get_node_ids(
-#         rentals.longitude, rentals.latitude)
-#     return idssmall_rentals
+@orca.column('parcels')
+def node_id_small(parcels, netsmall):
+    idssmall_parcel = netsmall.get_node_ids(parcels.x, parcels.y)
+    return idssmall_parcel
 
 
-# @orca.column('buildings')
-# def node_id_small(parcels, buildings):
-#     return misc.reindex(parcels.node_id_small, buildings.parcel_id)
+@orca.column('rentals')
+def node_id_small(rentals, netsmall):
+    idssmall_rentals = netsmall.get_node_ids(
+        rentals.longitude, rentals.latitude)
+    return idssmall_rentals
 
 
-# @orca.column('units')
-# def node_id_small(buildings, units):
-#     return misc.reindex(buildings.node_id_small, units.building_id)
+@orca.column('buildings')
+def node_id_small(parcels, buildings):
+    return misc.reindex(parcels.node_id_small, buildings.parcel_id)
 
 
-# @orca.column('households')
-# def node_id_small(units, households):
-#     return misc.reindex(units.node_id_small, households.unit_id)
+@orca.column('units')
+def node_id_small(buildings, units):
+    return misc.reindex(buildings.node_id_small, units.building_id)
 
 
-# @orca.column('persons')
-# def node_id_small(households, persons):
-#     return misc.reindex(households.node_id_small, persons.household_id)
+@orca.column('households')
+def node_id_small(units, households):
+    return misc.reindex(units.node_id_small, households.unit_id)
 
 
-# @orca.column('jobs')
-# def node_id_small(buildings, jobs):
-#     return misc.reindex(buildings.node_id_small, jobs.building_id)
+@orca.column('persons')
+def node_id_small(households, persons):
+    return misc.reindex(households.node_id_small, persons.household_id)
 
+
+@orca.column('jobs')
+def node_id_small(buildings, jobs):
+    return misc.reindex(buildings.node_id_small, jobs.building_id)
 
 ###########################
 #    walk network vars    #
@@ -83,32 +126,6 @@ def node_id_walk(households, persons):
 @orca.column('jobs')
 def node_id_walk(buildings, jobs):
     return misc.reindex(buildings.node_id_walk, jobs.building_id)
-
-
-###########################
-#    beam network vars    #
-###########################
-@orca.column('parcels')
-def node_id_beam(parcels, netbeam):
-    idsbeam_parcel = netbeam.get_node_ids(parcels.x, parcels.y)
-    return idsbeam_parcel
-
-
-@orca.column('rentals')
-def node_id_beam(rentals, netbeam):
-    idsbeam_rentals = netbeam.get_node_ids(
-        rentals.longitude, rentals.latitude)
-    return idsbeam_rentals
-
-
-@orca.column('buildings')
-def node_id_beam(parcels, buildings):
-    return misc.reindex(parcels.node_id_beam, buildings.parcel_id)
-
-
-@orca.column('jobs')
-def node_id_beam(buildings, jobs):
-    return misc.reindex(buildings.node_id_beam, jobs.building_id)
 
 
 ###############################

@@ -13,10 +13,11 @@ d = '/home/data/fall_2018/'
 if 'data_directory' in orca.list_injectables():
     d = orca.get_injectable('data_directory')
 
-
+b = '/home/data/spring_2019/base/'
 ############################################################
 
 # Tables from MTC Bay Area UrbanSim
+
 
 @orca.table(cache=True)
 def parcels():
@@ -109,6 +110,67 @@ def establishments():
 
 ############################################################
 
+
+# zones table
+@orca.table(cache=True)
+def zones():
+    df = pd.read_csv(
+        b + 'zones.csv', index_col='zone_id',
+        dtype={'zone_id': int})
+    df.drop('tract', axis=1, inplace=True)
+    return df
+
+############################################################
+# skims
+
+
+# Tables from Emma
+@orca.table('skims', cache=True)
+def skims():
+    df = pd.read_csv(d + 'skims_110118.csv', index_col=0)
+    return df
+
+
+@orca.table(cache=True)
+def beam_drive_skims():
+    """
+    Load BEAM skims, convert travel time to minutes
+    """
+    df = pd.read_csv(
+        b + 'sfbay-smart-base__2019-03-28_14-22-12/' +
+        'ITERS/it.30/30.skimsExcerpt.csv')
+
+    # morning peak
+    df = df[df['period'] == 'AM']
+    assert len(df) == 2114116
+    df = df.rename(
+        columns={'origTaz': 'from_zone_id', 'destTaz': 'to_zone_id'})
+    df = df.set_index(['from_zone_id', 'to_zone_id'])
+
+    # seconds to minutes
+    df['gen_tt_CAR'] = df['generalizedTimeInS'] / 60
+    return df
+
+
+@orca.table(cache=True)
+def beam_skims():
+    """
+    Load BEAM skims, convert travel time to minutes
+    """
+    df = pd.read_csv(
+        b + 'sfbay-smart-base__2019-03-28_14-22-12/' +
+        'ITERS/it.30/30.skims.csv')
+
+    df.rename(columns={
+        'generalizedCost': 'gen_cost', 'origTaz': 'from_zone_id',
+        'destTaz': 'to_zone_id'}, inplace=True)
+
+    # seconds to minutes
+    df['gen_tt'] = df['generalizedTimeInS'] / 60
+
+    return df
+
+############################################################
 # Broadcasts, a.k.a. merge relationships
 
 
