@@ -86,7 +86,7 @@ def skims_aggregations_drive(beam_drive_skims):
         for col in [
                 'total_jobs', 'sum_persons', 'sum_income',
                 'sum_residential_units']:
-            for tt in [15, 45]:
+            for tt in [15, 30, 60]:
                 register_skim_access_variable(
                     col + '_{0}_'.format(impedance) + str(tt),
                     col, impedance, tt, beam_drive_skims, np.sum)
@@ -108,7 +108,7 @@ def skims_aggregations_other(beam_skims):
         for col in [
                 'total_jobs', 'sum_persons', 'sum_income',
                 'sum_residential_units']:
-            for tt in [15, 45]:
+            for tt in [15, 30, 60]:
                 register_skim_access_variable(
                     col + '_{0}_'.format(impedance) + str(tt),
                     col, impedance, tt, beam_skims)
@@ -233,19 +233,6 @@ def network_aggregations_walk(netwalk):
     
     print(nodeswalk.describe())
     orca.add_table('nodeswalk', nodeswalk)
-
-
-@orca.step()
-def network_aggregations_beam(netbeam):
-    """
-    This will be turned into a network aggregation template.
-
-    """
-
-    nodesbeam = networks.from_yaml(netbeam, 'network_aggregations_beam.yaml')
-    nodesbeam = nodesbeam.fillna(0)
-    print(nodesbeam.describe())
-    orca.add_table('nodesbeam', nodesbeam)
 
 
 @orca.step()
