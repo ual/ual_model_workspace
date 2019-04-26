@@ -42,7 +42,7 @@ def get_merged_data(year):
         persons = data_dict[year]["persons"]
     except Exception as e:
         print(e)
-        import pdb; pdb.set_trace()
+#         import pdb; pdb.set_trace()
     
     print("merging households to buildings and parcels table")
     
@@ -53,6 +53,16 @@ def get_merged_data(year):
     hh_build.index.name = "household_id"
     
     hh_build = hh_build.reset_index()
+    print("merging persons to households and buildings")
+    persons = data_dict[year]["persons"]
+    persons.index.name = "person_id"
+    
+    buildings_persons = pd.merge(persons, hh_build, on='household_id')
+    print("hh build table has ", len(hh_build), "rows")
+    
+    buildings_persons["block_group_id"] = buildings_persons["block_group_id"].apply(lambda x: "0"+x)
+    buildings_persons["census_tract"] = buildings_persons["block_group_id"].apply(lambda x: x[:-1])
+    return buildings_persons
     
     
 
@@ -72,24 +82,30 @@ def get_job_locations(year):
     '''get the location of the jobs by merging the jobs table with the buildings table on building_id and that
     table with the parcels table on parcel_id, resulting in each job being assigned to a node id to be used
     in the pandana network'''
+    print("getting job locations")
+    buildings = data_dict[year]['buildings'].reset_index()[['building_id', 'parcel_id']]
     
-    buildings = data_dict[year]['buildings'].reset_index()
-    jobs = data_dict[year]['jobs'].reset_index()
-    parcels = data_dict[year]['parcels'].reset_index()
+    jobs = data_dict[year]['jobs'].reset_index()[['occupation_id', 'building_id', 'sector_id']]
+    
+    parcels = data_dict[year]['parcels'][['parcel_id_local', 'block_id', 'county_id', 'y', 'x', 'node_id']].reset_index()
     
     print("merging buildings to jobs")
     jobs_buildings = pd.merge(buildings, jobs, on='building_id')
     
     print("merging buildings with jobs to parcels")
     jobs_merge = pd.merge(jobs_buildings, parcels, on='parcel_id')
+    jobs_merge['census_tract'] = jobs_merge['block_id'].apply(lambda x: x[:-4])
+    jobs_merge['block_group'] = jobs_merge['block_id'].apply(lambda x: x[:-3])
+
     return jobs_merge
+
 
 
 def get_workers_by_race(year):
     '''Get the number of workers for each race by node, for a given year. Returns a dataframe
     with a column for each race and the number of workers assigned to that node by race. The node assignments
     are obtained from the person-> parcel match in get_merged_data()'''
-    
+    print("getting workers by race")
     node_df_lol = []
     node_id_list = []
     df = get_merged_data(year)
@@ -107,9 +123,10 @@ def get_workers_by_race(year):
         
     workers_by_node = pd.DataFrame(node_df_lol, columns=["nhwhite_workers", "nhblack_workers","nhasian_workers",
             "hispanic_workers", "non_workers_any", "block_group"], index=node_id_list)
-    
+    workers_by_node['census_tract'] = workers_by_node['block_group'].apply(lambda x: x[:-1])
     
     return workers_by_node
+
 
 
 beam_network_links = pd.read_csv('beam-network-links.csv')
@@ -118,9 +135,12 @@ beam_network_nodes = pd.read_csv('beam-network-nodes.csv')
 net=pdna.Network(beam_network_nodes.x, beam_network_nodes.y, beam_network_links["from"], beam_network_links["to"],
                  beam_network_links[["travelTime"]])
 net.precompute(10000)
+del beam_network_links
+del beam_network_nodes
 
 def get_job_accessibilities(net, year, dist):
     '''returns the number of jobs within a radius of dist of each node'''
+    print('getting job accessibilities')
     df = get_job_locations(year)
     workers_df = get_workers_by_race(year)
     node_ids = df["node_id"]
@@ -137,22 +157,24 @@ def get_job_accessibilities(net, year, dist):
 # get_job_accessibilities(net, 2010, 10000).to_csv('indicators_output/accessibilities_2010_1000.csv', index=False)
 
 def group_access_by_geo(job_access_df):
-    people_per_geo = sum(job_access_df["nhwhite_workers"] + job_access_df["nhblack_workers"]+job_access_df["nhasian_workers"]+job_access_df["hispanic_workers"])+1e-6
-    node_access_nhw = sum(job_access_df["nhwhite_workers"]*job_access_df["jobs"])/people_per_geo
-    node_access_nhb = sum(job_access_df["nhblack_workers"]*job_access_df["jobs"])/people_per_geo
-    node_access_nha = sum(job_access_df["nhasian_workers"]*job_access_df["jobs"])/people_per_geo
-    node_access_h = sum(job_access_df["hispanic_workers"]*job_access_df["jobs"])/people_per_geo
+    print("grouping accessibilities by geography")
 
-    return pd.Series(node_access_nhw, node_access_nhb, node_access_nha, node_access_h)
+    people_per_geo = sum(job_access_df["nhwhite_workers"] + job_access_df["nhblack_workers"]+job_access_df["nhasian_workers"]+job_access_df["hispanic_workers"])+1e-6
+    geo_access_nhw = sum(job_access_df["nhwhite_workers"]*job_access_df["jobs"])/people_per_geo
+    geo_access_nhb = sum(job_access_df["nhblack_workers"]*job_access_df["jobs"])/people_per_geo
+    geo_access_nha = sum(job_access_df["nhasian_workers"]*job_access_df["jobs"])/people_per_geo
+    geo_access_h = sum(job_access_df["hispanic_workers"]*job_access_df["jobs"])/people_per_geo
+    jobs = sum(job_access_df["jobs"])
+    return pd.Series([geo_access_nhw, geo_access_nhb, geo_access_nha, geo_access_h, jobs])
+
+
 
 def accessibilities_by_race(job_accessibilities_df, year, dist, net, geography): 
     '''This is the the essence of the computation being performed to get the race-based accessibilities. This function
     takes in the year, buffer distance, pandana network (should be precomputed) and desired geography (right now this
     notebook has shapefiles set up for census tract ("census_tract") and block group ("block_group"). Returns a table indexed by 
-    the id of the geography, and a column for each weighted accessibility by race.'''
-    
-    
-
+    the id of the geography, and a column for each weighted accessibility by race.'''    
+    print("getting accessibilities by race")
     if geography == 'node':
         access_by_race_df = pd.DataFrame()
         people_per_geo = job_accessibilities_df["nhwhite_workers"] + job_accessibilities_df["nhblack_workers"]+job_accessibilities_df["nhasian_workers"]+job_accessibilities_df["hispanic_workers"]+1e-6
@@ -167,33 +189,22 @@ def accessibilities_by_race(job_accessibilities_df, year, dist, net, geography):
         access_by_race_df["node_access_h"] = node_access_h
         return access_by_race_df
     else:
-        import pdb; pdb.set_trace()
-        access_geo = job_accessibilities_df.groupby(geography).agg(group_access_by_geo)
-        access_geo.columns = ["node_access_nhw", "node_access_nhb", "node_access_nha", "node_access_h"]
-        # job_access_df_lol = []
-        # geo_id_list = []
-        # for geo, job_access_df in job_accessibilities_df.groupby(geography):
-        #     people_per_geo = sum(job_access_df["nhwhite_workers"] + job_access_df["nhblack_workers"]+job_access_df["nhasian_workers"]+job_access_df["hispanic_workers"])+1e-6
-        #     node_access_nhw = sum(job_access_df["nhwhite_workers"]*job_access_df["jobs"])/people_per_geo
-        #     node_access_nhb = sum(job_access_df["nhblack_workers"]*job_access_df["jobs"])/people_per_geo
-        #     node_access_nha = sum(job_access_df["nhasian_workers"]*job_access_df["jobs"])/people_per_geo
-        #     node_access_h = sum(job_access_df["hispanic_workers"]*job_access_df["jobs"])/people_per_geo
-        #     geo_id_list.append(geo)
-        #     row = [node_access_nhw, node_access_nhb, node_access_nha, node_access_h]
-        #     job_access_df_lol.append(row)
-            
-        # access_geo = pd.DataFrame(job_access_df_lol, columns=["access_nhwhite", "access_nhblack","access_nhasian",
-        #           "access_hispanic"], index=geo_id_list)
-    
-    
+        access_geo = job_accessibilities_df.groupby(geography).apply(group_access_by_geo)
+        access_geo.columns = ['geo_access_nhw', 'geo_access_nhb', 'geo_access_nha', 'geo_access_h', 'jobs']
         return access_geo
+        
+        
+        
+        
 
 bay_county_codes = ['001', '013', '097', '095', '081', '085', '075', '041', '055'] 
 block_groups = gp.read_file(shapefiles_path+'tl_2018_06_bg/tl_2018_06_bg.shp')
 bay_bg = block_groups[(block_groups["COUNTYFP"].isin(bay_county_codes)) & (block_groups["ALAND"]> 100)]
+del block_groups
 
 tracts = gp.read_file(shapefiles_path+'tl_2018_06_tract/tl_2018_06_tract.shp')
 bay_tracts = tracts[(tracts["COUNTYFP"].isin(bay_county_codes)) & (tracts["ALAND"]> 100)]
+del tracts
 
 def get_access_by_race_geo(year, dist, net, geographies):
     '''merge the relevant shapefiles with the race weighted accessibilities tables to allow mapping. geographies is a list of 
@@ -210,9 +221,12 @@ def get_access_by_race_geo(year, dist, net, geographies):
             access_by_geo = pd.merge(bay_tracts, job_access_by_race_df, right_index=True, left_on='GEOID')
         elif (geography == 'block_group'):
             access_by_geo = pd.merge(bay_bg, job_access_by_race_df, right_index=True, left_on='GEOID')
+        
+        access_by_geo.index = job_access_by_race_df.index
 
         access_by_geos[geography] = access_by_geo
     return access_by_geos
+
 
     
 ##add the final access tables
@@ -220,15 +234,15 @@ def get_access_by_race_geo(year, dist, net, geographies):
 access_10000_2025 = get_access_by_race_geo(2025, 10000, net, ["census_tract", "block_group", "node"])
 for geo, df in access_10000_2025.items():
     df.to_csv("indicators_output/access_10000_2025_{0}.csv".format(geo))
-
+del access_10000_2025
 access_10000_2015 = get_access_by_race_geo(2015, 10000, net, ["census_tract", "block_group", "node"])
 for geo, df in access_10000_2015.items():
     df.to_csv("indicators_output/access_10000_2015_{0}.csv".format(geo))
-
+del access_10000_2015
 access_10000_2010 = get_access_by_race_geo(2010, 10000, net, ["census_tract", "block_group", "node"])
 for geo, df in access_10000_2010.items():
     df.to_csv("indicators_output/access_10000_2010_{0}.csv".format(geo))
-
+del access_10000_2010
 
 
 
