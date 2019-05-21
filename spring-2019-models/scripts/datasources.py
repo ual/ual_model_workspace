@@ -100,7 +100,7 @@ def households():
 def persons():
     df = pd.read_csv(
         d + 'persons.csv',
-        index_col='person_id', dtype={'person_id': int, 'household_id': int})
+        index_col='member_id', dtype={'member_id': int, 'household_id': int})
     return df
 
 
