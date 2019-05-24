@@ -1,0 +1,87 @@
+modelmanager_version: 0.2.dev2
+
+saved_object:
+    alt_capacity: null
+    alt_filters:
+    - 0 < jobs_25000 < 1000000
+    alt_sample_size: 100
+    alternatives:
+    - buildings
+    - parcels
+    - nodessmall
+    - nodeswalk
+    choice_column: building_id
+    chooser_filters:
+    - sector_id == 52
+    chooser_sample_size: null
+    chooser_size: null
+    choosers: establishments
+    constrained_choices: false
+    fitted_parameters:
+    - 1.092993562633142e-16
+    - -0.021437540259209444
+    - 0.5880662452697084
+    - 0.14234415565807224
+    - -0.029839903796426117
+    - 0.26392098742642434
+    - -0.3115804050363648
+    - 0.02475386593438742
+    - 0.26746853094792666
+    - -0.04087709014010509
+    - -0.3845402828172992
+    - 0.3181286368471545
+    - -0.0065526499049803205
+    - -0.0030706195081534964
+    - 0.7538442408660894
+    - -0.0485486405122916
+    - 1.062419783877064
+    max_iter: null
+    model_expression: np.log1p(avg_income_500_walk) + nonres_rent_per_sqft*np.log1p(jobs_10000)
+        + np.log1p(jobs_500_walk)*np.log1p(jobs_10000_retail) + np.log1p(jobs_2500_walk_finance)
+        + np.log1p(units_mf_1500_walk) + np.log1p(units_sf_10000) + np.log1p(land_value)*nonres_rent_per_sqft
+        + nonres_rent_per_sqft/np.log1p(sales_vol) + np.log1p(nonres_sqft_2500)/np.log1p(sqft_2500)
+        + np.log1p(pop_10000)
+    name: ELCM_finance
+    out_alt_filters: null
+    out_alternatives: null
+    out_chooser_filters: null
+    out_choosers: null
+    out_column: null
+    summary_table: "                  CHOICEMODELS ESTIMATION RESULTS            \
+        \      \n===================================================================\n\
+        Dep. Var.:                chosen   No. Observations:         15,588\nModel:\
+        \         Multinomial Logit   Df Residuals:             15,571\nMethod:  \
+        \     Maximum Likelihood   Df Model:                     17\nDate:       \
+        \          2019-05-23   Pseudo R-squ.:             0.497\nTime:          \
+        \            13:56   Pseudo R-bar-squ.:         0.496\nAIC:              \
+        \    72,305.008   Log-Likelihood:      -36,135.504\nBIC:                 \
+        \ 72,435.131   LL-Null:             -71,785.393\n========================================================================================================\n\
+        \                                                         coef   std err \
+        \        z     P>|z|   Conf. Int.\n--------------------------------------------------------------------------------------------------------\n\
+        Intercept                                              0.0000     0.385  \
+        \   0.000     1.000             \nnp.log1p(avg_income_500_walk)          \
+        \               -0.0214     0.004    -5.503     0.000             \nnonres_rent_per_sqft\
+        \                                   0.5881     0.008    69.314     0.000 \
+        \            \nnp.log1p(jobs_10000)                                   0.1423\
+        \     0.046     3.075     0.002             \nnonres_rent_per_sqft:np.log1p(jobs_10000)\
+        \             -0.0298     0.001   -42.155     0.000             \nnp.log1p(jobs_500_walk)\
+        \                                0.2639     0.033     7.934     0.000    \
+        \         \nnp.log1p(jobs_10000_retail)                           -0.3116\
+        \     0.048    -6.469     0.000             \nnp.log1p(jobs_500_walk):np.log1p(jobs_10000_retail)\
+        \    0.0248     0.003     7.248     0.000             \nnp.log1p(jobs_2500_walk_finance)\
+        \                       0.2675     0.011    24.213     0.000             \n\
+        np.log1p(units_mf_1500_walk)                          -0.0409     0.007  \
+        \  -5.795     0.000             \nnp.log1p(units_sf_10000)               \
+        \               -0.3845     0.056    -6.905     0.000             \nnp.log1p(land_value)\
+        \                                   0.3181     0.005    66.477     0.000 \
+        \            \nnp.log1p(land_value):nonres_rent_per_sqft             -0.0066\
+        \     0.000   -25.375     0.000             \nnonres_rent_per_sqft:np.log1p(sales_vol)\
+        \              -0.0031     0.000   -24.680     0.000             \nnp.log1p(nonres_sqft_2500)\
+        \                             0.7538     0.035    21.746     0.000       \
+        \      \nnp.log1p(nonres_sqft_2500):np.log1p(sqft_2500)        -0.0485   \
+        \  0.001   -37.657     0.000             \nnp.log1p(pop_10000)           \
+        \                         1.0624     0.061    17.450     0.000           \
+        \  \n========================================================================================================"
+    tags: []
+    template: LargeMultinomialLogitStep
+    template_version: 0.2.dev2
