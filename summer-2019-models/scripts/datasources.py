@@ -8,7 +8,7 @@ import numpy as np
 @orca.table('parcels', cache=True)
 def parcels(data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
     if data_mode == 's3':
-        df = pd.read_parquet(s3_input_data_url.format('parcels'))
+        df = pd.read_csv(s3_input_data_url.format('parcel_attr'))
     elif data_mode == 'h5':
         df = store['parcels']
     elif data_mode == 'csv':
@@ -26,7 +26,7 @@ def parcels(data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
 @orca.table('buildings', cache=True)
 def buildings(data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
     if data_mode == 's3':
-        df = pd.read_parquet(s3_input_data_url.format('buildings'))
+        df = pd.read_csv(s3_input_data_url.format('buildings_v2'))
     elif data_mode == 'h5':
         df = store['buildings']
     elif data_mode == 'csv':
@@ -42,7 +42,7 @@ def buildings(data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
 @orca.table('jobs', cache=True)
 def jobs(data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
     if data_mode == 's3':
-        df = pd.read_parquet(s3_input_data_url.format('jobs'))
+        df = pd.read_csv(s3_input_data_url.format('jobs_v2'))
     elif data_mode == 'h5':
         df = store['jobs']
     elif data_mode == 'csv':
@@ -62,7 +62,7 @@ def jobs(data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
 def establishments(
         data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
     if data_mode == 's3':
-        df = pd.read_parquet(s3_input_data_url.format('establishments'))
+        df = pd.read_csv(s3_input_data_url.format('establishments_v2'))
     elif data_mode == 'h5':
         df = store['establishments']
     elif data_mode == 'csv':
@@ -78,7 +78,7 @@ def establishments(
 def households(
         data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
     if data_mode == 's3':
-        df = pd.read_parquet(s3_input_data_url.format('households'))
+        df = pd.read_csv(s3_input_data_url.format('households_v2'))
     elif data_mode == 'h5':
         df = store['households']
     elif data_mode == 'csv':
@@ -103,7 +103,7 @@ def households(
 @orca.table('persons', cache=True)
 def persons(data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
     if data_mode == 's3':
-        df = pd.read_parquet(s3_input_data_url.format('persons'))
+        df = pd.read_csv(s3_input_data_url.format('persons_v3'))
     elif data_mode == 'h5':
         df = store['persons']
     elif data_mode == 'csv':
@@ -122,7 +122,8 @@ def persons(data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
 @orca.table('rentals', cache=True)
 def rentals(data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
     if data_mode == 's3':
-        df = pd.read_parquet(s3_input_data_url.format('rentals'))
+        df = pd.read_csv(
+            s3_input_data_url.format('MTC_craigslist_listings_7-10-18'))
     elif data_mode == 'h5':
         df = store['craigslist']
     elif data_mode == 'csv':
@@ -155,7 +156,7 @@ def rentals(data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
 @orca.table('units', cache=True)
 def units(data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
     if data_mode == 's3':
-        df = pd.read_parquet(s3_input_data_url.format('units'))
+        df = pd.read_csv(s3_input_data_url.format('units_v2'))
     elif data_mode == 'h5':
         df = store['units']
     elif data_mode == 'csv':
@@ -171,20 +172,27 @@ def units(data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
 # Append AM peak UrbanAccess transit accessibility variables to parcels table
 
 @orca.table('access_indicators_ampeak', cache=True)
-def access_indicators_ampeak():
-    am_acc = pd.read_csv(
-        './data/access_indicators_ampeak.csv', dtype={'block_id': str})
-    am_acc.block_id = am_acc.block_id.str.zfill(15)
-    am_acc.set_index('block_id', inplace=True)
-    am_acc = am_acc.fillna(am_acc.median())
-    return am_acc
+def access_indicators_ampeak(
+        data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
+    if data_mode == 's3':
+        df = pd.read_csv(s3_input_data_url.format('access_indicators_ampeak'))
+    elif data_mode == 'h5':
+        df = store['access_indicators_ampeak']
+    elif data_mode == 'csv':
+        df = pd.read_csv(
+            local_data_dir + csv_fnames['access_indicators_ampeak'],
+            dtype={'block_id': str})
+    df.block_id = df.block_id.str.zfill(15)
+    df.set_index('block_id', inplace=True)
+    df = df.fillna(df.median())
+    return df
 
 
 # Tables from Emma
 @orca.table('skims', cache=True)
 def skims(data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
     if data_mode == 's3':
-        df = pd.read_parquet(s3_input_data_url.format('skims'))
+        df = pd.read_csv(s3_input_data_url.format('skims_110118'))
     elif data_mode == 'h5':
         df = store['skims']
     elif data_mode == 'csv':

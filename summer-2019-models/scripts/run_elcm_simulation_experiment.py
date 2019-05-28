@@ -11,25 +11,26 @@ from choicemodels.tools import MergedChoiceTable, monte_carlo_choices, \
 
 from scripts import datasources, models, variables
 
-data_mode = 'csv'
-local_data_dir = '/home/data/spring_2019/base/'
-csv_fnames = {
-    'parcels': 'parcel_attr.csv',
-    'buildings': 'buildings_v2.csv',
-    'jobs': 'jobs_v2.csv',
-    'establishments': 'establishments_v2.csv',
-    'households': 'households_v2.csv',
-    'persons': 'persons_v3.csv',
-    'rentals': 'MTC_craigslist_listings_7-10-18.csv',
-    'units': 'units_v2.csv',
-    'skims': 'skims_110118.csv',
-    'drive_nodes': 'bay_area_tertiary_strongly_nodes.csv',
-    'drive_edges': 'bay_area_tertiary_strongly_edges.csv',
-    'drive_access_vars': 'drive_net_vars.csv',
-    'walk_nodes': 'bayarea_walk_nodes.csv',
-    'walk_edges': 'bayarea_walk_edges.csv',
-    'walk_access_vars': 'walk_net_vars.csv',
-}
+data_mode = 's3'
+local_data_dir = './data/'
+s3_input_data_url = 's3://baus/{}.csv'
+# csv_fnames = {
+#     'parcels': 'parcel_attr.csv',
+#     'buildings': 'buildings_v2.csv',
+#     'jobs': 'jobs_v2.csv',
+#     'establishments': 'establishments_v2.csv',
+#     'households': 'households_v2.csv',
+#     'persons': 'persons_v3.csv',
+#     'rentals': 'MTC_craigslist_listings_7-10-18.csv',
+#     'units': 'units_v2.csv',
+#     'skims': 'skims_110118.csv',
+#     'drive_nodes': 'bay_area_tertiary_strongly_nodes.csv',
+#     'drive_edges': 'bay_area_tertiary_strongly_edges.csv',
+#     'drive_access_vars': 'drive_net_vars.csv',
+#     'walk_nodes': 'bayarea_walk_nodes.csv',
+#     'walk_edges': 'bayarea_walk_edges.csv',
+#     'walk_access_vars': 'walk_net_vars.csv',
+# }
 
 
 def mct_callable(obs, alts):
@@ -44,9 +45,9 @@ def probs_callable(mct):
 if __name__ == '__main__':
 
     orca.add_injectable('data_mode', data_mode)
-    orca.add_injectable('csv_fnames', csv_fnames)
+    orca.add_injectable('csv_fnames', None)
     orca.add_injectable('store', None)
-    orca.add_injectable('s3_input_data_url', None)
+    orca.add_injectable('s3_input_data_url', s3_input_data_url)
     orca.add_injectable('local_data_dir', local_data_dir)
 
     orca.run(['initialize_network_small', 'initialize_network_walk'])
