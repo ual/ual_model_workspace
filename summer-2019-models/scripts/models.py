@@ -29,8 +29,10 @@ def initialize_network_small():
     def build_networksmall(
             data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
         if data_mode == 's3':
-            nodes = pd.read_parquet(s3_input_data_url.format('nodessmall'))
-            edges = pd.read_parquet(s3_input_data_url.format('edgessmall'))
+            nodes = pd.read_csv(s3_input_data_url.format('bay_area_tertiary_strongly_nodes')).set_index('osmid')
+            nodes.index.name = 'osmid_drive'
+            edges = pd.read_csv(s3_input_data_url.format('bay_area_tertiary_strongly_edges')).set_index('uniqueid')
+            edges.index.name = 'uniqueid_drive'
         elif data_mode == 'h5':
             nodes = store['nodessmall']
             edges = store['edgessmall']
@@ -58,8 +60,10 @@ def initialize_network_walk():
     def build_networkwalk(
             data_mode, store, s3_input_data_url, local_data_dir, csv_fnames):
         if data_mode == 's3':
-            nodes = pd.read_parquet(s3_input_data_url.format('nodeswalk'))
-            edges = pd.read_parquet(s3_input_data_url.format('edgeswalk'))
+            nodes = pd.read_csv(s3_input_data_url.format('bayarea_walk_nodes')).set_index('osmid')
+            nodes.index.name = 'osmid_walk'
+            edges = pd.read_csv(s3_input_data_url.format('bayarea_walk_edges')).set_index('uniqueid')
+            edges.index.name = 'uniqueid_walk'
         elif data_mode == 'h5':
             nodes = store['nodeswalk']
             edges = store['edgeswalk']

@@ -22,9 +22,9 @@ def node_id_small(rentals, netsmall):
     return idssmall_rentals
 
 
-@orca.column('buildings')
-def node_id_small(parcels, buildings):
-    return misc.reindex(parcels.node_id_small, buildings.parcel_id)
+# @orca.column('buildings')
+# def node_id_small(parcels, buildings):
+#     return misc.reindex(parcels.node_id_small, buildings.parcel_id)
 
 
 @orca.column('units')
@@ -62,9 +62,9 @@ def node_id_walk(rentals, netwalk):
     return idswalk_rentals
 
 
-@orca.column('buildings')
-def node_id_walk(parcels, buildings):
-    return misc.reindex(parcels.node_id_walk, buildings.parcel_id)
+# @orca.column('buildings')
+# def node_id_walk(parcels, buildings):
+#     return misc.reindex(parcels.node_id_walk, buildings.parcel_id)
 
 
 @orca.column('units')
