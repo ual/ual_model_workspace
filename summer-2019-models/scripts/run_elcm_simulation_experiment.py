@@ -4,6 +4,8 @@ import os; os.chdir('../')
 import warnings; warnings.simplefilter('ignore')
 import numpy as np
 from tqdm import tqdm
+import time
+import psutil
 
 from urbansim_templates import modelmanager as mm, utils
 from urbansim.models.util import columns_in_formula
@@ -14,7 +16,6 @@ from scripts import datasources, models, variables
 
 data_mode = 'csv'
 local_data_dir = 's3://baus/'
-# s3_input_data_url = 's3://baus/{}.csv'
 csv_fnames = {
     'parcels': 'parcel_attr.csv',
     'buildings': 'buildings_v2.csv',
@@ -33,12 +34,12 @@ csv_fnames = {
     'walk_access_vars': 'walk_net_vars.csv',
     'access_indicators_ampeak': 'access_indicators_ampeak.csv'
 }
-outfile = './data/sampling_results.csv'
+outfile = './data/sampling_results_v2.csv'
 
 
-def mct_callable(obs, alts):
+def mct_callable(obs, alts, alt_sample_size):
     return MergedChoiceTable(
-        obs, alts, sample_size=m.alt_sample_size)
+        obs, alts, sample_size=alt_sample_size)
 
 
 def probs_callable(mct):
@@ -46,6 +47,8 @@ def probs_callable(mct):
 
 
 if __name__ == '__main__':
+
+    free_ram_mb = psutil.virtual_memory().available / 1e6
 
     orca.add_injectable('data_mode', data_mode)
     orca.add_injectable('csv_fnames', csv_fnames)
@@ -55,20 +58,14 @@ if __name__ == '__main__':
 
     orca.run(['initialize_network_small', 'initialize_network_walk'])
 
-    try:
-        walk_net_vars = pd.read_csv(
-            local_data_dir + csv_fnames['walk_access_vars'],
-            index_col='osmid')
-        walk_net_vars.index.name = 'node_id_walk'
-        drive_net_vars = pd.read_csv(
-            local_data_dir + csv_fnames['drive_access_vars'],
-            index_col='osmid')
-        drive_net_vars.index.name = 'node_id_small'
-        orca.add_table('nodeswalk', walk_net_vars)
-        orca.add_table('nodessmall', drive_net_vars)
-
-    except OSError:
-        orca.run(['network_aggregations_small', 'network_aggregations_walk'])
+    walk_net_vars = pd.read_csv(
+        local_data_dir + csv_fnames['walk_access_vars'],
+        index_col='osmid')
+    drive_net_vars = pd.read_csv(
+        local_data_dir + csv_fnames['drive_access_vars'],
+        index_col='osmid')
+    orca.add_table('nodeswalk', walk_net_vars)
+    orca.add_table('nodessmall', drive_net_vars)
 
     try:
         processed = pd.read_csv(outfile, index_col=0)
@@ -89,22 +86,30 @@ if __name__ == '__main__':
         tables=m.out_alternatives,
         fallback_tables=m.alternatives,
         filters=m.out_alt_filters,
-        model_expression=m.model_expression,
-        extra_columns=['node_id_small', 'node_id_walk'])
+        model_expression=m.model_expression)
 
     expr_cols = columns_in_formula(m.model_expression)
 
     obs_cols = set(observations.columns) & set(expr_cols)
     observations = observations[list(obs_cols)]
+    len_choosers = len(observations)
 
     alt_cols = set(alternatives.columns) & set(expr_cols)
     alternatives = alternatives[list(alt_cols)]
     total_alts = alternatives.shape[0]
 
-    sample_sizes = [10, 50, 100, 500, 1000, 5000, 10000]
+    sample_sizes = [
+        10, 50, 100, 500, 1000, 5000, 10000, 50000, 1e5, 5e5,
+        1e6, total_alts]
 
     outputs = {}
+
     for sample_size in sample_sizes:
+
+        sttm = time.time()
+
+        if sample_size in processed.index.values or sample_size > total_alts:
+            continue
 
         print(
             'Generating marginal probabilities using a '
@@ -112,8 +117,13 @@ if __name__ == '__main__':
 
         m.alt_sample_size = sample_size
         sampling_rate = m.alt_sample_size / total_alts
-        full_batch_ram = sample_size * 8.8  # estimated size in MB
-        max_ram_mb = 20000
+
+        # estimate size of a full batch of choices in MB
+        full_batch_ram = sample_size * 8.8  
+
+        # limit estimated memory consumption of a single batch to
+        # ~60% of the memory available at the start of the script
+        max_ram_mb = free_ram_mb * .6
 
         try:
             if full_batch_ram > max_ram_mb:
@@ -123,8 +133,6 @@ if __name__ == '__main__':
                     choosers.shape[0] * (max_ram_mb / full_batch_ram))
 
                 alts = alternatives.copy()
-                len_choosers = len(choosers)
-                choices_made = 0
 
                 max_marginals = np.array([])
                 median_marginals = np.array([])
@@ -133,13 +141,20 @@ if __name__ == '__main__':
                 batches = choosers.groupby(
                     np.arange(len(choosers)) // chooser_batch_size)
 
+                # while (choices_made < len_choosers):
                 for group, batch in tqdm(batches, total=len(batches)):
 
+                    # sampled_choosers = choosers.sample(
+                    #     int(min(chooser_batch_size, len(choosers))))
                     sampled_choosers = batch
 
-                    mct = mct_callable(sampled_choosers, alts)
+                    choicetable = mct_callable(
+                        sampled_choosers, alts, sample_size)
 
-                    iter_probabilities = probs_callable(mct)
+                    assert choicetable.to_frame().shape[0] == \
+                        len(sampled_choosers) * sample_size
+
+                    iter_probabilities = probs_callable(choicetable)
                     iter_est_marginals = iter_probabilities * sampling_rate
 
                     iter_max_marginals = iter_est_marginals.groupby(
@@ -157,35 +172,30 @@ if __name__ == '__main__':
                     stddev_marginals = np.concatenate((
                         stddev_marginals, iter_stddev_marginals))
 
-                    choices_made += len(sampled_choosers)
-                    choosers = choosers.drop(sampled_choosers.index.values)
-
-                    print(
-                        "Iteration {}: {} of {} valid choices".format(
-                            iter, choices_made, len_choosers))
-
-                    if len(mct.to_frame()) == 0:
-                        print("No valid alts for the remaining choosers")
-                        break
             else:
-                choicetable = mct_callable(observations, alternatives)
+                choicetable = mct_callable(
+                    observations, alternatives, sample_size)
+                assert choicetable.to_frame().shape[0] == \
+                    len_choosers * sample_size
                 probabilities = probs_callable(choicetable)
                 est_marginal_probs = probabilities * sampling_rate
                 max_marginals = est_marginal_probs.groupby(level=0).max()
                 median_marginals = est_marginal_probs.groupby(level=0).median()
                 stddev_marginals = est_marginal_probs.groupby(level=0).std()
 
+            print('Finished after {0} minutes.'.format(
+                np.round((time.time() - sttm) / 60, 1)))
+            mean_max = np.mean(max_marginals)
+            mean_median = np.mean(median_marginals)
+            mean_stddev = np.mean(stddev_marginals)
+            outputs[sample_size] = {
+                'avg_max': mean_max, 'avg_median': mean_median,
+                'avg_stddev': mean_stddev}
+            out_df = pd.DataFrame.from_dict(outputs, orient='index')
+            out_df = pd.concat((processed, out_df))
+            out_df.to_csv(outfile)
+
         except MemoryError:
             print('MemoryError at sample size = {0}'.format(
                 str(sample_size)))
             break
-
-        mean_max = np.mean(max_marginals)
-        mean_median = np.mean(median_marginals)
-        mean_stddev = np.mean(stddev_marginals)
-        outputs[sample_size] = {
-            'avg_max': mean_max, 'avg_median': mean_median,
-            'avg_stddev': mean_stddev}
-        out_df = pd.DataFrame.from_dict(outputs, orient='index')
-        out_df = pd.concat((processed, out_df))
-        out_df.to_csv(outfile)
