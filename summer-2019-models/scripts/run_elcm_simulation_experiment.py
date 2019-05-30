@@ -5,6 +5,7 @@ import warnings; warnings.simplefilter('ignore')
 import numpy as np
 from tqdm import tqdm
 import time
+import psutil
 
 from urbansim_templates import modelmanager as mm, utils
 from urbansim.models.util import columns_in_formula
@@ -46,6 +47,8 @@ def probs_callable(mct):
 
 
 if __name__ == '__main__':
+
+    free_ram_mb = psutil.virtual_memory().available / 1e6
 
     orca.add_injectable('data_mode', data_mode)
     orca.add_injectable('csv_fnames', csv_fnames)
@@ -114,8 +117,13 @@ if __name__ == '__main__':
 
         m.alt_sample_size = sample_size
         sampling_rate = m.alt_sample_size / total_alts
-        full_batch_ram = sample_size * 8.8  # estimated size in MB
-        max_ram_mb = 50000
+
+        # estimate size of a full batch of choices in MB
+        full_batch_ram = sample_size * 8.8  
+
+        # limit estimated memory consumption of a single batch to
+        # ~60% of the memory available at the start of the script
+        max_ram_mb = free_ram_mb * .6
 
         try:
             if full_batch_ram > max_ram_mb:
