@@ -228,16 +228,7 @@ accessibilities_by_demog(2025, 10000, net, 97).sum(axis=0).to_csv("indicators_ou
 accessibilities_by_demog(2025, 10000, net, 95).sum(axis=0).to_csv("indicators_output/marin_10000_2025")
 
 
-# accessibilities_by_demog(2015, 10000, net, 'region').sum(axis=0).to_csv("indicators_output/region_10000_2015")
-# accessibilities_by_demog(2015, 10000, net, 1).sum(axis=0).to_csv("indicators_output/alameda_10000_2015")
-# accessibilities_by_demog(2015, 10000, net, 41).sum(axis=0).to_csv("indicators_output/marin_10000_2015")
-# accessibilities_by_demog(2015, 10000, net, 13).sum(axis=0).to_csv("indicators_output/marin_10000_2015")
-# accessibilities_by_demog(2015, 10000, net, 81).sum(axis=0).to_csv("indicators_output/marin_10000_2015")
-# accessibilities_by_demog(2015, 10000, net, 85).sum(axis=0).to_csv("indicators_output/marin_10000_2015")
-# accessibilities_by_demog(2015, 10000, net, 75).sum(axis=0).to_csv("indicators_output/marin_10000_2015")
-# accessibilities_by_demog(2015, 10000, net, 55).sum(axis=0).to_csv("indicators_output/marin_10000_2015")
-# accessibilities_by_demog(2015, 10000, net, 97).sum(axis=0).to_csv("indicators_output/marin_10000_2015")
-# accessibilities_by_demog(2015, 10000, net, 95).sum(axis=0).to_csv("indicators_output/marin_10000_2015")
+
 
 
 
@@ -267,18 +258,7 @@ accessibilities_by_demog(2025, 10000, net, 95).sum(axis=0).to_csv("indicators_ou
 
 
 
-# access_10000_2025 = get_access_by_demog_geo(2025, 10000, net, ["census_tract", "node_id"])
-# for geo, df in access_10000_2025.items():
-#     df.to_csv("indicators_output/access_10000_2025_{0}.csv".format(geo))
-# del access_10000_2025
-# access_10000_2015 = get_access_by_race_geo(2015, 10000, net, ["census_tract", "node"])
-# for geo, df in access_10000_2015.items():
-#     df.to_csv("indicators_output/access_10000_2015_{0}.csv".format(geo))
-# del access_10000_2015
-# access_10000_2010 = get_access_by_race_geo(2010, 10000, net, ["census_tract", "node"])
-# for geo, df in access_10000_2010.items():
-#     df.to_csv("indicators_output/access_10000_2010_{0}.csv".format(geo))
-# del access_10000_2010    
+   
 
 
 
