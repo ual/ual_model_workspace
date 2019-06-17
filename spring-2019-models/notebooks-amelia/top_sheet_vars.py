@@ -33,7 +33,9 @@ def get_data():
    
     hdfstore.close()
     return data_dict
+
 print("getting data")
+
 data_dict = get_data()
 
 beam_network_links = pd.read_csv('beam-network-links.csv')
@@ -42,10 +44,9 @@ beam_network_nodes = pd.read_csv('beam-network-nodes.csv')
 
 net=pdna.Network(beam_network_nodes.x, beam_network_nodes.y, beam_network_links["from"], beam_network_links["to"],
                  beam_network_links[["travelTime"]])
-net.precompute(10000)
+net.precompute(15000)
 del beam_network_links
 del beam_network_nodes
-print("precomputed network")
 
 def get_merged_data(year):
     '''merges the household and buildings and parcels and persons tables together in an inner merge, 
