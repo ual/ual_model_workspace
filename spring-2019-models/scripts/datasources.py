@@ -148,7 +148,7 @@ def zones():
 # Tables from Emma
 @orca.table('skims', cache=True)
 def skims():
-    df = pd.read_csv(d + 'skims.csv', index_col=0)
+    df = pd.read_csv("/home/data/spring_2019/2025/skims.csv", index_col=0)
     return df
 
 
@@ -158,11 +158,11 @@ def beam_drive_skims():
     Load BEAM skims, convert travel time to minutes
     """
     df = pd.read_csv(
-        d + 'smart-1Apr2019-sc-b-lt-2025-20.skimsExcerpt.csv.gz')
+        '/home/data/spring_2019/base/30.skimsExcerpt-smart-23April2019-baseline.csv.gz')
 
     # morning peak
     df = df[df['period'] == 'AM']
-    assert len(df) == 2114116
+#     assert len(df) == 2114116
     df = df.rename(
         columns={'origTaz': 'from_zone_id', 'destTaz': 'to_zone_id'})
     df = df.set_index(['from_zone_id', 'to_zone_id'])
@@ -178,7 +178,7 @@ def beam_skims():
     Load BEAM skims, convert travel time to minutes
     """
     df = pd.read_csv(
-        d + 'smart-1Apr2019-sc-b-lt-2025-20.skims.csv.gz')
+        '/home/data/spring_2019/base/30.skims-smart-23April2019-baseline.csv.gz')
 
     df.rename(columns={
         'generalizedCost': 'gen_cost', 'origTaz': 'from_zone_id',
