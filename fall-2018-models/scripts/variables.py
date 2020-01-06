@@ -189,10 +189,10 @@ def sector_util(jobs):
     return jobs['sector_id'].isin([22]).astype(int)
 
 
-@orca.column('jobs')
-def parcel_id(jobs, buildings):
-    return misc.reindex(
-        buildings.parcel_id, jobs.building_id)
+# @orca.column('jobs')
+# def parcel_id(jobs, buildings):
+#     return misc.reindex(
+#         buildings.parcel_id, jobs.building_id)
 
 
 @orca.column('persons')
@@ -226,17 +226,17 @@ def hh_inc_75_to_200k(households):
         households['income'] < 200000)).astype(int)
 
 
-# cols for WLCM interaction terms
-@orca.column('jobs')
-def zone_id_work(jobs, parcels):
-    return misc.reindex(
-        parcels.zone_id, jobs.parcel_id)
+# # cols for WLCM interaction terms
+# @orca.column('jobs')
+# def zone_id_work(jobs, parcels):
+#     return misc.reindex(
+#         parcels.zone_id, jobs.parcel_id)
 
 
-@orca.column('persons')
-def zone_id_home(persons, households, units, buildings, parcels):
-    return misc.reindex(
-        orca.merge_tables(
-            households, [households, units, buildings, parcels],
-            columns=['zone_id'])['zone_id'],
-        persons.household_id).astype(float)
+# @orca.column('persons')
+# def zone_id_home(persons, households, units, buildings, parcels):
+#     return misc.reindex(
+#         orca.merge_tables(
+#             households, [households, units, buildings, parcels],
+#             columns=['zone_id'])['zone_id'],
+#         persons.household_id).astype(float)

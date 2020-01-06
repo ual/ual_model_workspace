@@ -119,11 +119,11 @@ if __name__ == '__main__':
         sampling_rate = m.alt_sample_size / total_alts
 
         # estimate size of a full batch of choices in MB
-        full_batch_ram = sample_size * 8.8  
+        full_batch_ram = sample_size * 8.8
 
         # limit estimated memory consumption of a single batch to
         # ~60% of the memory available at the start of the script
-        max_ram_mb = free_ram_mb * .6
+        max_ram_mb = free_ram_mb * .3
 
         try:
             if full_batch_ram > max_ram_mb:
